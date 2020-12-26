@@ -9,7 +9,7 @@
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
                 <li>
-                    <a href="index.html">
+                    <a href="{{route('admin.dashboard')}} ">
                         <i class="fas fa-tachometer-alt"></i>Dashboard
                     </a>
                 </li>
@@ -32,33 +32,33 @@
 
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-copy"></i>Creation
+                        <i class="fas fa-plus"></i>Creation
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="login.html">Produit</a>
+                            <a href="{{route('admin.add_product')}}">Produit</a>
                         </li>
                         <li>
-                            <a href="register.html">Catégorie</a>
+                            <a href="{{route('admin.add_category')}}">Catégorie</a>
                         </li>
                         <li>
-                            <a href="forget-pass.html">Marque</a>
+                            <a href="{{route('admin.add_brand')}}">Marque</a>
                         </li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-copy"></i>Affichage
+                        <i class="fas fa-list-ol"></i>Affichage
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="login.html">Produit</a>
+                            <a href="{{route('admin.show_product')}}">Produit</a>
                         </li>
                         <li>
-                            <a href="register.html">Catégorie</a>
+                            <a href="{{route('admin.show_category')}}">Catégorie</a>
                         </li>
                         <li>
-                            <a href="forget-pass.html">Marque</a>
+                            <a href="{{route('admin.show_brand')}}">Marque</a>
                         </li>
                     </ul>
                 </li>

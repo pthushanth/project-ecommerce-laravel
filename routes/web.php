@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,19 @@ Route::get('/logedin', function () {
     }
 })->middleware(['auth']);
 
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+// Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('/cleint/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    //afichage
+    Route::get('/produit', [ProductController::class, 'index'])->name('show_product');
+    Route::get('/categorie', [CategoryController::class, 'index'])->name('show_category');
+    Route::get('/marque', [BrandController::class, 'index'])->name('show_brand');
+
+    //ajouter
+    Route::get('/ajouter-produit', [ProductController::class, 'add'])->name('add_product');
+    Route::get('/ajouter-categorie', [CategoryController::class, 'add'])->name('add_category');
+    Route::get('/ajouter-marque', [BrandController::class, 'add'])->name('add_brand');
+});
