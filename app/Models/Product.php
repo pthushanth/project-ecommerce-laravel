@@ -8,4 +8,32 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+
+    public function stock()
+    {
+        return $this->hasOne(Stock::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
+
+    public function dailyDeal()
+    {
+        return $this->hasOne(DailyDeal::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 }
