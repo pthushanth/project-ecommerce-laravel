@@ -16,6 +16,6 @@ class Brand extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product');
+        return $this->hasMany('App\Models\Product');
     }
 }

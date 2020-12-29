@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/marque', [BrandController::class, 'index'])->name('show_brand');
 
     //ajouter
-    Route::get('/ajouter-produit', [ProductController::class, 'add'])->name('add_product');
-    Route::get('/ajouter-categorie', [CategoryController::class, 'add'])->name('add_category');
-    Route::get('/ajouter-marque', [BrandController::class, 'add'])->name('add_brand');
+    Route::get('/ajouter-produit', [ProductController::class, 'create'])->name('create_product');
+    Route::get('/ajouter-categorie', [CategoryController::class, 'create'])->name('create_category');
+    Route::get('/ajouter-marque', [BrandController::class, 'create'])->name('create_brand');
+
+    //savegarder
+    Route::post('/ajouter-produit', [ProductController::class, 'store'])->name('store_product');
+    Route::post('/ajouter-categorie', [CategoryController::class, 'store'])->name('store_category');
+    Route::post('/ajouter-marque', [BrandController::class, 'store'])->name('store_brand');
 });

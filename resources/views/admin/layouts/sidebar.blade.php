@@ -36,13 +36,13 @@
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="{{route('admin.add_product')}}">Produit</a>
+                            <a href="{{route('admin.create_product')}}">Produit</a>
                         </li>
                         <li>
-                            <a href="{{route('admin.add_category')}}">Catégorie</a>
+                            <a href="{{route('admin.create_category')}}">Catégorie</a>
                         </li>
                         <li>
-                            <a href="{{route('admin.add_brand')}}">Marque</a>
+                            <a href="{{route('admin.create_brand')}}">Marque</a>
                         </li>
                     </ul>
                 </li>

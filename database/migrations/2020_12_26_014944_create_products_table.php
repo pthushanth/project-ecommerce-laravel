@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->json('image');
             $table->json('spec');
             $table->integer('status');
+            $table->foreignId('brand_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             // $table->foreignId('stock_id')->constrained();
             // $table->unsignedBigInteger('id_category');
             // $table->unsignedBigInteger('id_brand');
