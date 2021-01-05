@@ -31,7 +31,7 @@
 
     <!-- Main CSS-->
     <link href="{{asset('admin/css/theme.css')}}" rel="stylesheet" media="all">
-    
+    @yield('styles')
 
 </head>
 
@@ -80,6 +80,42 @@
 
     <!-- Main JS-->
     <script src="{{asset('admin/js/main.js')}}"></script>
+    {{-- tiny text editeur --}}
+    {{-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({ selector:'textarea' });</script> --}}
+
+    {{-- CKEditeur text editeur --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+    <script>
+        //get all textera 
+        var allEditors = document.querySelectorAll('textarea');
+        //replace by editor for eacher textearea
+        for (var i = 0; i < allEditors.length; ++i) {
+            ClassicEditor
+            .create(allEditors[i])
+            .catch( error => {
+                console.error( error );
+            } );
+        }
+        
+    </script>
+
+{{-- Delete alert warning --}}
+<script>
+    $(document).on("click","#delete",function(e){
+      e.preventDefault();
+      var link=$(this).attr("href");
+      bootbox.confirm("Voulez-vous vraiment supprimer cet élement ?", function(confirmed){
+        if(confirmed){
+          window.location.href=link;
+        }
+      })
+    })
+  </script>
+
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+
     @yield('scripts')
 </body>
 

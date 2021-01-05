@@ -9,6 +9,15 @@ class Product extends Model
 {
     use HasFactory;
 
+    //json field as array
+    protected $casts = [
+        'spec' => 'array',
+        'image' => 'array',
+    ];
+
+
+
+
     public function category()
     {
         return $this->belongsTo(Category::class);

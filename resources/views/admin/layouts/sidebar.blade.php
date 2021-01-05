@@ -31,34 +31,34 @@
                 </li>
 
                 <li class="has-sub">
-                    <a class="js-arrow" href="#">
+                    <a class="js-arrow" href="#" style="color:#4272d7">
                         <i class="fas fa-plus"></i>Creation
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="{{route('admin.create_product')}}">Produit</a>
+                            <a href="{{route('admin.products.create')}}">Produit</a>
                         </li>
                         <li>
-                            <a href="{{route('admin.create_category')}}">Catégorie</a>
+                            <a href="{{route('admin.categories.create')}}">Catégorie</a>
                         </li>
                         <li>
-                            <a href="{{route('admin.create_brand')}}">Marque</a>
+                            <a href="{{route('admin.brands.create')}}">Marque</a>
                         </li>
                     </ul>
                 </li>
                 <li class="has-sub">
-                    <a class="js-arrow" href="#">
+                    <a class="js-arrow" href="#" style="color:#4272d7">
                         <i class="fas fa-list-ol"></i>Affichage
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="{{route('admin.show_product')}}">Produit</a>
+                            <a href="{{route('admin.products.index')}}">Produit</a>
                         </li>
                         <li>
-                            <a href="{{route('admin.show_category')}}">Catégorie</a>
+                            <a href="{{route('admin.categories.index')}}">Catégorie</a>
                         </li>
                         <li>
-                            <a href="{{route('admin.show_brand')}}">Marque</a>
+                            <a href="{{route('admin.brands.index')}}">Marque</a>
                         </li>
                     </ul>
                 </li>

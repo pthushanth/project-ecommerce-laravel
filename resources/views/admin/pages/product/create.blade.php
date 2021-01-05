@@ -1,11 +1,12 @@
 @extends('admin.layouts.app')
 @section('title','Ajouter Produits')
 
+@section('styles')
+@endsection
 @section('content')
-
         <div class="row grid-margin">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="car mx-auto" style="max-width:800px; width:100%;">
                     <div class="card-body">
                         <h4 class="card-title">Ajouter Produits</h4>
                         @if(Session::has('status'))
@@ -22,83 +23,81 @@
                                 @endforeach
                         @endif
                         <div class="card">
-                            <div class="card-header">Example Form</div>
+                            <div class="card-header">Ajouter un produit</div>
                             <div class="card-body card-block">
                                 
-                                <form method="POST" action="{{route('admin.store_product')}}" enctype="multipart/form-data">
+                                <form method="POST" action="{{route('admin.products.store')}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
+                                        <div class="col-md-3 input-group-addon">Nom du produit</div>
                                         <div class="input-group">
-                                            <div class="input-group-addon">Nom du produit</div>
                                             <input type="text" id="product_name" name="product_name" class="form-control">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <div class="col-md-3 input-group-addon">Prix du produit</div>
                                         <div class="input-group">
-                                            <div class="input-group-addon">Prix du produit</div>
                                             <input type="text" id="product_price" name="product_price" class="form-control">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-envelope"></i>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <div class="col-md-3 input-group-addon">Catégorie du produit</div>
                                         <div class="input-group">
-                                            <div class="input-group-addon">Catégorie du produit</div>
                                             <select name="product_category" id="product_category" class="form-control">
                                                 <option value="0">Please select</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-asterisk"></i>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <div class="col-md-3 input-group-addon">Marque du produit</div>
                                         <div class="input-group">
-                                            <div class="input-group-addon">Description court</div>
+                                            <select name="product_brand" id="product_brand" class="form-control">
+                                                <option value="0">Please select</option>
+                                                @foreach($brands as $brand)
+                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3 input-group-addon">Description court</div>
+                                        <div class="input-group">
                                             <textarea name="short_description" id="short_description" rows="4" placeholder="Description" class="form-control"></textarea>
-
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-asterisk"></i>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <div class="col-md-3 input-group-addon">Description long</div>
                                         <div class="input-group">
-                                            <div class="input-group-addon">Description long</div>
                                             <textarea name="long_description" id="long_description" rows="8" placeholder="Description long" class="form-control"></textarea>
-
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-asterisk"></i>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-addon">Caractéristique</div>
-                                            <textarea name="spec" id="spec" rows="8" placeholder="Caractéristique" class="form-control"></textarea>
-
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-asterisk"></i>
+                                        <div id="specField">
+                                            <div class="col-md-3 input-group-addon">Caractéristique</div>
+                                            <div class="input-group">
+                                                <input type="text"  name="specName[]" placeholder="attribue" class="form-control">
+                                                <input type="text"  name="specValue[]" placeholder="valeur" class="form-control">
                                             </div>
                                         </div>
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="cloneField('specField','input-group')">
+                                            <i class="fa fa-plus"></i> Ajouter Caractéristique
+                                        </button>
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-addon">Image</div>
-                                            <input type="file" id="product_image" name="product_image" multiple="" class="form-control">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-asterisk"></i>
+                                        <div id="imageField">
+                                            <div class="col-md-3 input-group-addon">Image</div>
+                                            <div class="input-group">
+                                                <input type="file" id="product_image" name="product_image[]" multiple="" class="form-control">
                                             </div>
+                                            
                                         </div>
-                                        
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="cloneField('imageField','input-group')">
+                                                <i class="fa fa-plus"></i> Ajouter une autre image
+                                        </button>
                                     </div>
 
                                     <div class="form-actions form-group">
@@ -115,6 +114,14 @@
 @endsection
 
 @section('scripts')
-    {{-- <script src="{{asset('backend/js/form-validation.js')}}"></script>
-    <script src="{{asset('backend/js/bt-maxLength.js')}}"></script> --}}
+    <script>
+        function cloneField(idField,classtoClone){
+        
+            // clone at the end 
+            // but it will duplicate the values of the input so after insert find and reset values ofthe input
+            $('#'+idField+' .'+classtoClone+':last').clone().appendTo('#'+idField).find("input").val("").end();
+        }
+      
+    </script>
+    
 @endsection

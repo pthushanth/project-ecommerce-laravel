@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProductsDataTable;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(ProductsDataTable $dataTable)
     {
-        $products = Product::all();
-        return view('admin.products')->with('products', $products);
+        // $products = Product::with('category', 'brand')->get();
+        // return view('admin.pages.product.index')->with('products', $products);
+
+        return $dataTable->render('admin.pages.product.index');
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('admin.pages.product.create')->with('categories', $categories);
+        $brands = Brand::all();
+        return view('admin.pages.product.create')->with(['categories' => $categories, 'brands' => $brands]);
     }
 
     public function store(Request $request)
@@ -27,39 +32,53 @@ class ProductController extends Controller
             'product_price' => 'required',
             'product_name' => 'required|unique:App\Models\Product,name',
             'product_price' => 'required',
-            'product_image' => 'image|nullable|max:1999',
+            'product_image' => 'required|array|min:1',
+            'product_image.*' => 'image|nullable|max:1999',
             'short_description' => 'required',
             'long_description' => 'required',
-            'spec' => 'required',
+            'specName' => 'required|array|min:1',
+            'specValue' => 'required|array|min:1',
 
         ]);
         if ($request->hasFile('product_image')) {
-            // 1 get file name with extension
-            $fileNameWithExt = $request->file('product_image')->getClientOriginalName();
-            // 2 get just file name 
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            // 3 get just file extension 
-            $fileExtension = $request->file('product_image')->getClientOriginalExtension();
-            // 4 file name to store
-            $fileNameToStore = $fileName . '_' . time() . '.' . $fileExtension;
+            $imagesFileName = array();
+            foreach ($request->file('product_image') as $file) {
+                // 1 get file name with extension
+                $fileNameWithExt = $file->getClientOriginalName();
+                // 2 get just file name 
+                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                // 3 get just file extension 
+                $fileExtension = $file->getClientOriginalExtension();
+                // 4 file name to store
+                $fileNameToStore = $fileName . '_' . time() . '.' . $fileExtension;
 
-            //upload image
-            $path = $request->file('product_image')->storeAs('public/product_images', $fileNameToStore);
+                //upload image
+                $path = $file->storeAs('public/product_images', $fileNameToStore);
+
+                $imagesFileName[] =  $fileNameToStore;
+            }
         } else {
-            $fileNameToStore = 'noImage.jpg';
+            $imagesFileName[] = 'noImage.jpg';
         }
 
-        $product= new Product();
-        $product->name=$request->input['product_name'];
-        $product->price=$request->input['product_price'];
-        $product->short_description=$request->input['short_description'];
-        $product->long_description=$request->input['long_description'];
-        $product->spec=$fileNameToStore;
-        $product->image=$request->input['spec'];
-        $product->status=1;
+        $product = new Product();
+        $product->name = $request->input('product_name');
+        $product->price = $request->input('product_price');
+        $product->short_description = $request->input('short_description');
+        $product->long_description = $request->input('long_description');
 
-        $product->table;
-        $categoryId=$request->input['category'];
-        $product->categories()->attach($categoryId);
+        $specs = array_combine($request->input('specName'), $request->input('specValue'));
+
+        // Filtering the empty array
+        $specs = array_diff($specs, array('', NULL));
+
+
+        $product->spec = $specs;
+
+        $product->image = $imagesFileName;
+        $product->status = 1;
+        $product->category_id = $request->input('product_category');
+        $product->brand_id = $request->input('product_brand');
+        $product->save();
     }
 }
