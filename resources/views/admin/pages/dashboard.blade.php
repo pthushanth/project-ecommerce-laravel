@@ -9,22 +9,22 @@
             <div class="col-md-12">
                 <div class="overview-wrap">
                     <h2 class="title-1">overview</h2>
-                    <button class="au-btn au-btn-icon au-btn--blue">
+                    <button class="au-btn au-btn-icon d-block au-btn--blue">
                         <i class="zmdi zmdi-plus"></i>add item</button>
                 </div>
             </div>
         </div>
-        <div class="row m-t-25">
+        <div class="row m-t-25 ">
             <div class="col-sm-6 col-lg-3">
                 <div class="overview-item overview-item--c1">
                     <div class="overview__inner">
                         <div class="overview-box clearfix">
-                            <div class="icon">
+                            <div class="icon d-block">
                                 <i class="zmdi zmdi-account-o"></i>
                             </div>
                             <div class="text">
-                                <h2>10368</h2>
-                                <span>members online</span>
+                                <h2>{{$nbClients}}</h2>
+                                <span>Clients</span>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -37,12 +37,12 @@
                 <div class="overview-item overview-item--c2">
                     <div class="overview__inner">
                         <div class="overview-box clearfix">
-                            <div class="icon">
+                            <div class="icon d-block">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
                             <div class="text">
-                                <h2>388,688</h2>
-                                <span>items solid</span>
+                                <h2>{{$distinctProducts}}</h2>
+                                <span>Les produits differents</span>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -55,12 +55,12 @@
                 <div class="overview-item overview-item--c3">
                     <div class="overview__inner">
                         <div class="overview-box clearfix">
-                            <div class="icon">
+                            <div class="icon d-block">
                                 <i class="zmdi zmdi-calendar-note"></i>
                             </div>
                             <div class="text">
-                                <h2>1,086</h2>
-                                <span>this week</span>
+                                <h2>{{$totalOrders}}</h2>
+                                <span>Commandes total</span>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -73,12 +73,12 @@
                 <div class="overview-item overview-item--c4">
                     <div class="overview__inner">
                         <div class="overview-box clearfix">
-                            <div class="icon">
-                                <i class="zmdi zmdi-money"></i>
+                            <div class="icon d-block">
+                                <i class="fas fa-euro-sign"></i>
                             </div>
                             <div class="text">
-                                <h2>$1,060,386</h2>
-                                <span>total earnings</span>
+                                <h2>{{$totalIncome.' €'}}</h2>
+                                <span>Revenu Total</span>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -376,7 +376,7 @@
                                         <div class="au-message__item-text">
                                             <div class="avatar-wrap">
                                                 <div class="avatar">
-                                                    <img src="images/icon/avatar-02.jpg" alt="John Smith">
+                                                    <img src="images/icon d-block/avatar-02.jpg" alt="John Smith">
                                                 </div>
                                             </div>
                                             <div class="text">
@@ -394,7 +394,7 @@
                                         <div class="au-message__item-text">
                                             <div class="avatar-wrap online">
                                                 <div class="avatar">
-                                                    <img src="images/icon/avatar-03.jpg" alt="Nicholas Martinez">
+                                                    <img src="images/icon d-block/avatar-03.jpg" alt="Nicholas Martinez">
                                                 </div>
                                             </div>
                                             <div class="text">
@@ -412,7 +412,7 @@
                                         <div class="au-message__item-text">
                                             <div class="avatar-wrap online">
                                                 <div class="avatar">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Michelle Sims">
+                                                    <img src="images/icon d-block/avatar-04.jpg" alt="Michelle Sims">
                                                 </div>
                                             </div>
                                             <div class="text">
@@ -430,7 +430,7 @@
                                         <div class="au-message__item-text">
                                             <div class="avatar-wrap">
                                                 <div class="avatar">
-                                                    <img src="images/icon/avatar-05.jpg" alt="Michelle Sims">
+                                                    <img src="images/icon d-block/avatar-05.jpg" alt="Michelle Sims">
                                                 </div>
                                             </div>
                                             <div class="text">
@@ -448,7 +448,7 @@
                                         <div class="au-message__item-text">
                                             <div class="avatar-wrap online">
                                                 <div class="avatar">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Michelle Sims">
+                                                    <img src="images/icon d-block/avatar-04.jpg" alt="Michelle Sims">
                                                 </div>
                                             </div>
                                             <div class="text">
@@ -466,7 +466,7 @@
                                         <div class="au-message__item-text">
                                             <div class="avatar-wrap">
                                                 <div class="avatar">
-                                                    <img src="images/icon/avatar-05.jpg" alt="Michelle Sims">
+                                                    <img src="images/icon d-block/avatar-05.jpg" alt="Michelle Sims">
                                                 </div>
                                             </div>
                                             <div class="text">
@@ -489,7 +489,7 @@
                                 <div class="au-chat-info">
                                     <div class="avatar-wrap online">
                                         <div class="avatar avatar--small">
-                                            <img src="images/icon/avatar-02.jpg" alt="John Smith">
+                                            <img src="images/icon d-block/avatar-02.jpg" alt="John Smith">
                                         </div>
                                     </div>
                                     <span class="nick">
@@ -502,7 +502,7 @@
                                     <span class="mess-time">12 Min ago</span>
                                     <div class="recei-mess__inner">
                                         <div class="avatar avatar--tiny">
-                                            <img src="images/icon/avatar-02.jpg" alt="John Smith">
+                                            <img src="images/icon d-block/avatar-02.jpg" alt="John Smith">
                                         </div>
                                         <div class="recei-mess-list">
                                             <div class="recei-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>
@@ -520,9 +520,9 @@
                                 </div>
                             </div>
                             <div class="au-chat-textfield">
-                                <form class="au-form-icon">
+                                <form class="au-form-icon d-block">
                                     <input class="au-input au-input--full au-input--h65" type="text" placeholder="Type a message">
-                                    <button class="au-input-icon">
+                                    <button class="au-input-icon d-block">
                                         <i class="zmdi zmdi-camera"></i>
                                     </button>
                                 </form>

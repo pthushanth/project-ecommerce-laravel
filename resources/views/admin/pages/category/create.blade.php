@@ -20,25 +20,16 @@
                 <div class="car mx-auto" style="max-width:800px; width:100%;">
                     <div class="card-body">
                         <h4 class="card-title">{{ $titleForm }}</h4>
-                        @if(Session::has('status'))
-                            <div class="alert alert-success">
-                                {{Session::get('status')}}
-                            </div>
-                        @endif
+                        
+                        {{-- show error or successs message --}}
+                        @include('admin.includes.error_status')
 
-                        @if(count($errors)>0)
-                                @foreach ($errors->all() as $error)
-                                    <div class="alert alert-danger">
-                                        {{$error}}
-                                    </div>
-                                @endforeach
-                        @endif
                         <div class="card">
                             <div class="card-header">{{ $titleForm }}</div>
                             <div class="card-body card-block">
                             @if(isset($category))    
                                 <form method="POST" action="{{route('admin.categories.update')}}" enctype="multipart/form-data">
-                                    @method('PUT')
+                                    {{-- @method('PUT') --}}
                             @else
                                 <form method="POST" action="{{route('admin.categories.store')}}" enctype="multipart/form-data">
                             @endif

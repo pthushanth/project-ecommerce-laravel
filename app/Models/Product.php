@@ -16,7 +16,10 @@ class Product extends Model
     ];
 
 
-
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class);
+    }
 
     public function category()
     {

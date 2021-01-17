@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\Models\Brand;
-use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -23,14 +22,22 @@ class BrandsDataTable extends DataTable
     {
         return datatables()->of($query)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                $btn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+            ->addColumn('action', function (Brand $brand) {
+                $btn = '<a href="' . route('admin.brands.edit', $brand->id) . '" class="edit btn btn-success btn-sm">Edit</a> <a href="' . route('admin.brands.destroy', $brand->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
                 return $btn;
             })
             ->editColumn('created_at', function (Brand $brand) {
                 //change over here
                 return date('d-M-Y H:i:s', strtotime($brand->created_at));
-            });
+            })
+
+            ->editColumn('image', function (Brand $brand) {
+                //change over here
+                if ($brand->image == 'noImage.jpg')
+                    return '<img src="' . asset("/storage/$brand->image") . '"/>';
+                return '<img src="' . asset("/storage/brand_images/$brand->image") . '"/>';
+            })
+            ->rawColumns(['action', 'image']);
     }
 
     /**
@@ -39,7 +46,7 @@ class BrandsDataTable extends DataTable
      * @param \App\Models\BrandsDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(CategoriesDataTable $model)
+    public function query(BrandsDataTable $model)
     {
         // return $model->newQuery();
         $data = Brand::latest()->get();
@@ -80,8 +87,8 @@ class BrandsDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('N°')->orderable(false)->searchable(false),
-            Column::make('id')->title('Id categorie'),
             Column::make('created_at')->title('Date'),
+            Column::make('image')->title('Image'),
             Column::make('name')->title('Nom'),
             Column::computed('action')
                 ->exportable(false)

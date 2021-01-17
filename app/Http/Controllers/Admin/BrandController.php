@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\DataTables\BrandsDataTable;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -27,8 +30,8 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $inputs = $this->getInputs($request);
-        Brand::create($inputs);
-        return back()->with('status', 'La catégorie ' . $inputs['name'] . ' a été inséré avec succès.');
+        $brand = Brand::create($inputs);
+        return back()->with('status', 'La marque ' . $brand->name . ' a été inséré avec succès.');
     }
 
     public function update($request)
@@ -41,7 +44,7 @@ class BrandController extends Controller
 
         $brand = Brand::find($inputs['id']);
         $brand->update($inputs);
-        return back()->with('status', 'La catégorie ' . $brand->name . ' a été mis à jour avec succès.');
+        return back()->with('status', 'La marque ' . $brand->name . ' a été mis à jour avec succès.');
     }
 
     public function destroy($id)
@@ -49,7 +52,7 @@ class BrandController extends Controller
         $brand = Brand::find($id);
         $this->deleteImages($brand->image);
         $brand->delete();
-        return back()->with('status', 'La catégorie ' . $brand->name . ' a été supprimée avec succès.');
+        return back()->with('status', 'La marque ' . $brand->name . ' a été supprimée avec succès.');
     }
 
     protected function getInputs($request)
@@ -84,15 +87,14 @@ class BrandController extends Controller
         $fileNameToStore = $fileName . '_' . time() . '.' . $fileExtension;
 
         //upload image
-        $path = $request->file('image')->storeAs('public/brand_images', $fileNameToStore);
+        $path = $request->file('image')->storeAs('public/brand_images/', $fileNameToStore);
 
         return $fileNameToStore;
     }
 
     protected function deleteImages($name)
     {
-        File::delete([
-            public_path('public/brand_images') . $name
-        ]);
+        if (Storage::exists('public/category_images/' . $name))
+            Storage::delete('public/category_images/' . $name);
     }
 }

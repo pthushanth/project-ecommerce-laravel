@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('long_description');
             $table->string('price');
             $table->json('image');
-            $table->json('spec');
+            $table->json('spec')->nullable();
             $table->integer('status');
             $table->foreignId('brand_id')->constrained();
             $table->foreignId('category_id')->constrained();

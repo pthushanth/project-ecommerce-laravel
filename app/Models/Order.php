@@ -14,18 +14,18 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function order_status()
+    public function orderStatus()
     {
-        return $this->hasOne(OrderStatus::class);
+        return $this->belongsTo(OrderStatus::class);
     }
 
     public function coupons()
     {
-        return $this->hasMany(Coupon::class);
+        return $this->belongsToMany(Coupon::class);
     }
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 }

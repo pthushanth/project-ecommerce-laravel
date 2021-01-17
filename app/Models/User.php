@@ -40,8 +40,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function getClients()
+    {
+        return User::where('role', 'client')->get();
+    }
+    public static function getAdmin()
+    {
+        return User::where('role', 'admin')->get();
+    }
 
-
+    /********************        RelationShip       *******************/
     public function orders()
     {
         return $this->hasMany(Order::class);

@@ -1,0 +1,13 @@
+#datatable tbody td {
+    word-break: break-word !important;
+    vertical-align: top;
+}
+#datatable {
+    padding: 10px;
+}
+#datatable img {
+    height: 100px;
+}
+.table.dataTable {
+    width: 100% !important;
+}

@@ -16,8 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->float('amount');
-            $table->string('payment_method');
+            $table->string('payment_id');
+            $table->string('currency');
+            $table->string('payment_status');
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('order_status_id')->constrained();
             $table->timestamps();
         });
     }

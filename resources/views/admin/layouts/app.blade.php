@@ -25,12 +25,17 @@
     <link href="{{asset('admin/vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
 
+    {{-- dataTable --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
+    
     {{-- App css --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
     <!-- Main CSS-->
     <link href="{{asset('admin/css/theme.css')}}" rel="stylesheet" media="all">
+
+    <link href="{{ asset('admin/css/styles.css') }}" rel="stylesheet">
     @yield('styles')
 
 </head>
@@ -101,6 +106,7 @@
     </script>
 
 {{-- Delete alert warning --}}
+<script src="{{asset('admin/js/bootbox.min.js')}}"></script>
 <script>
     $(document).on("click","#delete",function(e){
       e.preventDefault();

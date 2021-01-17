@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\DataTables\CategoriesDataTable;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -52,7 +55,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $this->deleteImages($category->image);
         $category->delete();
-        return redirect()->route('categories')->with('status', 'La catégorie ' . $category->name . ' a été supprimée avec succès.');
+        return back()->with('status', 'La catégorie ' . $category->name . ' a été supprimée avec succès.');
     }
 
     protected function getInputs($request)
@@ -87,15 +90,17 @@ class CategoryController extends Controller
         $fileNameToStore = $fileName . '_' . time() . '.' . $fileExtension;
 
         //upload image
-        $path = $request->file('image')->storeAs('public/category_images', $fileNameToStore);
+        $path = $request->file('image')->storeAs('public/category_images/', $fileNameToStore);
 
         return $fileNameToStore;
     }
 
     protected function deleteImages($name)
     {
-        File::delete([
-            public_path('public/category_images') . $name
-        ]);
+        if (Storage::exists('public/category_images/' . $name))
+            Storage::delete('public/category_images/' . $name);
+        // File::delete([
+        //     public_path('public/category_images' . $name)
+        // ]);
     }
 }

@@ -34,9 +34,25 @@ class ProductsDataTable extends DataTable
 
             //     return  $champs;
             // })
-            ->addColumn('action', function ($row) {
-                $btn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                return $btn;
+            ->editColumn('image', function (Product $product) {
+                $html = "";
+                // dd($product->image[1]);
+                foreach ($product->image as $index => $image) {
+                    // var_dump($image);
+                    if ($image == 'noImage.jpg')
+                        $html .= '<img src="' . asset("/storage/$image") . '"/>';
+                    else {
+                        $html .= '<img src="' . asset("/storage/product_images/$image") . '"/>';
+                    }
+                }
+                return $html;
+            })
+
+            ->editColumn('status', function (Product $product) {
+                //change over here
+
+                if ($product->status) return '<label class="badge badge-success">Activé</label>';
+                if (!$product->status) return '<label class="badge badge-warning">Désactivé</label>';
             })
 
             ->editColumn('created_at', function (Product $product) {
@@ -44,7 +60,15 @@ class ProductsDataTable extends DataTable
                 return date('d-M-Y H:i:s', strtotime($product->created_at));
             })
 
-            ->rawColumns(['action', 'spec']);
+            ->addColumn('action', function (Product $product) {
+                $btn = '<a href="' . route('admin.products.edit', $product->id) . '" class="edit btn btn-info btn-sm">Edit</a> 
+                        <a href="' . route('admin.products.destroy', $product->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+
+                if ($product->status) $btn .= ' <a href="' . route('admin.products.desactivate', $product->id) . '" class="edit btn btn-warning btn-sm">Désactivé</a>';
+                if (!$product->status) $btn .= ' <a href="' . route('admin.products.activate', $product->id) . '" class="edit btn btn-success btn-sm">Activé</a>';
+                return $btn;
+            })
+            ->rawColumns(['action', 'status', 'image', 'spec']);
         // ->make(true);
     }
 
@@ -95,14 +119,14 @@ class ProductsDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('N°')->orderable(false)->searchable(false),
-            Column::make('id')->title('Id product'),
             Column::make('created_at')->title('Date'),
-            Column::make('name'),
-            Column::make('price'),
-            Column::make('status'),
+            Column::make('name')->title('Nom'),
+            Column::make('image')->title('Images'),
+            Column::make('price')->title('Prix'),
+            Column::make('status')->title('visilbilité'),
             Column::make('spec')->visible(false),
-            Column::make('short_description'),
-            Column::make('long_description'),
+            Column::make('short_description')->title('Description court'),
+            Column::make('long_description')->title('Description long')->visible(false),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

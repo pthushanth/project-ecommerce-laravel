@@ -2,7 +2,7 @@
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <a href="#">
-            <img src="images/icon/logo.png" alt="Cool Admin" />
+            <img src="{{asset('admin/images/icon/logo.png')}}" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
@@ -39,6 +39,9 @@
                             <a href="{{route('admin.products.create')}}">Produit</a>
                         </li>
                         <li>
+                            <a href="{{route('admin.attributes.create')}}">Attribut Produit</a>
+                        </li>
+                        <li>
                             <a href="{{route('admin.categories.create')}}">Catégorie</a>
                         </li>
                         <li>
@@ -55,6 +58,9 @@
                             <a href="{{route('admin.products.index')}}">Produit</a>
                         </li>
                         <li>
+                            <a href="{{route('admin.attributes.index')}}">Attribut Produit</a>
+                        </li>
+                        <li>
                             <a href="{{route('admin.categories.index')}}">Catégorie</a>
                         </li>
                         <li>
@@ -68,13 +74,23 @@
                     </a>
                 </li>
                 <li>
-                    <a href="map.html">
+                    <a href="{{route('admin.clients.index')}}" style="color:#4272d7">
                         <i class="fas fa-map-marker-alt"></i>Client
                     </a>
                 </li>
                 <li>
-                    <a href="map.html">
+                    <a href="{{route('admin.orders.index')}}" style="color:#4272d7">
                         <i class="fas fa-map-marker-alt"></i>Commande
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.coupons.index')}}" style="color:#4272d7">
+                        <i class="fas fa-map-marker-alt"></i>Coupons
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.sales.index')}}" style="color:#4272d7">
+                        <i class="fas fa-map-marker-alt"></i>Promotion
                     </a>
                 </li>
                 <li>
@@ -83,12 +99,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="map.html">
+                    <a href="{{route('admin.reviews.index')}}" style="color:#4272d7">
                         <i class="fas fa-map-marker-alt"></i>Commentaire
                     </a>
                 </li>
                 <li>
-                    <a href="map.html">
+                    <a href="{{route('admin.ratings.index')}}" style="color:#4272d7">
                         <i class="fas fa-map-marker-alt"></i>Rating
                     </a>
                 </li>

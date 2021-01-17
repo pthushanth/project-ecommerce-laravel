@@ -1,7 +1,11 @@
 @extends('admin.layouts.app')
 @section('title','Catégories')
-<style>
-tbody td {
+
+
+@section('styles')
+
+{{-- <style>
+#datatable tbody td {
     word-break: break-word !important;
     vertical-align: top;
 }
@@ -14,11 +18,7 @@ tbody td {
 .table.dataTable {
     width: 100% !important;
 }
-</style>
-
-@section('styles')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
-
+</style> --}}
 @endsection
 
 @section('content')
