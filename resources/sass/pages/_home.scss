@@ -1,0 +1,336 @@
+$primary: #18a0fb;
+.rating {
+    .fa,
+    .far {
+        color: #ffb503;
+    }
+}
+// .rating .fa-star-o {
+//     font-weight: 500;
+// }
+section {
+    margin-top: 50px;
+}
+#sectionSlider {
+    margin-top: 0px;
+    img {
+        height: 500px;
+        width: 100%;
+    }
+}
+#sectionAvantages {
+    .card {
+        background-color: transparent;
+        border: none;
+
+        .div-icone {
+            margin: 0 auto 0px auto;
+            width: 100px;
+            height: 100px;
+            background-color: #66f36d;
+            border-radius: 50%;
+        }
+
+        img {
+            width: 65%;
+            height: 65%;
+        }
+        .title {
+            font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        span {
+            color: #808080;
+        }
+    }
+}
+
+#sectionCategories {
+    .btnCategorie {
+        // width: 150px;
+        min-width: 75px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(0, 0, 0, 0);
+        border-radius: 6px;
+    }
+}
+
+#sectionProduits {
+    margin-top: 100px;
+    .nav-link {
+        border-bottom: 0;
+        a {
+            color: #ffffff;
+            font-weight: 500;
+
+            &:hover {
+                color: $primary !important;
+            }
+        }
+    }
+
+    .card {
+        background-color: transparent;
+        border: none;
+        margin: 0 10px;
+
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+        p {
+            margin: 1px;
+        }
+        .categorie {
+            font-size: 1em;
+            color: #999999;
+        }
+
+        .produit-titre {
+            color: #191919;
+            font-size: 1.1em;
+        }
+        .prix {
+            font-size: 1.3em;
+            line-height: 20px;
+            font-weight: 700;
+            color: #191919;
+        }
+    }
+
+    /*************************   Product slide ***************/
+    /* medium - display 2  */
+    @media (min-width: 768px) {
+        .carousel-inner .carousel-item-right.active,
+        .carousel-inner .carousel-item-next {
+            transform: translateX(50%);
+        }
+
+        .carousel-inner .carousel-item-left.active,
+        .carousel-inner .carousel-item-prev {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* large - display 3 */
+    @media (min-width: 992px) {
+        .carousel-inner .carousel-item-right.active,
+        .carousel-inner .carousel-item-next {
+            transform: translateX(33%);
+        }
+
+        .carousel-inner .carousel-item-left.active,
+        .carousel-inner .carousel-item-prev {
+            transform: translateX(-33%);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .carousel-inner .carousel-item > div {
+            display: none;
+        }
+
+        .carousel-inner .carousel-item > div:first-child {
+            display: block;
+        }
+    }
+
+    .carousel-inner .carousel-item.active,
+    .carousel-inner .carousel-item-next,
+    .carousel-inner .carousel-item-prev {
+        display: flex;
+    }
+}
+
+/**********************************  Section Offres ************************/
+#sectionOffres {
+    .parallax {
+        /* The image used */
+        background-image: url("/images/bg-parallax.jpg");
+
+        /* Set a specific height */
+        min-height: 300px;
+
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+    .masque {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    h4 {
+        color: #ffffff;
+    }
+
+    .button-cta {
+        border: 1px solid $primary;
+        border-radius: 25px;
+        font-weight: 500;
+        font-size: 1.7em;
+        margin-left: 0;
+        margin-right: 0;
+        color: #fff;
+        background-color: $primary;
+    }
+
+    .button-cta:hover {
+        background-color: #fff;
+        color: $primary;
+        border: 1px solid $primary;
+    }
+}
+
+#SectionDeals {
+    img {
+        max-width: 200px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .card {
+        width: 100%;
+        .price {
+            font-weight: 800;
+            font-size: 2.5em;
+
+            span {
+                font-size: 0.7em;
+                text-decoration: line-through;
+            }
+        }
+    }
+
+    .clockdiv {
+        font-family: sans-serif;
+        color: #fff;
+        display: inline-block;
+        font-weight: 100;
+        text-align: center;
+        font-size: 30px;
+
+        & > div {
+            padding: 5px;
+            border-radius: 3px;
+            display: inline-block;
+
+            span {
+                padding: 5px 10px;
+                border-radius: 3px;
+                background: #000000;
+                display: inline-block;
+                font-weight: 800;
+            }
+        }
+
+        .smalltext {
+            padding-top: 5px;
+            font-size: 16px;
+            color: #000000;
+        }
+    }
+}
+
+/*****************************  PROMOTIONS  *******************************/
+#sectionPromotions {
+    .card {
+        background-color: transparent;
+        border: none;
+        margin: 0 10px;
+        position: relative;
+
+        .solde-reduction {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            span {
+                padding: 5px 10px;
+                font-size: 1.2em;
+                font-weight: 800;
+                &.solde {
+                    background-color: red;
+                    color: #ffffff;
+                    line-height: 2em;
+                }
+                &.reduction {
+                    background-color: #ffffff;
+                    color: red;
+                }
+            }
+        }
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+        p {
+            margin: 1px;
+        }
+        .categorie {
+            font-size: 1em;
+            color: #999999;
+        }
+
+        .produit-titre {
+            color: #191919;
+            font-size: 1.1em;
+        }
+        .prix {
+            font-size: 1.3em;
+            line-height: 20px;
+            font-weight: 700;
+            color: #191919;
+
+            span {
+                font-size: 0.8em;
+                text-decoration: line-through;
+            }
+        }
+    }
+}
+
+#sectionMarques {
+    margin-top: 30px;
+    padding: 20px 0;
+    img {
+        max-width: 200px;
+        width: 100%;
+        margin: 0 auto;
+        cursor: pointer;
+        filter: grayscale(100%); /*grey the image*/
+
+        &:hover {
+            filter: grayscale(0%);
+        }
+    }
+}
+
+#sectionNewsletter {
+    background-color: $primary;
+    padding: 30px;
+    img {
+        max-width: 200px;
+        width: 100%;
+    }
+    .btn {
+        background-color: #000000;
+        color: #ffffff;
+        padding: inherit 20px;
+    }
+    p {
+        font-size: 2em;
+        font-weight: 800;
+        margin-bottom: 0;
+    }
+}

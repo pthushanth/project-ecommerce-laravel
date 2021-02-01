@@ -11,3 +11,8 @@
 .table.dataTable {
     width: 100% !important;
 }
+
+.rating .fa,
+.testimonial .fa {
+    color: #ff523b;
+}

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\ClientsDataTable;
+use App\DataTables\RatingsDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Rating;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class RatingController extends Controller
 {
 
-    public function index(ClientsDataTable $dataTable)
+    public function index(RatingsDataTable $dataTable)
     {
         return $dataTable->render('admin.pages.client.index');
     }

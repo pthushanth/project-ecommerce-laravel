@@ -26,11 +26,20 @@ class RatingsDataTable extends DataTable
                 $btn = '<a href="' . route('admin.ratings.destroy', $rating->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
                 return $btn;
             })
+            ->editColumn('star', function (Rating $rating) {
+                //change over here
+                $html = '<div class="rating">';
+                for ($i = 0; $i < (int)$rating->star; $i++) {
+                    $html .= ' <i class="fa fa-star"></i>';
+                }
+                $html .= ' </div> ' . $rating->star;
+                return $html;
+            })
             ->editColumn('created_at', function (Rating $rating) {
                 //change over here
                 return date('d-M-Y H:i:s', strtotime($rating->created_at));
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'star']);
     }
 
     /**

@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="map.html">
+                    <a href="{{route('admin.notifications.index')}}" style="color:#4272d7">
                         <i class="fas fa-map-marker-alt"></i>Notification
                     </a>
                 </li>

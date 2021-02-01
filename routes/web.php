@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\Admin\SaleController;
-
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,9 +28,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+/***************************************  FRONT  **************************************** */
+Route::get('/', [FrontController::class, 'index'])->name('index');
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************************************************** */
 
 Route::get('/logedin', function () {
     if (Auth::user()->role === 'admin') {
@@ -114,4 +130,9 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     //review
     Route::get('/commentaire', [ReviewController::class, 'index'])->name('reviews.index');
     Route::get('/supprimer-review/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+
+    //notification
+    Route::get('/notification', function () {
+        return view('admin.pages.notification.index')->with("notifications", Auth::user()->notifications);
+    })->name('notifications.index');
 });

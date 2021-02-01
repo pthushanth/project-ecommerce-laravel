@@ -1,0 +1,33 @@
+footer {
+    background-color: #000000;
+    padding: 10px;
+
+    .detail {
+        .logo {
+            width: 200px;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 0;
+        }
+    }
+    p {
+        color: #ffffff;
+        font-size: 1.1em;
+    }
+    a {
+        color: #ffffff;
+        display: block;
+        text-decoration: none;
+    }
+    .titre {
+        text-transform: uppercase;
+        font-size: 1.5em;
+        font-weight: 800;
+    }
+    .fab {
+        font-size: 2.5em;
+        color: #ffffff;
+        margin: 5px;
+    }
+}
