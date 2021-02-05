@@ -1,5 +1,7 @@
+@charset "UTF-8";
+
 header {
-  background-color: #000000;
+  background-color: #000000 !important;
   padding-top: 10px;
   margin-bottom: 10px;
 }
@@ -12,6 +14,29 @@ header p {
   color: #ffffff;
   font-size: 1.2em;
   font-weight: bold;
+}
+
+header .icone .fas {
+  color: #ffffff;
+  font-size: 35px;
+}
+
+header .cart {
+  position: relative;
+}
+
+header .cart .badge {
+  position: absolute;
+  /* postulat de départ */
+  top: 65%;
+  left: 50%;
+  /* à 50%/50% du parent référent */
+  transform: translate(-50%, -50%);
+  /* décalage de 50% de sa propre taille */
+  background-color: #18a0fb;
+  font-size: 15px;
+  border-radius: 30px;
+  color: #ffffff;
 }
 
 footer {
@@ -394,6 +419,85 @@ section {
   font-size: 2em;
   font-weight: 800;
   margin-bottom: 0;
+}
+
+#sectionTitle {
+  background-color: #e5e5e5;
+  padding: 30px 10px;
+  text-align: center;
+}
+
+#sectionCart .sous-titre {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+#sectionCart .card {
+  width: 100%;
+  padding: 0px 10px;
+}
+
+#sectionCart .card img {
+  width: 150px;
+}
+
+#sectionCart .code-promo {
+  background-color: #ffffff;
+  padding: 30px 10px;
+  margin-bottom: 100px;
+}
+
+#sectionCart .code-promo p {
+  font-size: 1.3em;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+}
+
+#sectionCart .valider-panier {
+  background-color: #ffffff;
+  padding: 30px 10px;
+}
+
+#sectionCart .valider-panier tr:first-child td {
+  border-top: none;
+}
+
+.card.product {
+  background-color: transparent;
+  border: none;
+  margin: 0 10px;
+}
+
+.card.product img {
+  width: 200px;
+  height: 200px;
+}
+
+.card.product a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.card.product p {
+  margin: 1px;
+}
+
+.card.product .categorie {
+  font-size: 1em;
+  color: #999999;
+}
+
+.card.product .produit-titre {
+  color: #191919;
+  font-size: 1.1em;
+}
+
+.card.product .prix {
+  font-size: 1.3em;
+  line-height: 20px;
+  font-weight: 700;
+  color: #191919;
 }
 
 html {

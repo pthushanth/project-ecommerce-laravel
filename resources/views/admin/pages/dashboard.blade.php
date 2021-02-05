@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-6">
                 <div class="au-card recent-report">
                     <div class="au-card-inner">
@@ -149,8 +149,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
+        </div> 
+         <div class="row">
             <div class="col-lg-9">
                 <h2 class="title-1 m-b-25">Earnings By Items</h2>
                 <div class="table-responsive table--no-card m-b-40">
@@ -538,7 +538,7 @@
                     <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection

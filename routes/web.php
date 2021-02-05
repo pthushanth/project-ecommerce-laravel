@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\FrontController;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,13 @@ use Illuminate\Support\Facades\Route;
 
 
 /***************************************  FRONT  **************************************** */
-Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::get('/', [FrontController::class, 'home'])->name('home');
+Route::get('produits', [FrontController::class, 'products'])->name('products');
+Route::get('/panier', [FrontController::class, 'cart'])->name('cart');
+
+Route::post('panier/ajouter', [FrontController::class, 'addToCart'])->name('cart.add');
+Route::put('panier/{id}', [FrontController::class, 'updateCart'])->name('cart.update');
+Route::delete('panier/{id}', [FrontController::class, 'deleteItemCart'])->name('cart.delete_item');
 
 
 
@@ -43,9 +50,10 @@ Route::get('/', [FrontController::class, 'index'])->name('index');
 
 
 
-
-
-
+Route::get('admins/login', function () {
+    Session::put('adminLoginPage', true);
+    return view('admin.auth.login');
+});
 /***************************************************************************************** */
 
 Route::get('/logedin', function () {
@@ -60,7 +68,10 @@ Route::get('/logedin', function () {
 // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
 
-Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function () {
+
+
+    Route::get('', [AdminController::class, 'index']);
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     //Product

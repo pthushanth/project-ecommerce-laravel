@@ -1,0 +1,34 @@
+#sectionCart {
+  .sous-titre {
+    font-size: 1.5em;
+    font-weight: 700;
+  }
+  .card {
+    // max-width: 750px;
+    width: 100%;
+    padding: 0px 10px;
+    img {
+      width: 150px;
+    }
+  }
+
+  .code-promo {
+    background-color: #ffffff;
+    padding: 30px 10px;
+    margin-bottom: 100px;
+
+    p {
+      font-size: 1.3em;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 700;
+    }
+  }
+  .valider-panier {
+    background-color: #ffffff;
+    padding: 30px 10px;
+    tr:first-child td {
+      border-top: none;
+    }
+  }
+}

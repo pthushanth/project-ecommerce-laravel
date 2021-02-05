@@ -43,16 +43,16 @@
 <body class="animsition">
     <div class="page-wrapper">
         {{-- HEADER MOBILE--}}
-        @include('admin.layouts.header_mobile')
+        @if(Auth::user()) @include('admin.layouts.header_mobile') @endif
 
         {{-- MENU SIDEBAR --}}
-        @include('admin.layouts.sidebar')
+        @if(Auth::user()) @include('admin.layouts.sidebar') @endif
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             
             {{-- HEADER DESKTOP --}}
-        @include('admin.layouts.header_desktop')
+            @if(Auth::user()) @include('admin.layouts.header_desktop') @endif
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -121,6 +121,7 @@
 
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+
 
     @yield('scripts')
 </body>

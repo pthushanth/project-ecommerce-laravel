@@ -1,7 +1,13 @@
+$primary: #18a0fb;
+
 @import "layout/header";
 @import "layout/footer";
 @import "pages/home";
+@import "pages/products";
+@import "pages/cart";
 
+@import "components/productCard";
+// @import "components/cart";
 html {
     font-family: "Nunito", sans-serif;
 }

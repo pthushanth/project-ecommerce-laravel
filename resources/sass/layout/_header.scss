@@ -1,14 +1,36 @@
 header {
-    background-color: #000000;
-    padding-top: 10px;
-    margin-bottom: 10px;
+  background-color: #000000 !important;
+  padding-top: 10px;
+  margin-bottom: 10px;
 
-    .icone {
-        width: 60px;
+  .icone {
+    width: 60px;
+  }
+  p {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  .icone .fas {
+    color: #ffffff;
+    font-size: 35px;
+  }
+
+  .cart {
+    position: relative;
+    .badge {
+      position: absolute; /* postulat de départ */
+      top: 65%;
+      left: 50%; /* à 50%/50% du parent référent */
+      transform: translate(
+        -50%,
+        -50%
+      ); /* décalage de 50% de sa propre taille */
+      background-color: $primary;
+      font-size: 15px;
+      border-radius: 30px;
+      color: #ffffff;
     }
-    p {
-        color: #ffffff;
-        font-size: 1.2em;
-        font-weight: bold;
-    }
+  }
 }

@@ -4,7 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+
+use Cart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +30,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
+
+        //Cart 
+        View::composer(['front.*'], function ($view) {
+            $view->with([
+                'cartCount' => Cart::getTotalQuantity(),
+                'cartTotal' => Cart::getTotal(),
+            ]);
+        });
     }
 }

@@ -13,9 +13,15 @@
     
     {{-- fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"> 
+   
+    {{-- cart --}}
+    {{-- <link href="{{ asset('css/cart.css') }}" rel="stylesheet"> --}}
+   
     {{-- App css --}}
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
 
 
     <!-- Main CSS-->
@@ -38,6 +44,7 @@
             </div>
             <!-- END MAIN CONTENT-->
 
+            @include('front.layouts.newsletter')
             @include('front.layouts.footer')
 
             <!-- END PAGE CONTAINER-->
@@ -48,7 +55,8 @@
     {{-- app js --}}
     <script src="{{asset('js/app.js')}}"></script>
 
-
+<script src="{{ asset('js/cart_main.js') }}"></script>
+<script src="{{ asset('js/cart_util.js') }}"></script>
 
 <script src="{{ mix('js/app.js') }}"></script>
 
