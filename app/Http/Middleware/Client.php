@@ -16,13 +16,19 @@ class Client
      */
     public function handle(Request $request, Closure $next)
     {
-        //check if session exists and if user has admin role
-        $this->auth = auth()->user() ? (auth()->user()->role === 'client') : false;
+        // //check if session exists and if user has client role
+        // $this->auth = auth()->user() ? (auth()->user()->role === 'client') : false;
 
-        //Pass request if auth is valid
-        if ($this->auth === true) {
+        // //Pass request if auth is valid
+        // if ($this->auth === true) {
+        //     return $next($request);
+        // }
+        // return redirect()->route('login')->with('error', 'Access denied. Login to continue');
+
+        if (auth()->user()->role === 'client') {
             return $next($request);
         }
-        return redirect()->route('login')->with('error', 'Access denied. Login to continue');
+
+        return redirect()->route('admin.auth.login')->with('error', 'Access denied. Login to continue');
     }
 }

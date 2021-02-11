@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('short_description');
             $table->text('long_description');
             $table->string('price');
+            $table->string('thumbnail');
             $table->json('image');
             $table->json('spec')->nullable();
             $table->integer('status');

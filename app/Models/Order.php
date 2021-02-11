@@ -13,7 +13,10 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    public function deliveryAddress()
+    {
+        return $this->belongsTo(DeliveryAddress::class);
+    }
     public function orderStatus()
     {
         return $this->belongsTo(OrderStatus::class);

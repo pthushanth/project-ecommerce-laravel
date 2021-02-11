@@ -20,6 +20,7 @@ class CreateDeliveryAddressesTable extends Migration
             $table->string('first_name');
             $table->string('address');
             $table->foreignId('city_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

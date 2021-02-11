@@ -15,6 +15,17 @@ class Product extends Model
         'image' => 'array',
     ];
 
+    function getAvgRating()
+    {
+        return $this->ratings->avg('star');
+    }
+
+    //Accessor
+    public function getThumbnailAttribute($value)
+    {
+        if ($value === "noImage.jpg") return "storage/$value";
+        else return "storage/product_images/$value";
+    }
 
     public function attributes()
     {

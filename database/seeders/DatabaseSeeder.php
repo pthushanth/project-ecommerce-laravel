@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Models\Attribute;
 use App\Models\Coupon;
+use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\Rating;
@@ -98,7 +99,8 @@ class DatabaseSeeder extends Seeder
 
 
         Order::factory(50)
-            ->for(User::factory())
+            ->for($users[1])
+            ->for(DeliveryAddress::factory()->for($users[1]))
             ->for(OrderStatus::factory())
             ->hasAttached(
                 Coupon::factory()->count(5)

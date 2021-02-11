@@ -43,6 +43,10 @@ Route::post('panier/ajouter', [FrontController::class, 'addToCart'])->name('cart
 Route::put('panier/{id}', [FrontController::class, 'updateCart'])->name('cart.update');
 Route::delete('panier/{id}', [FrontController::class, 'deleteItemCart'])->name('cart.delete_item');
 
+Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
+Route::post('/checkout/payer', [FrontController::class, 'checkoutPay'])->name('checkout.pay');
+
+Route::get('/confirmation', [FrontController::class, 'confirmation'])->name('confirmation');
 
 
 
@@ -61,6 +65,9 @@ Route::get('/logedin', function () {
         return redirect()->route('admin.dashboard');
     }
     if (Auth::user()->role === 'client') {
+        if (session()->has('url.intended')) {
+            return redirect()->route(session()->get('url.intended'));
+        }
         return redirect()->route('client.dashboard');
     }
 })->middleware(['auth']);
