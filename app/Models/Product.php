@@ -15,6 +15,9 @@ class Product extends Model
         'image' => 'array',
     ];
 
+    protected $searchableColumns = ['name'];
+
+
     function getAvgRating()
     {
         return $this->ratings->avg('star');
@@ -29,7 +32,7 @@ class Product extends Model
 
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class);
+        return $this->belongsToMany(Attribute::class)->withPivot('value');
     }
 
     public function category()

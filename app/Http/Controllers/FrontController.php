@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\City;
+use App\Models\Coupon;
 use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\User;
+use App\Notifications\NewOrderNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Cart;
+use Darryldecode\Cart\Cart as CartCart;
+use Darryldecode\Cart\CartCondition;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -49,9 +56,10 @@ class FrontController extends Controller
 
     public function cart()
     {
-        $content = Cart::getContent();
-        $total = Cart::getTotal();
-        return view('front.pages.cart', compact('content', 'total'));
+        // $content = Cart::getContent();
+        // $total = Cart::getTotal();
+        // return view('front.pages.cart', compact('content', 'total'));
+        return view('front.pages.cart');
     }
 
     public function addToCart(Request $request)
@@ -79,10 +87,53 @@ class FrontController extends Controller
         ]);
         return redirect(route('cart'));
     }
+
+
     public function deleteItemCart($id)
     {
         Cart::remove($id);
         return redirect(route('cart'));
+    }
+
+    public function couponReduction(Request $request)
+    {
+        if (!Auth::user()) {
+            //session to store where to redirect after login
+            session(['url.intended' => 'cart']);
+            return view('auth.login');
+        }
+        $request->validate([
+            'coupon' => 'required'
+        ]);
+        $coupon = Coupon::where('code', $request->input('coupon'))
+            ->where('end', '>=', Carbon::now()->format('Y/m/d H:i:s'))
+            ->where('start', '<=', Carbon::now()->format('Y/m/d H:i:s'))
+            ->first();
+
+        if ($coupon == null) {
+            return redirect(route('cart'))->withFail('Désolé, le code n\'est pas valable');
+        }
+
+        $value = null;
+        if ($coupon->discount_type == 'fixed') $value = '-' . $coupon->discount_value;
+        if ($coupon->discount_type == 'pourcentage') $value = '-' . $coupon->discount_value . '%';
+
+        if (!Cart::getConditions()->isEmpty()) {
+            Cart::clearCartConditions();
+        }
+        $condition = new CartCondition(array(
+            'name' => $coupon->code,
+            'type' => 'coupon',
+            'target' => 'total', // this condition will be applied to cart's subtotal when getSubTotal() is called.
+            'value' => $value
+        ));
+        Cart::condition($condition);
+        // $total = Cart::getSubTotal();
+        // $couponUsed = Cart::getCondition('coupon');
+        // $newTotal = $couponUsed->getCalculatedValue($total);
+        // dd($newTotal);
+
+        return redirect(route('cart'))->withSuccess('Reduction bien appliquée');
     }
 
     public function checkout()
@@ -102,7 +153,6 @@ class FrontController extends Controller
 
     public function checkoutPay(Request $request)
     {
-
         if (Cart::isEmpty()) {
             return view('front.pages.cart');
         }
@@ -141,6 +191,10 @@ class FrontController extends Controller
             $order->save();
             $order->products()->attach($attachProduct);
 
+            if (Cart::getConditions()->first()) {
+                $coupon = Coupon::where('code', Cart::getConditions()->first()->getName())->first();
+                $order->coupons()->attach($coupon->id);
+            }
             // $orders = Order::where("payment_id", $charge->id)->get();
 
             //$email = Session::get('client')->email;
@@ -153,6 +207,9 @@ class FrontController extends Controller
         }
         Cart::clear();
         Session::put('success', 'Purchase accomplished successfully !');
+        //notify new order
+        Notification::send(User::getAdmin(), new NewOrderNotification($order));
+
         return redirect()->route('confirmation')->with('status', 'Achat accompli avec succès');
     }
 
@@ -183,5 +240,12 @@ class FrontController extends Controller
     public function confirmation()
     {
         return view('front.pages.confirmation_order');
+    }
+
+    public function productDetail($id)
+    {
+        $product = Product::find($id);
+        $relatedProducts = Category::with('products')->where('id', $product->category->id)->get();
+        return view('front.pages.product_detail')->with(['product' => $product, 'relatedProducts' => $relatedProducts]);
     }
 }

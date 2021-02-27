@@ -1,111 +1,120 @@
 @extends('admin.layouts.app')
-    
-        @section('title','Ajouter Produit')
-        @php
-            $titleForm="Ajouter un produit";
-        @endphp   
+
+@section('title','Ajouter Produit')
+@php
+$titleForm="Ajouter un produit";
+@endphp
 
 @section('styles')
 @endsection
 @section('content')
-        <div class="row grid-margin">
-            <div class="col-lg-12">
-                <div class="car mx-auto" style="max-width:800px; width:100%;">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ $titleForm }}</h4>
-                        {{-- show error or successs message --}}
-                        @include('admin.includes.error_status')
-                        
-                        <div class="card">
-                            <div class="card-header">{{ $titleForm }}</div>
-                            <div class="card-body card-block">
-                                    <form method="POST" action="{{route('admin.products.store')}}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group">
-                                        <div class="col-md-3 input-group-addon">Nom du produit</div>
-                                        <div class="input-group">
-                                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
-                                        </div>
-                                         @error('name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-3 input-group-addon">Prix du produit</div>
-                                        <div class="input-group">
-                                            <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror">
-                                        </div>
-                                        @error('price')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-3 input-group-addon">Catégorie du produit</div>
-                                        <div class="input-group">
-                                            <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
-                                                <option value="0">Please select</option>
-                                                @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @error('category')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-3 input-group-addon">Marque du produit</div>
-                                        <div class="input-group">
-                                            <select name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror">
-                                                <option value="0">Please select</option>
-                                                @foreach($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @error('brand')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-3 input-group-addon">Attribut du produit</div>
-                                        <div class="input-group">
-                                            <select name="attribute" id="attribute" class="form-control @error('attribute') is-invalid @enderror">
-                                                <option value="0">Please select</option>
-                                                @foreach($attributes as $attribute)
-                                                    <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
-                                                @endforeach
-                                            </select>
+<div class="row grid-margin">
+    <div class="col-lg-12">
+        <div class="car mx-auto" style="max-width:800px; width:100%;">
+            <div class="card-body">
+                <h4 class="card-title">{{ $titleForm }}</h4>
+                {{-- show error or successs message --}}
+                @include('admin.includes.error_status')
 
-                                            <button type="button" class="btn btn-secondary btn-sm" onclick="AddAttributField()">
-                                                <i class="fa fa-plus"></i> Ajouter attribut
-                                            </button>
-                                        </div>
-                                        @error('attribute')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <div id="attributField"></div>
-                                    </div>
-                                   
-                                    <div class="form-group">
-                                        <div class="col-md-3 input-group-addon">Description court</div>
-                                        <div class="input-group">
-                                            <textarea name="short_description" id="short_description" rows="4" placeholder="Description" class="form-control @error('short_description') is-invalid @enderror"></textarea>
-                                        </div>
-                                        @error('short_description')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-3 input-group-addon">Description long</div>
-                                        <div class="input-group">
-                                            <textarea name="long_description" id="long_description" rows="8" placeholder="Description long" class="form-control @error('long_description') is-invalid @enderror"></textarea>
-                                        </div>
-                                        @error('short_description')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    {{-- <div class="form-group">
+                <div class="card">
+                    <div class="card-header">{{ $titleForm }}</div>
+                    <div class="card-body card-block">
+                        <form method="POST" action="{{route('admin.products.store')}}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <div class="col-md-3 input-group-addon">Nom du produit</div>
+                                <div class="input-group">
+                                    <input type="text" id="name" name="name"
+                                        class="form-control @error('name') is-invalid @enderror">
+                                </div>
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3 input-group-addon">Prix du produit</div>
+                                <div class="input-group">
+                                    <input type="text" id="price" name="price"
+                                        class="form-control @error('price') is-invalid @enderror">
+                                </div>
+                                @error('price')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3 input-group-addon">Catégorie du produit</div>
+                                <div class="input-group">
+                                    <select name="category" id="category"
+                                        class="form-control @error('category') is-invalid @enderror">
+                                        <option value="0">Please select</option>
+                                        @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('category')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3 input-group-addon">Marque du produit</div>
+                                <div class="input-group">
+                                    <select name="brand" id="brand"
+                                        class="form-control @error('brand') is-invalid @enderror">
+                                        <option value="0">Please select</option>
+                                        @foreach($brands as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('brand')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3 input-group-addon">Attribut du produit</div>
+                                <div class="input-group">
+                                    <select name="attribute" id="attribute"
+                                        class="form-control @error('attribute') is-invalid @enderror">
+                                        <option value="0">Please select</option>
+                                        @foreach($attributes as $attribute)
+                                        <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="AddAttributField()">
+                                        <i class="fa fa-plus"></i> Ajouter attribut
+                                    </button>
+                                </div>
+                                @error('attribute')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <div id="attributField"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3 input-group-addon">Description court</div>
+                                <div class="input-group">
+                                    <textarea name="short_description" id="short_description" rows="4"
+                                        placeholder="Description"
+                                        class="form-control @error('short_description') is-invalid @enderror"></textarea>
+                                </div>
+                                @error('short_description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3 input-group-addon">Description long</div>
+                                <div class="input-group">
+                                    <textarea name="long_description" id="long_description" rows="8"
+                                        placeholder="Description long"
+                                        class="form-control @error('long_description') is-invalid @enderror"></textarea>
+                                </div>
+                                @error('short_description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            {{-- <div class="form-group">
                                         <div id="specField">
                                             <div class="col-md-3 input-group-addon">Caractéristique</div>
                                             <div class="input-group">
@@ -118,47 +127,63 @@
                                         </button>
                                     </div> --}}
 
-                                    <div class="form-group">
-                                        <div id="imageField">
-                                            <div class="col-md-3 input-group-addon">Image</div>
-                                            <div class="input-group">
-                                                <input type="file" id="image" name="image[]" multiple="" class="form-control @error('image') is-invalid @enderror">
-                                            </div>
-                                            @error('image')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <button type="button" class="btn btn-secondary btn-sm" onclick="cloneField('imageField','input-group')">
-                                                <i class="fa fa-plus"></i> Ajouter une autre image
-                                        </button>
+                            <div class="form-group">
+                                <div>
+                                    <div class="col-md-3 input-group-addon">thumbnail</div>
+                                    <div class="input-group">
+                                        <input type="file" id="image" name="thumbnail" multiple=""
+                                            class="form-control @error('thumbnail') is-invalid @enderror">
                                     </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-3 input-group-addon">Stock</div>
-                                        <div class="input-group">
-                                            <input type="number" id="stock" name="stock" class="form-control @error('stock') is-invalid @enderror">
-                                        </div>
-                                        @error('stock')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-actions form-group">
-                                        <button type="submit" class="btn btn-primary btn-sm">Ajouter</button>
-                                    </div>
-                                </form>
+                                    @error('thumbnail')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <div id="imageField">
+                                    <div class="col-md-3 input-group-addon">Image</div>
+                                    <div class="input-group">
+                                        <input type="file" id="image" name="image[]" multiple=""
+                                            class="form-control @error('image') is-invalid @enderror">
+                                    </div>
+                                    @error('image')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <button type="button" class="btn btn-secondary btn-sm"
+                                    onclick="cloneField('imageField','input-group')">
+                                    <i class="fa fa-plus"></i> Ajouter une autre image
+                                </button>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3 input-group-addon">Stock</div>
+                                <div class="input-group">
+                                    <input type="number" id="stock" name="stock"
+                                        class="form-control @error('stock') is-invalid @enderror">
+                                </div>
+                                @error('stock')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-actions form-group">
+                                <button type="submit" class="btn btn-primary btn-sm">Ajouter</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
 @endsection
 
 @section('scripts')
-    <script>
-        function cloneField(idField,classtoClone){
+<script>
+    function cloneField(idField,classtoClone){
         
             // clone at the end 
             // but it will duplicate the values of the input so after insert find and reset values ofthe input
@@ -222,6 +247,6 @@
     //   function RemoveAttributField(e){
     //     e.parentNode.removeChild(e);
     //   }
-    </script>
-    
+</script>
+
 @endsection

@@ -1,0 +1,33 @@
+#sectionLogin {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+
+  .formBox {
+    background-color: #ffffff;
+    padding: 30px;
+    .btnSubmit {
+      background-color: #18a0fb;
+      color: #ffffff;
+    }
+  }
+
+  .btnSubmit {
+    background-color: #ffffff;
+    color: #000000;
+    width: 100%;
+  }
+
+  .dashed {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #6c757d;
+    line-height: 0.1em;
+    margin: 40px 0 25px;
+
+    span {
+      background: #f8fafc;
+      padding: 0 10px;
+    }
+  }
+}

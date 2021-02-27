@@ -19,4 +19,9 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Product');
     }
+
+    public function relatedProducts()
+    {
+        return $this->products()->inRandomOrder()->take(4);
+    }
 }

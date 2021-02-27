@@ -37,11 +37,13 @@ use Illuminate\Support\Facades\Route;
 /***************************************  FRONT  **************************************** */
 Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('produits', [FrontController::class, 'products'])->name('products');
+Route::get('produit/{id}', [FrontController::class, 'productDetail'])->name('productDetail');
 Route::get('/panier', [FrontController::class, 'cart'])->name('cart');
 
 Route::post('panier/ajouter', [FrontController::class, 'addToCart'])->name('cart.add');
 Route::put('panier/{id}', [FrontController::class, 'updateCart'])->name('cart.update');
 Route::delete('panier/{id}', [FrontController::class, 'deleteItemCart'])->name('cart.delete_item');
+Route::post('panier/code-promo', [FrontController::class, 'couponReduction'])->name('cart.coupon');
 
 Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
 Route::post('/checkout/payer', [FrontController::class, 'checkoutPay'])->name('checkout.pay');
@@ -57,7 +59,7 @@ Route::get('/confirmation', [FrontController::class, 'confirmation'])->name('con
 Route::get('admins/login', function () {
     Session::put('adminLoginPage', true);
     return view('admin.auth.login');
-});
+})->name('admin.login');
 /***************************************************************************************** */
 
 Route::get('/logedin', function () {
@@ -90,6 +92,8 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/supprimer-produit/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/activer-produit/{id}', [ProductController::class, 'activateProduct'])->name('products.activate');
     Route::get('/desactiver-produit/{id}', [ProductController::class, 'desactivateProduct'])->name('products.desactivate');
+    Route::get('/produit/recherche', [ProductController::class, 'findAutocomplete'])->name('products.findAutocomplete');
+
 
     //Attribute
     Route::get('/attribut', [ProductAttributeController::class, 'index'])->name('attributes.index');

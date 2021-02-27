@@ -15,7 +15,7 @@
 <section id="sectionCart">
   <div class="container-fluid">
     <div class="row">
-      @if(!empty($total)&&$total)
+      @if(!Cart::isEmpty())
       <div class="col-md-8 px-4">
         <p class="sous-titre">Détail de mon panier</p>
         <div class="row ">
@@ -31,7 +31,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($content as $item)
+                @foreach (Cart::getContent() as $item)
                 <tr>
                   <th>
                     <div class="d-inline-block align-middle">
@@ -53,6 +53,8 @@
                       @method('PUT')
                       <input name="quantity" type="number" min="1" value="{{ $item->quantity }}" class="form-control"
                         style="width:70px">
+
+                      <button class="btn btn-secondary" type="submit">modifier</button>
                     </form>
                   </td>
 
@@ -80,58 +82,96 @@
         <p class="sous-titre">Récapitulaif</p>
         <div class="row code-promo">
           <div class="col-12 justify-content-center">
-            <form action="{{ route('cart.delete_item', $item->id) }}" method="POST">
+            <form action="{{ route('cart.coupon') }}" method="POST">
               @csrf
               <p>Code promo</p>
               <div class="form-group row ">
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" placeholder="Ecrivez ici">
-                </div>
-                <div class="col-sm-3">
-                  <button type="submit" class="btn btn-primary mb-2">Valider</button>
-                </div>
-              </div>
+                  <input type="text" class="form-control" placeholder="Ecrivez ici" name="coupon">
+                  @if(Session::has('success'))
+                  <div class="alert alert-success">
+                    {{Session::get('success')}}
+                  </div>
+                  @endif
+                  @if(Session::has('fail'))
+                  <div class="alert alert-danger">
+                    {{Session::get('fail')}}
+                  </div>
+                  @endif
+
             </form>
+
+          </div>
+          <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary mb-2">Valider</button>
           </div>
         </div>
-
-        <div class="row valider-panier mt-5">
-          <div class="col">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>Panier</td>
-                  <td>@if(!empty($total) && $total) {{$total.' €'}} @endif </td>
-                </tr>
-                <tr>
-                  <td>Frais de livraion estimé</td>
-                  <td>Gratuit</td>
-                </tr>
-                <tr>
-                  <td>TOTAL (TVA inclus)</td>
-                  <td>@if(!empty($total) && $total) {{$total.' €'}} @endif </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="d-flex justify-content-center">
-              <a class="btn btn-primary" href="{{ route('checkout') }}"> Valider mon panier</a>
-            </div>
-          </div>
-        </div>
-
-
+        </form>
       </div>
-      @else
-      <div class="col px-5 text-center">
-        <h2>Panier est vide</h2>
-      </div>
-      @endif
     </div>
+
+    <div class="row valider-panier mt-5">
+      <div class="col">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Panier</td>
+              <td>@if(!Cart::isEmpty()) {{Cart::getSubTotal().' €'}} @endif </td>
+            </tr>
+            <tr>
+              <td>Frais de livraion estimé</td>
+              <td>Gratuit</td>
+            </tr>
+            @if(Cart::getConditions()->first())
+            {{-- {{dd(Cart::getConditions())}} --}}
+            <tr>
+              <td>Code promo ({{Cart::getConditions()->first()->getName()}})</td>
+              @php $discount= Cart::getConditions()->first()->getCalculatedValue(Cart::getSubTotal()).' €' @endphp
+              <td>{{'- '.$discount}}</td>
+            </tr>
+            @endif
+            <tr>
+              <td>TOTAL (TVA inclus)</td>
+              <td>@if(!Cart::isEmpty()) {{Cart::getTotal().' €'}} @endif <br>
+                @if(Cart::getConditions()->first()) <span style="color:rgb(9, 173, 9)"> Vous économisez
+                  <strong>{{$discount}}</strong></span> @endif
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+          <a class="btn btn-primary" href="{{ route('checkout') }}"> Valider mon panier</a>
+        </div>
+      </div>
+    </div>
+    {{-- {{Cart::getContent()}}
+    {{dd(Cart::getCondition('coupon'))}} --}}
+    {{-- @if(isset($newTotal)){{dd($newTotal)}}@endif --}}
+
+  </div>
+  @else
+  <div class="col px-5 text-center">
+    <h2>Panier est vide</h2>
+  </div>
+  @endif
+  </div>
   </div>
 </section>
 @endsection
 
-
+@section('scripts')
+{{-- <script>
+  $(document).ready(function() {
+ $('.product-icon-container').find('a.scrollOffset').click(function (event){
+   event.preventDefault();
+   $.ajax({
+      url: $(this).attr('href')
+   });
+  return false;
+ });
+});
+</script> --}}
+@endsection
 
 
 
@@ -143,7 +183,7 @@
                 Total TTC (hors livraison)
               </div>
               <div class="col s6">
-                <strong>{{ number_format($total, 2, ',', ' ') }} €</strong>
+                <strong>{{ number_format(Cart::getTotal(), 2, ',', ' ') }} €</strong>
 </div>
 </div>
 @else
@@ -161,7 +201,7 @@
 {{-- <div id="action" class="card-action">
         <p>
           <a  href="{{ route('home') }}">Continuer mes achats</a>
-@if($total)
+@if(Cart::getTotal())
 <a href="#">Commander</a>
 @endif
 </p>

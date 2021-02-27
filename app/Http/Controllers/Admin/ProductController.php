@@ -11,8 +11,8 @@ use App\Models\Product;
 use App\Models\Attribute;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
-
 
 class ProductController extends Controller
 {
@@ -205,5 +205,35 @@ class ProductController extends Controller
 
             Storage::delete('public/product_images/' . $name);
         }
+    }
+
+
+    public function findAutocomplete(Request $request)
+    {
+        // $term = trim($request->q);
+
+        // if (empty($term)) {
+        //     return Response::json([]);
+        // }
+
+        // $products = Product::search($term)->limit(5)->get();
+
+        // $formatted_products = [];
+
+        // foreach ($products as $product) {
+        //     $formatted_products[] = ['id' => $product->id, 'text' => $product->name];
+        // }
+        // // dd(Response::json($formatted_products));
+        // return Response::json($formatted_products);
+
+        $data = [];
+
+        if ($request->has('q')) {
+            $search = $request->q;
+            $data = Product::select("id", "name")
+                ->where('name', 'LIKE', "%$search%")
+                ->get();
+        }
+        return response()->json($data);
     }
 }

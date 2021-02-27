@@ -4,10 +4,12 @@ $primary: #18a0fb;
 @import "layout/footer";
 @import "pages/home";
 @import "pages/products";
+@import "pages/productDetail";
 @import "pages/cart";
+@import "pages/login";
 
 @import "components/productCard";
 // @import "components/cart";
 html {
-    font-family: "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif;
 }

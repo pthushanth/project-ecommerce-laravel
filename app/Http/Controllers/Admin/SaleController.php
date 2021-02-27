@@ -40,10 +40,8 @@ class SaleController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:App\Models\Sale,name',
-            'is_percentage' => 'required',
             'start' => 'required|date',
-            'end' => 'required|date',
-            'discount_value' => 'required'
+            'end' => 'required|date'
         ]);
 
         $sale = new Sale();

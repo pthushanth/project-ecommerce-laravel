@@ -1,0 +1,43 @@
+#pageProductDetail {
+  section {
+    background-color: #ffffff;
+    padding: 20px;
+  }
+
+  #sectionProductDetail {
+    .image-gallery {
+      img {
+        width: 100%;
+      }
+      #ProductImg {
+        height: 300px;
+        width: auto;
+        margin: 0 auto;
+      }
+      .small-img {
+        max-width: 80px;
+        margin: 0 auto;
+      }
+    }
+    .product-title {
+      font-size: 1.8em;
+      font-weight: 700;
+    }
+    .product-price {
+      margin-top: 10px;
+      font-size: 1.6em;
+      font-weight: 700;
+    }
+
+    .ajouterPanier {
+      background-color: $primary;
+      font-size: 1.4em;
+      padding: 8px 20px;
+    }
+  }
+
+  table {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}

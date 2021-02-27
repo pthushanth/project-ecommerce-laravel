@@ -427,6 +427,48 @@ section {
   text-align: center;
 }
 
+#pageProductDetail section {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+#pageProductDetail #sectionProductDetail .image-gallery img {
+  width: 100%;
+}
+
+#pageProductDetail #sectionProductDetail .image-gallery #ProductImg {
+  height: 300px;
+  width: auto;
+  margin: 0 auto;
+}
+
+#pageProductDetail #sectionProductDetail .image-gallery .small-img {
+  max-width: 80px;
+  margin: 0 auto;
+}
+
+#pageProductDetail #sectionProductDetail .product-title {
+  font-size: 1.8em;
+  font-weight: 700;
+}
+
+#pageProductDetail #sectionProductDetail .product-price {
+  margin-top: 10px;
+  font-size: 1.6em;
+  font-weight: 700;
+}
+
+#pageProductDetail #sectionProductDetail .ajouterPanier {
+  background-color: #18a0fb;
+  font-size: 1.4em;
+  padding: 8px 20px;
+}
+
+#pageProductDetail table {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 #sectionCart .sous-titre {
   font-size: 1.5em;
   font-weight: 700;
@@ -461,6 +503,41 @@ section {
 
 #sectionCart .valider-panier tr:first-child td {
   border-top: none;
+}
+
+#sectionLogin {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#sectionLogin .formBox {
+  background-color: #ffffff;
+  padding: 30px;
+}
+
+#sectionLogin .formBox .btnSubmit {
+  background-color: #18a0fb;
+  color: #ffffff;
+}
+
+#sectionLogin .btnSubmit {
+  background-color: #ffffff;
+  color: #000000;
+  width: 100%;
+}
+
+#sectionLogin .dashed {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #6c757d;
+  line-height: 0.1em;
+  margin: 40px 0 25px;
+}
+
+#sectionLogin .dashed span {
+  background: #f8fafc;
+  padding: 0 10px;
 }
 
 .card.product {
