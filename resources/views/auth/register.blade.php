@@ -60,13 +60,21 @@
                         <span class="input-group-text" id="inputGroup-sizing-default">Mot de passe</span>
                     </div>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                        name="password" required autocomplete="current-password">
+                        name="password" required>
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Confirmez Mot de passe</span>
+                    </div>
+                    <input id="password-confirm" type="password"
+                        class="form-control @error('password_confirmation') is-invalid @enderror"
+                        name="password_confirmation" required>
                 </div>
 
                 <button class="btn btnSubmit" type="submit">Créer mon compte</button>

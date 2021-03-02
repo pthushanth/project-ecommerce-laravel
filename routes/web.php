@@ -11,7 +11,6 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ReviewController;
-use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Session;
@@ -60,6 +59,12 @@ Route::get('admins/login', function () {
     Session::put('adminLoginPage', true);
     return view('admin.auth.login');
 })->name('admin.login');
+
+Route::get('admins/register', function () {
+    // Session::put('adminRegisterPage', true);
+    // return view('admin.auth.register');
+    return redirect()->route('admin.login');
+})->name('admin.register');
 /***************************************************************************************** */
 
 Route::get('/logedin', function () {
@@ -75,7 +80,7 @@ Route::get('/logedin', function () {
 })->middleware(['auth']);
 
 // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
+// Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
 
 Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function () {
 
@@ -145,10 +150,6 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::post('/modifier-promotion', [SaleController::class, 'update'])->name('sales.update');
     Route::get('/supprimer-promotion/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
 
-    //rating
-    Route::get('/rating', [RatingController::class, 'index'])->name('ratings.index');
-    Route::get('/supprimer-rating/{id}', [RatingController::class, 'destroy'])->name('ratings.destroy');
-
     //review
     Route::get('/commentaire', [ReviewController::class, 'index'])->name('reviews.index');
     Route::get('/supprimer-review/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
@@ -157,4 +158,14 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/notification', function () {
         return view('admin.pages.notification.index')->with("notifications", Auth::user()->notifications);
     })->name('notifications.index');
+});
+
+
+//CUSTOMER
+Route::middleware(['client'])->prefix('client')->name('client.')->group(function () {
+    Route::get('', [ClientController::class, 'index']);
+    Route::get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
+    Route::get('/mes-info-perso', [ClientController::class, 'account'])->name('account');
+    Route::post('/mes-info-perso', [ClientController::class, 'accountUpdate'])->name('account.update');
+    Route::get('/commandes', [ClientController::class, 'orders'])->name('orders');
 });

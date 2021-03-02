@@ -136,8 +136,6 @@ class ProductController extends Controller
             'specName' => 'array|min:1',
             'specValue' => 'array|min:1',
             'stock' => 'numeric',
-
-
         ]);
         $product = Product::find($id);
 

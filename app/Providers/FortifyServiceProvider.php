@@ -9,6 +9,7 @@ use App\Actions\Fortify\UpdateUserProfileInformation;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use SebastianBergmann\Environment\Console;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -35,14 +36,21 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         Fortify::loginView(function () {
-            if (Session::has('adminLoginPage')) {
-                Session::forget('adminLoginPage');
-                return view('admin.auth.login');
-            } else
-                return view('auth.login');
+            // dd(Session::has('adminLoginPage'));
+
+            // if (Session::has('adminLoginPage')) {
+
+            //     Session::forget('adminLoginPage');
+            //     return view('admin.auth.login');
+            // } else
+            return view('auth.login');
         });
 
         Fortify::registerView(function () {
+            // if (Session::has('adminRegisterPage')) {
+            //     Session::forget('adminRegisterPage');
+            //     return view('admin.auth.register');
+            // } else
             return view('auth.register');
         });
 

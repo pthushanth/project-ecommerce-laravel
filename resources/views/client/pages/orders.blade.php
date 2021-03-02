@@ -1,5 +1,5 @@
-@extends('admin.layouts.app')
-@section('title','Rating')
+@extends('client.layouts.app')
+@section('title','Commandes')
 
 @section('styles')
 
@@ -7,9 +7,9 @@
 @endsection
 
 @section('content')
-    <div  id="datatable" class="table-responsive"> 
-        {!! $dataTable->table() !!}
-    </div>
+<div id="datatable" class="table-responsive">
+    {!! $dataTable->table() !!}
+</div>
 @endsection
 
 @section('scripts')

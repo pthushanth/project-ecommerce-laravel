@@ -26,11 +26,20 @@ class ReviewsDataTable extends DataTable
                 $btn = '<a href="' . route('admin.reviews.destroy', $review->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
                 return $btn;
             })
+            ->editColumn('rating', function (Review $review) {
+                //change over here
+                $html = '<div class="rating">';
+                for ($i = 0; $i < (int)$review->rating; $i++) {
+                    $html .= ' <i class="fa fa-star"></i>';
+                }
+                $html .= ' </div> ' . $review->rating;
+                return $html;
+            })
             ->editColumn('created_at', function (Review $review) {
                 //change over here
                 return date('d-M-Y H:i:s', strtotime($review->created_at));
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'rating']);
     }
 
     /**
@@ -82,6 +91,7 @@ class ReviewsDataTable extends DataTable
             Column::make('DT_RowIndex')->title('N°')->orderable(false)->searchable(false),
             Column::make('created_at')->title('Date'),
             Column::make('user.name')->title('Client'),
+            Column::make('rating')->title('rating'),
             Column::make('review')->title('Commentaire'),
             Column::make('product.name')->title('Produit'),
             Column::computed('action')

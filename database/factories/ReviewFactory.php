@@ -26,6 +26,7 @@ class ReviewFactory extends Factory
         return [
             // 'user_id' => User::factory(),
             // 'product_id' => Product::factory(),
+            'rating' => $this->faker->randomFloat($nbMaxDecimals = 1, $min = 1, $max = 5),
             'review' => $this->faker->sentence(),
         ];
     }

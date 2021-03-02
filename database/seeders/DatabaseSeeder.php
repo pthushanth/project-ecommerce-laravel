@@ -11,7 +11,6 @@ use App\Models\Coupon;
 use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\OrderStatus;
-use App\Models\Rating;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -83,12 +82,12 @@ class DatabaseSeeder extends Seeder
         //     ->for($this->randomArrayElement($products))
         //     ->for($this->randomArrayElement($users))
         //     ->create();
-        for ($i = 0; $i < 30; $i++) {
-            Rating::factory()
-                ->for($this->randomArrayElement($products))
-                ->for($this->randomArrayElement($users))
-                ->create();
-        }
+        // for ($i = 0; $i < 30; $i++) {
+        //     Rating::factory()
+        //         ->for($this->randomArrayElement($products))
+        //         ->for($this->randomArrayElement($users))
+        //         ->create();
+        // }
 
         for ($i = 0; $i < 30; $i++) {
             Review::factory()

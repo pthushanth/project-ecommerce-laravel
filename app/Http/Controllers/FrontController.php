@@ -8,7 +8,6 @@ use App\Models\Coupon;
 use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\Rating;
 use App\Models\User;
 use App\Notifications\NewOrderNotification;
 use Carbon\Carbon;
@@ -37,10 +36,10 @@ class FrontController extends Controller
 
         // $topRatedProducts = Rating::with('product.category', 'product.brand')->groupBy('product_id')->orderBy(avg('star'))->get();
         $topRatedProducts = Product::with('category', 'brand')
-            ->join('ratings', 'ratings.product_id', '=', 'products.id')
-            ->select('products.*', DB::raw('avg(star) as avg_star'))
+            ->join('reviews', 'reviews.product_id', '=', 'products.id')
+            ->select('products.*', DB::raw('avg(rating) as avg_rating'))
             ->groupBy('products.id')
-            ->orderBy('avg_star', 'DESC')
+            ->orderBy('avg_rating', 'DESC')
             ->take(10)
             ->get();
         // dd($topRatedProducts->category);
@@ -99,7 +98,7 @@ class FrontController extends Controller
     {
         if (!Auth::user()) {
             //session to store where to redirect after login
-            session(['url.intended' => 'cart']);
+            session(['url.intended' => 'panier']);
             return view('auth.login');
         }
         $request->validate([
@@ -206,11 +205,11 @@ class FrontController extends Controller
             return redirect::to('/checkout');
         }
         Cart::clear();
-        Session::put('success', 'Purchase accomplished successfully !');
+        // Session::put('success', 'Achat accompli avec succès !');
         //notify new order
         Notification::send(User::getAdmin(), new NewOrderNotification($order));
-
-        return redirect()->route('confirmation')->with('status', 'Achat accompli avec succès');
+        Session::put('order', $order);
+        return redirect()->route('confirmation');
     }
 
 
@@ -239,7 +238,12 @@ class FrontController extends Controller
 
     public function confirmation()
     {
-        return view('front.pages.confirmation_order');
+        $order = null;
+        if (Session::has('order')) {
+            $order = Session::get('order');
+            Session::forget('order');
+        }
+        return view('front.pages.confirmation_order')->with(['order' => $order]);
     }
 
     public function productDetail($id)

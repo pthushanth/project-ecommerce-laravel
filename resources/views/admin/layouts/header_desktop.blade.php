@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="mess__item">
                                     <div class="image img-cir img-40">
-                                        <img src="{{asset('admin/images/icon/avatar-06.jpg')}}" alt="profile" />
+                                        <img src="{{asset(Auth::user()->getAvatarUrl())}}" alt="profile" />
                                     </div>
                                     <div class="content">
                                         <h6>Michelle Moreno</h6>

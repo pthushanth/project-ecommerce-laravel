@@ -108,12 +108,8 @@
             </li>
             <li>
                 <a href="{{route('admin.reviews.index')}}" style="color:#4272d7">
-                    <i class="fas fa-comment-alt"></i>Commentaire
-                </a>
-            </li>
-            <li>
-                <a href="{{route('admin.ratings.index')}}" style="color:#4272d7">
-                    <i class="fas fa-star"></i>Rating
+                    <i class="fas  fa-star"></i>Commentaire
+                    {{-- <i class="fas fa-comment-alt"></i>Commentaire --}}
                 </a>
             </li>
             </ul>

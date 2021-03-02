@@ -8,6 +8,7 @@ header {
 
 header .icone {
   width: 60px;
+  margin: 0 auto;
 }
 
 header p {

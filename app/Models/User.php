@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -44,12 +45,27 @@ class User extends Authenticatable
     {
         return User::where('role', 'client')->get();
     }
+    public static function getClient()
+    {
+        return User::with('customer')->where('role', 'client')->where('id', Auth::user()->id)->first();
+    }
+
     public static function getAdmin()
     {
         return User::where('role', 'admin')->get();
     }
 
+    public function getAvatarUrl()
+    {
+        $avatar = $this->avatar;
+        return "storage/avatars/" . $avatar;
+    }
     /********************        RelationShip       *******************/
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -58,10 +74,6 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class);
-    }
-    public function ratings()
-    {
-        return $this->hasMany(Rating::class);
     }
     public function city()
     {
