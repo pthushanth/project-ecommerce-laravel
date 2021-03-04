@@ -36,10 +36,10 @@ use Illuminate\Support\Facades\Route;
 /***************************************  FRONT  **************************************** */
 Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('produits', [FrontController::class, 'products'])->name('products');
-Route::get('produit/{id}', [FrontController::class, 'productDetail'])->name('productDetail');
+Route::get('produit/{slug}', [FrontController::class, 'productDetail'])->name('productDetail');
 Route::get('/panier', [FrontController::class, 'cart'])->name('cart');
 
-Route::post('panier/ajouter', [FrontController::class, 'addToCart'])->name('cart.add');
+Route::post('panier/produit/{slug}', [FrontController::class, 'addToCart'])->name('cart.add');
 Route::put('panier/{id}', [FrontController::class, 'updateCart'])->name('cart.update');
 Route::delete('panier/{id}', [FrontController::class, 'deleteItemCart'])->name('cart.delete_item');
 Route::post('panier/code-promo', [FrontController::class, 'couponReduction'])->name('cart.coupon');
@@ -92,11 +92,11 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/produit', [ProductController::class, 'index'])->name('products.index');
     Route::get('/ajouter-produit', [ProductController::class, 'create'])->name('products.create');
     Route::post('/ajouter-produit', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/modifier-produit/{id}', [ProductController::class, 'edit'])->name('products.edit');
+    Route::get('/modifier-produit/{slug}', [ProductController::class, 'edit'])->name('products.edit');
     Route::post('/modifier-produit', [ProductController::class, 'update'])->name('products.update');
-    Route::get('/supprimer-produit/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-    Route::get('/activer-produit/{id}', [ProductController::class, 'activateProduct'])->name('products.activate');
-    Route::get('/desactiver-produit/{id}', [ProductController::class, 'desactivateProduct'])->name('products.desactivate');
+    Route::get('/supprimer-produit/{slug}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/activer-produit/{slug}', [ProductController::class, 'activateProduct'])->name('products.activate');
+    Route::get('/desactiver-produit/{slug}', [ProductController::class, 'desactivateProduct'])->name('products.desactivate');
     Route::get('/produit/recherche', [ProductController::class, 'findAutocomplete'])->name('products.findAutocomplete');
 
 
@@ -168,4 +168,6 @@ Route::middleware(['client'])->prefix('client')->name('client.')->group(function
     Route::get('/mes-info-perso', [ClientController::class, 'account'])->name('account');
     Route::post('/mes-info-perso', [ClientController::class, 'accountUpdate'])->name('account.update');
     Route::get('/commandes', [ClientController::class, 'orders'])->name('orders');
+
+    Route::post('/produit/{slug}/donner-avis', [ReviewController::class, 'store'])->name('review.store');
 });

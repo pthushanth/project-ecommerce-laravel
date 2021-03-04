@@ -55,6 +55,14 @@ class User extends Authenticatable
         return User::where('role', 'admin')->get();
     }
 
+    public function isAdmin()
+    {
+        return $this->role == "admin";
+    }
+    public function isClient()
+    {
+        return $this->role == "client";
+    }
     public function getAvatarUrl()
     {
         $avatar = $this->avatar;

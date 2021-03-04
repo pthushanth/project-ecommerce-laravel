@@ -13,6 +13,7 @@ use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -106,10 +107,10 @@ class ProductController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit($slug)
     {
 
-        $product = Product::with('category', 'brand', 'attributes', 'stock')->find($id);
+        $product = Product::with('category', 'brand', 'attributes', 'stock')->where('slug', $slug)->first();
         $categories = Category::all();
         $brands = Brand::all();
         $attributes = Attribute::all();
@@ -122,7 +123,7 @@ class ProductController extends Controller
             ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
         $validated = $request->validate([
             'category' => 'required',
@@ -137,9 +138,10 @@ class ProductController extends Controller
             'specValue' => 'array|min:1',
             'stock' => 'numeric',
         ]);
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
 
         $product->name = $request->input('name');
+        $product->slug = Str::slug($product->name);
         $product->price = $request->input('price');
         $product->short_description = $request->input('short_description');
         $product->long_description = $request->input('long_description');
@@ -154,9 +156,9 @@ class ProductController extends Controller
         // return back()->with('status', 'La catégorie ' . $category->name . ' a été mis à jour avec succès.');
     }
 
-    public function destroy($id)
+    public function destroy($slug)
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
         foreach ($product->image as $file) {
             $this->deleteImages($file);
         }
@@ -164,17 +166,17 @@ class ProductController extends Controller
         return back()->with('status', 'Le produit ' . $product->name . ' a été supprimée avec succès.');
     }
 
-    public function activateProduct($id)
+    public function activateProduct($slug)
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
         $product->status = 1;
         $product->save();
         return back()->with('status', 'Le product ' . $product->name . ' a été activé avec succès.');
     }
 
-    public function desactivateProduct($id)
+    public function desactivateProduct($slug)
     {
-        $product = Product::find($id);
+        $product = Product::find($slug);
         $product->status = 0;
         $product->save();
         return back()->with('status', 'Le product ' . $product->name . ' a été desactivé avec succès.');
@@ -228,7 +230,7 @@ class ProductController extends Controller
 
         if ($request->has('q')) {
             $search = $request->q;
-            $data = Product::select("id", "name")
+            $data = Product::select("slug", "id", "name")
                 ->where('name', 'LIKE', "%$search%")
                 ->get();
         }

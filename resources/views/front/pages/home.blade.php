@@ -167,10 +167,10 @@
         <a class="nav-link btn showProductDiv" target="bestSeller" data-toggle="tab" role="tab" aria-controls="special"
           aria-selected="false" onclick="showProductDiv(this.target)">Best seller</a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" id="special-tab" data-toggle="tab" href="#special" role="tab" aria-controls="special"
           aria-selected="false">Special Offer</a>
-      </li>
+      </li> --}}
     </ul>
 
     <div class="glider-contain">
@@ -179,30 +179,28 @@
 
           @foreach ($latestProducts as $latestProduct)
           <div class="card">
-            <img class="card-img-top" src="{{ asset($latestProduct->thumbnail) }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">{{$latestProduct->category->name}} - {{$latestProduct->brand->name}}</a>
-              <div class="rating">
-                {{$latestProduct->getAvgRating()}}
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">{{$latestProduct->name}}</a>
-              <p class="prix">{{$latestProduct->price}} €</p>
-              <form method="POST" action="{{route('cart.add',$latestProduct->id)}}">
-                @csrf
-                <div class="input-field col">
-                  <input type="hidden" id="id" name="id" value="{{ $latestProduct->id }}">
-                  <input id="quantity" name="quantity" type="hidden" value="1" min="1">
-                  <p>
-                    <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
-                  </p>
+            <a href="{{route('productDetail',$latestProduct->slug)}}">
+              <img class="card-img-top" src="{{ asset($latestProduct->thumbnail) }}">
+              <div class="card-body text-center">
+                <a href="#" class="categorie">{{$latestProduct->category->name}} - {{$latestProduct->brand->name}}</a>
+                <div class="rating">
+                  {{-- {{$latestProduct->getAvgRating()}} --}}
+                  {!! $latestProduct->printAverageRatingStar() !!}
                 </div>
-              </form>
-            </div>
+                <a href="#" class="produit-titre">{{$latestProduct->name}}</a>
+                <p class="prix">{{$latestProduct->price}} €</p>
+                <form method="POST" action="{{route('cart.add',$latestProduct->slug)}}">
+                  @csrf
+                  <div class="input-field col">
+                    <input type="hidden" id="id" name="id" value="{{ $latestProduct->slug }}">
+                    <input id="quantity" name="quantity" type="hidden" value="1" min="1">
+                    <p>
+                      <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </a>
           </div>
           @endforeach
 
@@ -215,31 +213,29 @@
         <div class="glider">
           @foreach ($topRatedProducts as $topRatedProduct)
           <div class="card">
-            <img class="card-img-top" src="{{ asset($topRatedProduct->thumbnail) }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">{{$topRatedProduct->category->name}} -
-                {{$topRatedProduct->brand->name}}</a>
-              <div class="rating">
-                {{$topRatedProduct->getAvgRating()}}
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">{{$topRatedProduct->name}}</a>
-              <p class="prix">{{$topRatedProduct->price}} €</p>
-              <form method="POST" action="{{route('cart.add',$topRatedProduct->id)}}">
-                @csrf
-                <div class="input-field col">
-                  <input type="hidden" id="id" name="id" value="{{ $topRatedProduct->id }}">
-                  <input id="quantity" name="quantity" type="hidden" value="1" min="1">
-                  <p>
-                    <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
-                  </p>
+            <a href="{{route('productDetail',$topRatedProduct->slug)}}">
+              <img class="card-img-top" src="{{ asset($topRatedProduct->thumbnail) }}">
+              <div class="card-body text-center">
+                <a href="#" class="categorie">{{$topRatedProduct->category->name}} -
+                  {{$topRatedProduct->brand->name}}</a>
+                <div class="rating">
+                  {!! $topRatedProduct->printAverageRatingStar() !!}
+
                 </div>
-              </form>
-            </div>
+                <a href="#" class="produit-titre">{{$topRatedProduct->name}}</a>
+                <p class="prix">{{$topRatedProduct->price}} €</p>
+                <form method="POST" action="{{route('cart.add',$topRatedProduct->slug)}}">
+                  @csrf
+                  <div class="input-field col">
+                    <input type="hidden" id="id" name="id" value="{{ $topRatedProduct->slug }}">
+                    <input id="quantity" name="quantity" type="hidden" value="1" min="1">
+                    <p>
+                      <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </a>
           </div>
           @endforeach
 
@@ -250,150 +246,32 @@
 
       <div id="bestSeller" class="productDiv">
         <div class="glider">
+          @foreach ($bestSellerProducts as $bestSellerProduct)
           <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
+            <a href="{{route('productDetail',$bestSellerProduct->slug)}}">
+              <img class="card-img-top" src="{{ asset($bestSellerProduct->thumbnail) }}">
+              <div class="card-body text-center">
+                <a href="#" class="categorie">{{$bestSellerProduct->category->name}} -
+                  {{$bestSellerProduct->brand->name}}</a>
+                <div class="rating">
+                  {!! $bestSellerProduct->printAverageRatingStar() !!}
+                </div>
+                <a href="#" class="produit-titre">{{$bestSellerProduct->name}}</a>
+                <p class="prix">{{$bestSellerProduct->price}} €</p>
+                <form method="POST" action="{{route('cart.add',$bestSellerProduct->slug)}}">
+                  @csrf
+                  <div class="input-field col">
+                    <input type="hidden" id="id" name="id" value="{{ $bestSellerProduct->slug }}">
+                    <input id="quantity" name="quantity" type="hidden" value="1" min="1">
+                    <p>
+                      <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
+                    </p>
+                  </div>
+                </form>
               </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
+            </a>
           </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-            <div class="card-body text-center">
-              <a href="#" class="categorie">Laptop - Asus</a>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-              <p class="prix">1499,99 €</p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </div>
+          @endforeach
         </div>
         <button class="glider-prev">&laquo;</button>
         <button class="glider-next">&raquo;</button>
@@ -503,110 +381,26 @@
     <h2 class="text-center">Promotions</h2>
     <div class="glider-contain">
       <div class="glider">
+        @foreach ($bestSellerProducts as $saleProduct)
         <div class="card">
-          <div class="solde-reduction">
-            <span class="solde">BON PLAN</span>
-            <span class="reduction">-33%</span>
-          </div>
-          <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-          <div class="card-body text-center">
-            <a href="#" class="categorie">Laptop - Asus</a>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="far fa-star"></i>
+          <a href="{{route('productDetail',$saleProduct->slug)}}">
+            <div class="solde-reduction">
+              <span class="solde">BON PLAN</span>
+              <span class="reduction">-33%</span>
             </div>
-            <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-            <p class="prix">1299,00 € <span> 1499,99 €</span></p>
-            <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="solde-reduction">
-            <span class="solde">BON PLAN</span>
-            <span class="reduction">-33%</span>
-          </div>
-          <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-          <div class="card-body text-center">
-            <a href="#" class="categorie">Laptop - Asus</a>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="far fa-star"></i>
+            <img class="card-img-top" src="{{ asset($saleProduct->getThumbnailUrl()) }}">
+            <div class="card-body text-center">
+              <a href="#" class="categorie">{{$saleProduct->category->name}}</a>
+              <div class="rating">
+                {!! $saleProduct->printAverageRatingStar() !!}
+              </div>
+              <a href="#" class="produit-titre">{{$saleProduct->name}}</a>
+              <p class="prix">1299,00 € <span> {{$saleProduct->price}} </span></p>
+              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
             </div>
-            <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-            <p class="prix">1299,00 € <span> 1499,99 €</span></p>
-
-            <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-          </div>
+          </a>
         </div>
-        <div class="card">
-          <div class="solde-reduction">
-            <span class="solde">BON PLAN</span>
-            <span class="reduction">-33%</span>
-          </div>
-          <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-          <div class="card-body text-center">
-            <a href="#" class="categorie">Laptop - Asus</a>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-            <p class="prix">1299,00 € <span> 1499,99 €</span></p>
-
-            <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="solde-reduction">
-            <span class="solde">BON PLAN</span>
-            <span class="reduction">-33%</span>
-          </div>
-          <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-          <div class="card-body text-center">
-            <a href="#" class="categorie">Laptop - Asus</a>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-            <p class="prix">1299,00 € <span> 1499,99 €</span></p>
-
-            <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="solde-reduction">
-            <span class="solde">BON PLAN</span>
-            <span class="reduction">-33%</span>
-          </div>
-          <img class="card-img-top" src="{{ asset('images/test/product.jpg') }}">
-          <div class="card-body text-center">
-            <a href="#" class="categorie">Laptop - Asus</a>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <a href="#" class="produit-titre">Asus Zenbook UX481FA</a>
-            <p class="prix">1299,00 € <span> 1499,99 €</span></p>
-
-            <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-          </div>
-        </div>
+        @endforeach
       </div>
       <button class="glider-prev">&laquo;</button>
       <button class="glider-next">&raquo;</button>

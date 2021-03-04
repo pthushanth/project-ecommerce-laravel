@@ -47,16 +47,16 @@
     <div class="page-wrapper">
 
         {{-- MENU SIDEBAR --}}
-        @if(Auth::user()) @include('client.layouts.sidebar') @endif
+        @include('client.layouts.sidebar')
 
         {{-- HEADER MOBILE--}}
-        @if(Auth::user()) @include('client.layouts.header_mobile') @endif
+        @include('client.layouts.header_mobile')
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
 
             {{-- HEADER DESKTOP --}}
-            @if(Auth::user()) @include('client.layouts.header_desktop') @endif
+            @include('client.layouts.header_desktop')
 
             <!-- MAIN CONTENT-->
             <div class="main-content">

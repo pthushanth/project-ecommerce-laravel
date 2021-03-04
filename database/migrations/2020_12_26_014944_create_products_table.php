@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('thumbnail');
             $table->json('image');
             $table->json('spec')->nullable();
-            $table->integer('status');
+            $table->boolean('status')->default(1);
             $table->foreignId('brand_id')->constrained();
             $table->foreignId('category_id')->constrained();
             // $table->foreignId('stock_id')->constrained();

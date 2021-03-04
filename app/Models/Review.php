@@ -9,6 +9,21 @@ class Review extends Model
 {
     use HasFactory;
 
+    public function printRatingStar()
+    {
+        $html = '';
+        $rating = $this->rating;
+        $drawn = 5;
+        for ($i = 0; $i < $rating; $i++) {
+            $drawn--;
+            $html .= ' <i class="fa fa-star"></i>';
+        }
+        for ($drawn; $drawn > 0; $drawn--) {
+            $html .= ' <i class="far fa-star"></i>';
+        }
+        return $html;
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);

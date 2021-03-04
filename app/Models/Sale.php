@@ -13,4 +13,14 @@ class Sale extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function isDailyDeal()
+    {
+        return $this->name == "daily deal";
+    }
+
+    public static function getDailyDeals()
+    {
+        return self::with('products')->where('name', 'daily deal')->get();
+    }
 }

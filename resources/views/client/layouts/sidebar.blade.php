@@ -1,7 +1,7 @@
 <!-- MENU SIDEBAR-->
 <aside class="menu-sidebar2">
     <div class="logo">
-        <a href="#">
+        <a href="{{route('home')}}">
             <img src="{{asset('images/logo.png')}}" alt="Tech Zone" />
         </a>
     </div>
@@ -11,7 +11,7 @@
                 <img src="{{asset(Auth::user()->getAvatarUrl())}}" alt="profile" />
 
             </div>
-            <h4 class="name">john doe</h4>
+            <h4 class="name">{{Auth::user()->name}}</h4>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                 <i class="zmdi zmdi-power"></i>Se déconnecter

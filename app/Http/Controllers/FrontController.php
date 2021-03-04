@@ -29,12 +29,6 @@ class FrontController extends Controller
 {
     public function home()
     {
-        // $topRatedProducts = Product::with('category', 'brand', 'rating')->avg()->get();
-        // $topRatedProducts = Product::with('category', 'brand', 'rating')
-        //     ->select('products.*', DB::raw('avg(star)'))->groupBy('id')->orderBy('star', 'DESC')->get();
-        // dd($topRatedProducts);
-
-        // $topRatedProducts = Rating::with('product.category', 'product.brand')->groupBy('product_id')->orderBy(avg('star'))->get();
         $topRatedProducts = Product::with('category', 'brand')
             ->join('reviews', 'reviews.product_id', '=', 'products.id')
             ->select('products.*', DB::raw('avg(rating) as avg_rating'))
@@ -42,10 +36,18 @@ class FrontController extends Controller
             ->orderBy('avg_rating', 'DESC')
             ->take(10)
             ->get();
-        // dd($topRatedProducts->category);
+
         $latestProducts = Product::with('category', 'brand')->latest()->take(10)->get();
+
+        $bestSellerProducts = Product::with('category', 'brand')
+            ->join('order_product', 'order_product.product_id', '=', 'products.id')
+            ->select('products.*', DB::raw('sum(order_product.qty) as totalOrderedProduct'))
+            ->groupBy('products.id')
+            ->orderBy('totalOrderedProduct', 'DESC')
+            ->take(10)
+            ->get();
         // return view('front.pages.home', compact($topRatedProducts, $latestProducts));
-        return view('front.pages.home')->with(['topRatedProducts' => $topRatedProducts, 'latestProducts' => $latestProducts]);
+        return view('front.pages.home')->with(['topRatedProducts' => $topRatedProducts, 'latestProducts' => $latestProducts, 'bestSellerProducts' => $bestSellerProducts]);
     }
     public function products()
     {
@@ -61,13 +63,14 @@ class FrontController extends Controller
         return view('front.pages.cart');
     }
 
-    public function addToCart(Request $request)
+    public function addToCart(Request $request, $slug)
     {
-        $product = Product::findOrFail($request->id);
+        $product = Product::where('slug', $slug)->first();
         // dd(Cart::getContent());
         Cart::add(
             [
                 'id' => $product->id,
+                'slug' => $product->slug,
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => intval($request->quantity),
@@ -246,9 +249,9 @@ class FrontController extends Controller
         return view('front.pages.confirmation_order')->with(['order' => $order]);
     }
 
-    public function productDetail($id)
+    public function productDetail($slug)
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
         $relatedProducts = Category::with('products')->where('id', $product->category->id)->get();
         return view('front.pages.product_detail')->with(['product' => $product, 'relatedProducts' => $relatedProducts]);
     }

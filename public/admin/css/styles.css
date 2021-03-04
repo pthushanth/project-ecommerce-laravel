@@ -13,6 +13,12 @@
 }
 
 .rating .fa,
+.rating .fas,
+.rating .far,
 .testimonial .fa {
     color: #ff523b;
+}
+
+.rating .fas .fa-star-half:after {
+    content: "\f006";
 }

@@ -4,8 +4,8 @@
         <div class="container-fluid">
             <div class="header-wrap2">
                 <div class="logo d-block d-lg-none">
-                    <a href="#">
-                        <img src="images/icon/logo-white.png" alt="TechZone" />
+                    <a class="logo" href="{{route('home')}}">
+                        <img src="{{asset('images/logo.png')}}" alt="Tech Zone" />
                     </a>
                 </div>
                 <div class="header-button2">

@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -23,10 +24,14 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->unique()->word;
+        $slug = Str::slug($name, '-');
+
         return [
             // 'category_id' => Category::factory(),
             // 'brand_id' => Brand::factory(),
-            'name' => $this->faker->unique()->word,
+            'name' => $name,
+            'slug' => $slug,
             'short_description' => $this->faker->text,
             'long_description' => $this->faker->text,
             'thumbnail' => 'noImage.jpg',

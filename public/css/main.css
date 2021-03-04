@@ -78,8 +78,14 @@ footer .fab {
 }
 
 .rating .fa,
-.rating .far {
+.rating .far,
+.rating .fas {
   color: #ffb503;
+  font-size: 22px;
+}
+
+.rating .count-rating {
+  font-size: 22px;
 }
 
 section {

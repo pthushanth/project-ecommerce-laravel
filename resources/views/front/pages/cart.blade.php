@@ -35,9 +35,7 @@
                 <tr>
                   <th>
                     <div class="d-inline-block align-middle">
-                      @php $image= $item->model->image[0]; @endphp
-                      <img src="{{ $image === "noImage.jpg" ? "/storage/$image" : "/storage/product_images/$image" }}"
-                        class="card-img" style="width: 100px">
+                      <img src="{{$item->model->getThumbnailUrl()}}" class="card-img" style="width: 100px">
                     </div>
                     <div class="d-inline-block align-middle">
                       <h5 class="produit-titre">{{$item->name}}</h5>

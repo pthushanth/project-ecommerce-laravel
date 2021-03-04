@@ -29,8 +29,34 @@ class ReviewsDataTable extends DataTable
             ->editColumn('rating', function (Review $review) {
                 //change over here
                 $html = '<div class="rating">';
-                for ($i = 0; $i < (int)$review->rating; $i++) {
+                // $i = 0;
+                // for ($i; $i < $rating; $i++) {
+                //     if (floor($rating) != $rating) {
+                //         $html .= ' <i class="fas fa-star-half"></i>';
+                //         $rating = $rating - 0.5;
+                //     } else {
+                //         $html .= ' <i class="fa fa-star"></i>';
+                //         $rating = $rating - 1;
+                //     }
+                // }
+                // for ($i; $i < 5; $i++) {
+                //     $html .= ' <i class="fa fa-star-o"></i>';
+                // }
+
+                $rating_sum = $review->rating;
+                $average_stars = round($rating_sum * 2) / 2;
+                $drawn = 5;
+                for ($i = 0; $i < floor($average_stars); $i++) {
+                    $drawn--;
                     $html .= ' <i class="fa fa-star"></i>';
+                }
+
+                if ($rating_sum - floor($average_stars) == 0.5) {
+                    $drawn--;
+                    $html .= ' <i class="fas fa-star-half"></i>';
+                }
+                for ($drawn; $drawn > 0; $drawn--) {
+                    $html .= ' <i class="far fa-star"></i>';
                 }
                 $html .= ' </div> ' . $review->rating;
                 return $html;

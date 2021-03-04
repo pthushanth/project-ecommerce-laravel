@@ -26,7 +26,7 @@ class ClientOrdersDataTable extends DataTable
                 $i = 1;
                 $html = "";
                 foreach ($order->products as $product) {
-                    $html .= $i . " - " . $product->name . "</br>";
+                    $html .= '<a target="_blank" href="' . route('productDetail', $product->slug) . '">' . $i . " - " . $product->name . "</a></br>";
                     $i++;
                 }
                 return $html;
@@ -37,9 +37,9 @@ class ClientOrdersDataTable extends DataTable
                 foreach ($order->products as $product) {
                     $image = $product->image[0];
                     if ($image == 'noImage.jpg') {
-                        $html .= '<img src="' . asset("/storage/$image") . '"/>';
+                        $html .= '<a target="_blank" href="' . route('productDetail', $product->slug) . '"> <img src="' . asset("/storage/$image") . '"/> </a>';
                     } else {
-                        $html .= '<img src="' . asset("/storage/product_images/$image") . '"/>';
+                        $html .= '<a target="_blank" href="' . route('productDetail', $product->slug) . '"> <img src="' . asset("/storage/product_images/$image") . '"/></a>';
                     }
                 }
 

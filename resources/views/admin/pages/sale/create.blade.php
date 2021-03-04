@@ -135,7 +135,8 @@ cache: true
             results:  $.map(data, function (item) {
                   return {
                       text: item.name,
-                      id: item.id
+                      id: item.id,
+                      slug: item.slug,
                   }
               })
           };

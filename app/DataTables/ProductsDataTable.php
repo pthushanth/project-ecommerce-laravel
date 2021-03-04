@@ -37,13 +37,21 @@ class ProductsDataTable extends DataTable
             ->editColumn('image', function (Product $product) {
                 $html = "";
                 // dd($product->image[1]);
-                foreach ($product->image as $index => $image) {
-                    // var_dump($image);
-                    if ($image == 'noImage.jpg')
-                        $html .= '<img src="' . asset("/storage/$image") . '"/>';
-                    else {
-                        $html .= '<img src="' . asset("/storage/product_images/$image") . '"/>';
-                    }
+                // foreach ($product->image as $index => $image) {
+                //     // var_dump($image);
+                //     if ($image == 'noImage.jpg')
+                //         $html .= '<img src="' . asset("/storage/$image") . '"/>';
+                //     else {
+                //         $html .= '<img src="' . asset("/storage/product_images/$image") . '"/>';
+                //     }
+                // }
+
+                // var_dump($image);
+                $image = $product->image[0];
+                if ($image == 'noImage.jpg')
+                    $html .= '<img src="' . asset("/storage/$image") . '"/>';
+                else {
+                    $html .= '<img src="' . asset("/storage/product_images/$image") . '"/>';
                 }
                 return $html;
             })
