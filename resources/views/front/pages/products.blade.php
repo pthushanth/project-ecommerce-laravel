@@ -24,7 +24,7 @@
           @php $image=$product->image[0]; @endphp
           <div class="col-md-3">
             <a href="{{route('productDetail',$product->slug)}}">
-              <div class="card product text-center">
+              <div class="card product ">
                 <img class="card-img-top"
                   src="{{ $image === "noImage.jpg" ? "/storage/$image" : "/storage/product_images/$image" }}">
                 <div class="card-body ">

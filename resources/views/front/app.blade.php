@@ -21,9 +21,6 @@
     {{-- cart --}}
     {{-- <link href="{{ asset('css/cart.css') }}" rel="stylesheet"> --}}
 
-    {{-- app js --}}
-    {{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> --}}
-
     {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
     {{-- App css --}}
 

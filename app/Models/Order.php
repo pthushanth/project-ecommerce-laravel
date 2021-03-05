@@ -17,6 +17,11 @@ class Order extends Model
     {
         return $this->belongsTo(DeliveryAddress::class);
     }
+    public function deliveryAddressCity()
+    {
+        return $this->hasOneThrough(City::class, DeliveryAddress::class, 'city_id', '');
+    }
+
     public function orderStatus()
     {
         return $this->belongsTo(OrderStatus::class);
@@ -29,6 +34,6 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('qty');
     }
 }

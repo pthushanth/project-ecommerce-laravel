@@ -331,7 +331,17 @@ section {
   background-color: transparent;
   border: none;
   margin: 0 10px;
+}
+
+#sectionPromotions .card .image {
   position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+#sectionPromotions .card .image image {
+  width: 100%;
 }
 
 #sectionPromotions .card .solde-reduction {
@@ -556,6 +566,7 @@ section {
 .card.product img {
   width: 200px;
   height: 200px;
+  margin: 0 auto;
 }
 
 .card.product a {

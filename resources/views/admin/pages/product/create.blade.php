@@ -128,19 +128,6 @@ $titleForm="Ajouter un produit";
                                     </div> --}}
 
                             <div class="form-group">
-                                <div>
-                                    <div class="col-md-3 input-group-addon">thumbnail</div>
-                                    <div class="input-group">
-                                        <input type="file" id="image" name="thumbnail" multiple=""
-                                            class="form-control @error('thumbnail') is-invalid @enderror">
-                                    </div>
-                                    @error('thumbnail')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <div id="imageField">
                                     <div class="col-md-3 input-group-addon">Image</div>
                                     <div class="input-group">

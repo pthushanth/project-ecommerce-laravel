@@ -1,12 +1,3 @@
-// require( 'jszip' );
-// require( 'pdfmake' );
-// require( 'datatables.net-buttons-bs4' );
-// require( 'datatables.net-buttons/js/buttons.colVis.js' );
-// require( 'datatables.net-buttons/js/buttons.flash.js' );
-// require( 'datatables.net-buttons/js/buttons.html5.js' );
-// require( 'datatables.net-buttons/js/buttons.print.js' );
-// require( 'datatables.net-responsive-bs4' );
-
 window._ = require('lodash');
 
 /**
@@ -35,9 +26,7 @@ try {
         var pdfMake = require('pdfmake/build/pdfmake.js');
         var pdfFonts = require('pdfmake/build/vfs_fonts.js');
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
-        // window.pdfMake = require('pdfmake/build/pdfmake');
-        // window.pdfFonts = require('pdfmake/build/vfs_fonts');
-        // pdfMake.vfs = pdfFonts.pdfMake.vfs;
+       
 } catch (e) {}
 
 /**

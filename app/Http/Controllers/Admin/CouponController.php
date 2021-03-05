@@ -38,7 +38,7 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Code' => 'required|unique:App\Models\Coupon,code',
+            'code' => 'required|unique:App\Models\Coupon,code',
             'start' => 'required|date',
             'end' => 'required|date',
             'discount_type' => 'required',

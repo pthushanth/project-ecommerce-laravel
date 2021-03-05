@@ -43,7 +43,7 @@ class CreateNewUser implements CreatesNewUsers
                 'password' => Hash::make($input['password']),
             ]);
             //$user->notify(new NewClientNotification($user));
-            // User::getAdmin()->notify(new NewClientNotification($user));
+            // User::getAdmins()->notify(new NewClientNotification($user));
             // Send the notifications
         }
 
@@ -76,7 +76,7 @@ class CreateNewUser implements CreatesNewUsers
                 'lastname' => $input['lastname'],
                 'firstname' => $input['firstname']
             ]);
-            Notification::send(User::getAdmin(), new NewClientNotification($user));
+            Notification::send(User::getAdmins(), new NewClientNotification($user));
             return $user;
         }
     }

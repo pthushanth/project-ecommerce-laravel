@@ -20,13 +20,6 @@ class ProductController extends Controller
     public function index(ProductsDataTable $dataTable)
     {
         $products = Product::with('category', 'brand')->get();
-        // return view('admin.pages.product.index')->with('products', $products);
-        // $product = Product::find(51);
-        // $res = "";
-        // foreach ($product->image as $image) {
-        //     $res .= "***" . $image;
-        // }
-        // dd($res);
         return $dataTable->render('admin.pages.product.index');
     }
 
@@ -50,7 +43,8 @@ class ProductController extends Controller
             'brand' => 'required',
             'price' => 'required',
             'name' => 'required|unique:App\Models\Product,name',
-            'image' => 'required|array|min:1',
+            // 'image' => 'required|array|min:1',
+            'image' => 'array',
             'image.*' => 'image|nullable|max:1999',
             'short_description' => 'required',
             'long_description' => 'required',
@@ -71,19 +65,10 @@ class ProductController extends Controller
 
         $product = new Product();
         $product->name = $request->input('name');
+        $product->slug = Str::slug($product->name);
         $product->price = $request->input('price');
         $product->short_description = $request->input('short_description');
         $product->long_description = $request->input('long_description');
-
-        // $specs = array_combine($request->input('specName'), $request->input('specValue'));
-        // // Filtering the empty array
-        // $specs = array_diff($specs, array('', NULL));
-        // $product->spec = $specs;
-
-        // if (!$product->attributes()->attach($request->input('attribute_id'), ['value' => $request->input('attribute_value')])) {
-
-        //     // throw new FailedJobCreateException;
-        //   }
 
         $product->spec = "";
 
@@ -100,10 +85,17 @@ class ProductController extends Controller
         $stock = $product->stock()->create(['stock' => $request->input('stock'), 'low_stock_amount' => 5]);
 
         $sync_data = [];
-        for ($i = 0; $i < count($request->input('attribute_id')); $i++)
-            $sync_data[$request->input('attribute_id')[$i]] = ['value' => $request->input('attribute_value')[$i]];
+        if(!empty($request->input('attribute_id'))){
+
+            for ($i = 0; $i < count($request->input('attribute_id')); $i++){
+
+                $sync_data[$request->input('attribute_id')[$i]] = ['value' => $request->input('attribute_value')[$i]];
+            }
+        }
 
         $product->attributes()->attach($sync_data);
+        return back()->with('status', 'Le produit ' . $product->name . ' a été crée avec succès.');
+
     }
 
 
@@ -153,7 +145,7 @@ class ProductController extends Controller
 
         // $category = Category::find($inputs['id']);
         // $category->update($inputs);
-        // return back()->with('status', 'La catégorie ' . $category->name . ' a été mis à jour avec succès.');
+        return back()->with('status', 'Le produit ' . $product->name . ' a été mis à jour avec succès.');
     }
 
     public function destroy($slug)

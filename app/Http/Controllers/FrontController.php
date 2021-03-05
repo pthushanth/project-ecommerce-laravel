@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Coupon;
@@ -20,6 +21,7 @@ use Darryldecode\Cart\CartCondition;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 use Stripe\Charge;
@@ -38,6 +40,7 @@ class FrontController extends Controller
             ->get();
 
         $latestProducts = Product::with('category', 'brand')->latest()->take(10)->get();
+        $saleProducts = Product::has('productSale')->with('category', 'brand', 'productSale')->latest()->take(10)->get();
 
         $bestSellerProducts = Product::with('category', 'brand')
             ->join('order_product', 'order_product.product_id', '=', 'products.id')
@@ -47,7 +50,7 @@ class FrontController extends Controller
             ->take(10)
             ->get();
         // return view('front.pages.home', compact($topRatedProducts, $latestProducts));
-        return view('front.pages.home')->with(['topRatedProducts' => $topRatedProducts, 'latestProducts' => $latestProducts, 'bestSellerProducts' => $bestSellerProducts]);
+        return view('front.pages.home')->with(['topRatedProducts' => $topRatedProducts, 'latestProducts' => $latestProducts, 'bestSellerProducts' => $bestSellerProducts, 'saleProducts' => $saleProducts]);
     }
     public function products()
     {
@@ -155,6 +158,8 @@ class FrontController extends Controller
 
     public function checkoutPay(Request $request)
     {
+        // $aa=Order::with('user', 'deliveryAddress', 'deliveryAddressCity', 'products', 'orderStatus')->find(55);
+
         if (Cart::isEmpty()) {
             return view('front.pages.cart');
         }
@@ -199,9 +204,7 @@ class FrontController extends Controller
             }
             // $orders = Order::where("payment_id", $charge->id)->get();
 
-            //$email = Session::get('client')->email;
 
-            // Mail::to($email)->send(new SendMail($orders));
         } catch (\Exception $e) {
             Session::put('error', $e->getMessage());
             dd($e->getMessage());
@@ -210,8 +213,12 @@ class FrontController extends Controller
         Cart::clear();
         // Session::put('success', 'Achat accompli avec succès !');
         //notify new order
-        Notification::send(User::getAdmin(), new NewOrderNotification($order));
+        Notification::send(User::getAdmins(), new NewOrderNotification($order));
         Session::put('order', $order);
+
+        $order = Order::with('user', 'deliveryAddress', 'products', 'orderStatus')->find($order->id);
+        $email = Auth::user()->email;
+        Mail::to($email)->send(new OrderMail($order));
         return redirect()->route('confirmation');
     }
 

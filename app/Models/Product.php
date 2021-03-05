@@ -54,6 +54,25 @@ class Product extends Model
         if ($image === "noImage.jpg") return "storage/$image";
         else return "storage/product_images/$image";
     }
+    public function getImageUrl($image)
+    {
+        if ($image === "noImage.jpg") return "storage/$image";
+        else return "storage/product_images/$image";
+    }
+
+    // public function getImagesUrl()
+    // {
+    //     dd($this->image);
+    //     if(count(array($this->image))>0){
+    //       foreach ($this->image as $key=> $image) {
+    //         if ($image === "noImage.jpg") $this->image[$key] ="storage/$image";
+    //         else $this->image[$key]= "storage/product_images/$image";
+    //         }  
+    //     }
+        
+    //     return $this->image;
+        
+    // }
 
     // public function printEmptyStar()
     // {
@@ -134,5 +153,9 @@ class Product extends Model
     public function sales()
     {
         return $this->hasMany(Sale::class);
+    }
+    public function productSale()
+    {
+        return $this->hasOne(ProductSale::class);
     }
 }

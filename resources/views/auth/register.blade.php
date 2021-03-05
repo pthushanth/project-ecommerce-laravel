@@ -10,11 +10,11 @@
                 @csrf
                 <div class="form-group">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="mme" name="title" value="mme">
+                        <input class="form-check-input" type="radio" id="mme" name="title" value="mme"  {{ old('title') == "mme" ? 'checked' : ''}}>
                         <label class="form-check-label" for="mme">Madame</label></label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="m" name="title" value="m">
+                        <input class="form-check-input" type="radio" id="m" name="title" value="m" {{ old('title') == "m" ? 'checked' : ''}}>
                         <label class="form-check-label" for="m">Monsieur</label>
                     </div>
                 </div>

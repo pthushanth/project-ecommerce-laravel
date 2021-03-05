@@ -38,7 +38,24 @@
                                             <input type="text" id="code" name="code" value="{{ old('code',$coupon->code ?? '') }}" class="form-control">
                                         </div>
                                     </div>
-
+                                    
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="percentage"
+                                            name="discount_type" value="pourcentage" {{ old('discount_type') == "pourcentage" ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="percentage">Pourcentage</label></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="remise" name="discount_type" value="fixed" {{ old('discount_type') == "0" ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="remise">Remise</label>
+                                    </div>
+                                <div class="form-group mt-3">
+                                    <div class="col-md-3 input-group-addon">Réduction</div>
+                                    <div class="input-group">
+                                        <input type="number" id="discount_value" name="discount_value"
+                                            value="{{ old('discount_value',$sale->discount_value ?? '') }}"
+                                            class="form-control">
+                                    </div>
+                                </div>
                                     <div class="form-group">
                                         <div class="col-md-3 input-group-addon">Date de début</div>
                                         <div class="input-group">

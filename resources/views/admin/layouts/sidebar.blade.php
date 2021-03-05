@@ -97,7 +97,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.sales.index')}}" style="color:#4272d7">
+                <a href="{{route('admin.product_sales.index')}}" style="color:#4272d7">
                     <i class="fas fa-tags"></i>Promotion
                 </a>
             </li>

@@ -178,10 +178,10 @@
         <div class="glider">
 
           @foreach ($latestProducts as $latestProduct)
-          <div class="card">
+          <div class="card product text-center">
             <a href="{{route('productDetail',$latestProduct->slug)}}">
-              <img class="card-img-top" src="{{ asset($latestProduct->thumbnail) }}">
-              <div class="card-body text-center">
+              <img class="card-img-top " src="{{ asset($latestProduct->getThumbnailUrl()) }}">
+              <div class="card-body">
                 <a href="#" class="categorie">{{$latestProduct->category->name}} - {{$latestProduct->brand->name}}</a>
                 <div class="rating">
                   {{-- {{$latestProduct->getAvgRating()}} --}}
@@ -212,9 +212,9 @@
       <div id="topRated" class="productDiv">
         <div class="glider">
           @foreach ($topRatedProducts as $topRatedProduct)
-          <div class="card">
+          <div class="card product text-center">
             <a href="{{route('productDetail',$topRatedProduct->slug)}}">
-              <img class="card-img-top" src="{{ asset($topRatedProduct->thumbnail) }}">
+              <img class="card-img-top" src="{{ asset($topRatedProduct->getThumbnailUrl()) }}">
               <div class="card-body text-center">
                 <a href="#" class="categorie">{{$topRatedProduct->category->name}} -
                   {{$topRatedProduct->brand->name}}</a>
@@ -247,9 +247,9 @@
       <div id="bestSeller" class="productDiv">
         <div class="glider">
           @foreach ($bestSellerProducts as $bestSellerProduct)
-          <div class="card">
+          <div class="card product text-center">
             <a href="{{route('productDetail',$bestSellerProduct->slug)}}">
-              <img class="card-img-top" src="{{ asset($bestSellerProduct->thumbnail) }}">
+              <img class="card-img-top" src="{{ asset($bestSellerProduct->getThumbnailUrl()) }}">
               <div class="card-body text-center">
                 <a href="#" class="categorie">{{$bestSellerProduct->category->name}} -
                   {{$bestSellerProduct->brand->name}}</a>
@@ -381,21 +381,24 @@
     <h2 class="text-center">Promotions</h2>
     <div class="glider-contain">
       <div class="glider">
-        @foreach ($bestSellerProducts as $saleProduct)
-        <div class="card">
+        @foreach ($saleProducts as $saleProduct)
+        <div class="card product text-center">
           <a href="{{route('productDetail',$saleProduct->slug)}}">
+          <div class="image">
             <div class="solde-reduction">
-              <span class="solde">BON PLAN</span>
-              <span class="reduction">-33%</span>
-            </div>
-            <img class="card-img-top" src="{{ asset($saleProduct->getThumbnailUrl()) }}">
+                <span class="solde">BON PLAN</span>
+                <span class="reduction">{{$saleProduct->productSale->discount_value}}</span>
+              </div>
+              <img class="card-img-top" src="{{ asset($saleProduct->getThumbnailUrl()) }}">
+          </div>
+            
             <div class="card-body text-center">
               <a href="#" class="categorie">{{$saleProduct->category->name}}</a>
               <div class="rating">
                 {!! $saleProduct->printAverageRatingStar() !!}
               </div>
               <a href="#" class="produit-titre">{{$saleProduct->name}}</a>
-              <p class="prix">1299,00 € <span> {{$saleProduct->price}} </span></p>
+              <p class="prix">{{$saleProduct->productSale->getDiscountedPrice($saleProduct->price)}} <span> {{$saleProduct->price}} </span></p>
               <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
             </div>
           </a>

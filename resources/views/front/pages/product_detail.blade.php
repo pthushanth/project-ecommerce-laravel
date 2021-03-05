@@ -78,9 +78,9 @@
 @endsection
 
 @section('content')
-<section id="sectionTitle">
+{{-- <section id="sectionTitle">
     <h1>PRODUIT DETAIL</h1>
-</section>
+</section> --}}
 
 <div id="pageProductDetail">
     <section id="sectionProductDetail">
@@ -88,41 +88,25 @@
             <div class="row align-items-center">
                 <div class="col-md-5 image-gallery">
                     <div class="row">
-                        <img src="{{asset('images/test/apple_watch.png')}}" id="ProductImg">
+                        <img src="{{asset($product->getThumbnailUrl())}}" id="ProductImg">
                     </div>
 
                     <div class="row">
-                        <div class="col-3">
-                            <img src="{{asset('images/test/iphone12.jpg')}}" class="small-img">
-                        </div>
-                        <div class="col-3">
-                            <img src="{{asset('images/test/apple_watch.png')}}" class="small-img">
-                        </div>
-                        <div class="col-3">
-                            <img src="{{asset('images/test/s20.jpg')}}" class="small-img">
-                        </div>
-                        <div class="col-3">
-                            <img src="{{asset('images/test/apple_watch.png')}}" class="small-img">
-                        </div>
+                        @foreach ( $product->image as $image)
+                            <div class="col-3">
+                                    <img src="{{asset($product->getImageUrl($image))}}" class="small-img">
+                                </div>  
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <p class="product-title">Samsung Galaxy S20</p>
+                    <p class="product-title">{{$product->name}}</p>
                     <hr>
                     <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="far fa-star"></i>
+                        {!! $product->printAverageRatingStar() !!}
                     </div>
-                    <p class="product-price">500.00€</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent egestas volutpat libero, vitae
-                        dictum
-                        ligula posuere sed. Praesent at ultricies urna. Quisque euismod enim ipsum, at tempor erat
-                        tempor
-                        eget
-                    </p>
+                    <p class="product-price">{{$product->price}}</p>
+                    <p>{!!$product->short_description!!}</p>
 
                     <div class="row mt-5 justify-content-center">
                         <form method="POST" action="{{route('cart.add',$product->slug)}}">

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\ProductSaleController;
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -149,6 +150,15 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/modifier-promotion/{id}', [SaleController::class, 'edit'])->name('sales.edit');
     Route::post('/modifier-promotion', [SaleController::class, 'update'])->name('sales.update');
     Route::get('/supprimer-promotion/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
+
+    //Product Sales
+    Route::get('/promo', [ProductSaleController::class, 'index'])->name('product_sales.index');
+    Route::get('/ajouter-promo', [ProductSaleController::class, 'create'])->name('product_sales.create');
+    Route::post('/ajouter-promo', [ProductSaleController::class, 'store'])->name('product_sales.store');
+    Route::get('/modifier-promo/{id}', [ProductSaleController::class, 'edit'])->name('product_sales.edit');
+    Route::post('/modifier-promo', [ProductSaleController::class, 'update'])->name('product_sales.update');
+    Route::get('/supprimer-promo/{id}', [ProductSaleController::class, 'destroy'])->name('product_sales.destroy');
+
 
     //review
     Route::get('/commentaire', [ReviewController::class, 'index'])->name('reviews.index');

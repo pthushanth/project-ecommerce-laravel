@@ -50,7 +50,7 @@ class User extends Authenticatable
         return User::with('customer')->where('role', 'client')->where('id', Auth::user()->id)->first();
     }
 
-    public static function getAdmin()
+    public static function getAdmins()
     {
         return User::where('role', 'admin')->get();
     }
