@@ -178,30 +178,7 @@
         <div class="glider">
 
           @foreach ($latestProducts as $latestProduct)
-          <div class="card product text-center">
-            <a href="{{route('productDetail',$latestProduct->slug)}}">
-              <img class="card-img-top " src="{{ asset($latestProduct->getThumbnailUrl()) }}">
-              <div class="card-body">
-                <a href="#" class="categorie">{{$latestProduct->category->name}} - {{$latestProduct->brand->name}}</a>
-                <div class="rating">
-                  {{-- {{$latestProduct->getAvgRating()}} --}}
-                  {!! $latestProduct->printAverageRatingStar() !!}
-                </div>
-                <a href="#" class="produit-titre">{{$latestProduct->name}}</a>
-                <p class="prix">{{$latestProduct->price}} €</p>
-                <form method="POST" action="{{route('cart.add',$latestProduct->slug)}}">
-                  @csrf
-                  <div class="input-field col">
-                    <input type="hidden" id="id" name="id" value="{{ $latestProduct->slug }}">
-                    <input id="quantity" name="quantity" type="hidden" value="1" min="1">
-                    <p>
-                      <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </a>
-          </div>
+          @include('front.includes.product_card',['product'=>$latestProduct])
           @endforeach
 
         </div>
@@ -212,31 +189,7 @@
       <div id="topRated" class="productDiv">
         <div class="glider">
           @foreach ($topRatedProducts as $topRatedProduct)
-          <div class="card product text-center">
-            <a href="{{route('productDetail',$topRatedProduct->slug)}}">
-              <img class="card-img-top" src="{{ asset($topRatedProduct->getThumbnailUrl()) }}">
-              <div class="card-body text-center">
-                <a href="#" class="categorie">{{$topRatedProduct->category->name}} -
-                  {{$topRatedProduct->brand->name}}</a>
-                <div class="rating">
-                  {!! $topRatedProduct->printAverageRatingStar() !!}
-
-                </div>
-                <a href="#" class="produit-titre">{{$topRatedProduct->name}}</a>
-                <p class="prix">{{$topRatedProduct->price}} €</p>
-                <form method="POST" action="{{route('cart.add',$topRatedProduct->slug)}}">
-                  @csrf
-                  <div class="input-field col">
-                    <input type="hidden" id="id" name="id" value="{{ $topRatedProduct->slug }}">
-                    <input id="quantity" name="quantity" type="hidden" value="1" min="1">
-                    <p>
-                      <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </a>
-          </div>
+          @include('front.includes.product_card',['product'=>$topRatedProduct])
           @endforeach
 
         </div>
@@ -247,30 +200,7 @@
       <div id="bestSeller" class="productDiv">
         <div class="glider">
           @foreach ($bestSellerProducts as $bestSellerProduct)
-          <div class="card product text-center">
-            <a href="{{route('productDetail',$bestSellerProduct->slug)}}">
-              <img class="card-img-top" src="{{ asset($bestSellerProduct->getThumbnailUrl()) }}">
-              <div class="card-body text-center">
-                <a href="#" class="categorie">{{$bestSellerProduct->category->name}} -
-                  {{$bestSellerProduct->brand->name}}</a>
-                <div class="rating">
-                  {!! $bestSellerProduct->printAverageRatingStar() !!}
-                </div>
-                <a href="#" class="produit-titre">{{$bestSellerProduct->name}}</a>
-                <p class="prix">{{$bestSellerProduct->price}} €</p>
-                <form method="POST" action="{{route('cart.add',$bestSellerProduct->slug)}}">
-                  @csrf
-                  <div class="input-field col">
-                    <input type="hidden" id="id" name="id" value="{{ $bestSellerProduct->slug }}">
-                    <input id="quantity" name="quantity" type="hidden" value="1" min="1">
-                    <p>
-                      <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </a>
-          </div>
+          @include('front.includes.product_card',['product'=>$bestSellerProduct])
           @endforeach
         </div>
         <button class="glider-prev">&laquo;</button>
@@ -382,27 +312,7 @@
     <div class="glider-contain">
       <div class="glider">
         @foreach ($saleProducts as $saleProduct)
-        <div class="card product text-center">
-          <a href="{{route('productDetail',$saleProduct->slug)}}">
-          <div class="image">
-            <div class="solde-reduction">
-                <span class="solde">BON PLAN</span>
-                <span class="reduction">{{$saleProduct->productSale->discount_value}}</span>
-              </div>
-              <img class="card-img-top" src="{{ asset($saleProduct->getThumbnailUrl()) }}">
-          </div>
-            
-            <div class="card-body text-center">
-              <a href="#" class="categorie">{{$saleProduct->category->name}}</a>
-              <div class="rating">
-                {!! $saleProduct->printAverageRatingStar() !!}
-              </div>
-              <a href="#" class="produit-titre">{{$saleProduct->name}}</a>
-              <p class="prix">{{$saleProduct->productSale->getDiscountedPrice($saleProduct->price)}} <span> {{$saleProduct->price}} </span></p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
-            </div>
-          </a>
-        </div>
+        @include('front.includes.product_card',['product'=>$saleProduct])
         @endforeach
       </div>
       <button class="glider-prev">&laquo;</button>

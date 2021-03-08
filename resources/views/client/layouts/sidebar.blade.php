@@ -29,7 +29,7 @@
                 </li>
                 <li>
                     <a href="{{route('client.account')}}">
-                        <i class="fas fa-shopping-basket"></i>Mes info perso</a>
+                        <i class="zmdi zmdi-account"></i>Mes info perso</a>
                 </li>
                 <li>
                     <a href="{{route('client.orders')}}">
@@ -37,7 +37,7 @@
                 </li>
                 <li>
                     <a href="inbox.html">
-                        <i class="fas fa-chart-bar"></i>Notification</a>
+                        <i class="zmdi zmdi-notifications"></i>Notification</a>
                     <span class="inbox-num">3</span>
                 </li>
 

@@ -7,6 +7,10 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+use App\Events\OrderCreated;
+use App\Listeners\NotifyOrderCreated;
+use App\Listeners\SendEmailUserOrderInvoice;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**

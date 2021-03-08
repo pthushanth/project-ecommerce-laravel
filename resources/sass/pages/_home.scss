@@ -1,3 +1,15 @@
+.prix {
+    font-size: 1.3em;
+    line-height: 20px;
+    font-weight: 700;
+    color: #191919;
+
+    span {
+        font-size: 0.8em;
+        text-decoration: line-through;
+    }
+}
+
 .rating {
     .fa,
     .far,
@@ -252,17 +264,16 @@ section {
         background-color: transparent;
         border: none;
         margin: 0 10px;
-       
 
-    .image{
-         position: relative;
-        width: 200px;
-        height: 200px;
-        margin: 0 auto;
-         image{
-         width:100%;
-         }
-    }
+        .image {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            image {
+                width: 100%;
+            }
+        }
         .solde-reduction {
             position: absolute;
             top: 0;

@@ -93,9 +93,9 @@
 
                     <div class="row">
                         @foreach ( $product->image as $image)
-                            <div class="col-3">
-                                    <img src="{{asset($product->getImageUrl($image))}}" class="small-img">
-                                </div>  
+                        <div class="col-3">
+                            <img src="{{asset($product->getImageUrl($image))}}" class="small-img">
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     <div class="rating">
                         {!! $product->printAverageRatingStar() !!}
                     </div>
-                    <p class="product-price">{{$product->price}}</p>
+                    <p class="product-price">{!!$product->printPrice()!!}</p>
                     <p>{!!$product->short_description!!}</p>
 
                     <div class="row mt-5 justify-content-center">

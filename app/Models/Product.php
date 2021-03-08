@@ -69,9 +69,9 @@ class Product extends Model
     //         else $this->image[$key]= "storage/product_images/$image";
     //         }  
     //     }
-        
+
     //     return $this->image;
-        
+
     // }
 
     // public function printEmptyStar()
@@ -117,6 +117,26 @@ class Product extends Model
         else return "storage/product_images/$value";
     }
 
+    public function printPrice()
+    {
+        if ($this->productSale != null) {
+            return '<p class="prix">' . $this->productSale->getDiscountedPrice($this->price) . ' <span> ' . $this->price . '</span></p>';
+            return $this->productSale->getDiscountedPrice($this->price);
+        } else return $this->price;
+    }
+    public function isOnSale()
+    {
+        if ($this->productSale == null) return false;
+        return true;
+    }
+
+    // public function printProductCard()
+    // {
+    //     if ($this->productSale != null) {
+    //         return '<p class="prix">' . $this->productSale->getDiscountedPrice($this->price) . ' <span> ' . $this->price . '</span></p>';
+    //         return $this->productSale->getDiscountedPrice($this->price);
+    //     } else return $this->price;
+    // }
     /************************* Relationship *********************/
     public function attributes()
     {
@@ -154,6 +174,7 @@ class Product extends Model
     {
         return $this->hasMany(Sale::class);
     }
+
     public function productSale()
     {
         return $this->hasOne(ProductSale::class);

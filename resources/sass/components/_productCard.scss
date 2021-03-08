@@ -31,3 +31,35 @@
         color: #191919;
     }
 }
+
+.card.product {
+    .image {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        image {
+            width: 100%;
+        }
+    }
+    .solde-reduction {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        span {
+            padding: 5px 10px;
+            font-size: 1.2em;
+            font-weight: 800;
+            &.solde {
+                background-color: red;
+                color: #ffffff;
+                line-height: 2em;
+            }
+            &.reduction {
+                background-color: #ffffff;
+                color: red;
+            }
+        }
+    }
+}

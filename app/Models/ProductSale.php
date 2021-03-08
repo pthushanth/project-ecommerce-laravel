@@ -21,6 +21,8 @@ class ProductSale extends Model
             return (1 - ($this->getRawOriginal('discount_value') / 100)) * $priceActual . ' €';
         } else return $priceActual - $this->getRawOriginal('discount_value') . ' €';
     }
+
+    //realtion
     public function product()
     {
         return $this->belongsTo(Product::class);

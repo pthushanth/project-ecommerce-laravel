@@ -77,6 +77,18 @@ footer .fab {
   margin: 5px;
 }
 
+.prix {
+  font-size: 1.3em;
+  line-height: 20px;
+  font-weight: 700;
+  color: #191919;
+}
+
+.prix span {
+  font-size: 0.8em;
+  text-decoration: line-through;
+}
+
 .rating .fa,
 .rating .far,
 .rating .fas {
@@ -593,6 +605,40 @@ section {
   line-height: 20px;
   font-weight: 700;
   color: #191919;
+}
+
+.card.product .image {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.card.product .image image {
+  width: 100%;
+}
+
+.card.product .solde-reduction {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card.product .solde-reduction span {
+  padding: 5px 10px;
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+.card.product .solde-reduction span.solde {
+  background-color: red;
+  color: #ffffff;
+  line-height: 2em;
+}
+
+.card.product .solde-reduction span.reduction {
+  background-color: #ffffff;
+  color: red;
 }
 
 html {

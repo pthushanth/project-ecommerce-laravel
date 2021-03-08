@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderCreated;
 use App\Mail\OrderMail;
 use App\Models\Category;
 use App\Models\City;
@@ -213,12 +214,15 @@ class FrontController extends Controller
         Cart::clear();
         // Session::put('success', 'Achat accompli avec succès !');
         //notify new order
-        Notification::send(User::getAdmins(), new NewOrderNotification($order));
+        // Notification::send(User::getAdmins(), new NewOrderNotification($order));
         Session::put('order', $order);
 
         $order = Order::with('user', 'deliveryAddress', 'products', 'orderStatus')->find($order->id);
         $email = Auth::user()->email;
-        Mail::to($email)->send(new OrderMail($order));
+        // Mail::to($email)->send(new OrderMail($order));
+
+        OrderCreated::dispatch($order);
+        // event(new OrderCreated($order));
         return redirect()->route('confirmation');
     }
 

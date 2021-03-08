@@ -45,18 +45,17 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-
         {{-- MENU SIDEBAR --}}
-        @include('client.layouts.sidebar')
+        @if(Auth::user()) @include('client.layouts.sidebar') @endif
 
         {{-- HEADER MOBILE--}}
-        @include('client.layouts.header_mobile')
+        @if(Auth::user()) @include('client.layouts.header_mobile') @endif
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
 
             {{-- HEADER DESKTOP --}}
-            @include('client.layouts.header_desktop')
+            @if(Auth::user()) @include('client.layouts.header_desktop') @endif
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
