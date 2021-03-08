@@ -58,48 +58,48 @@
 
 <section id="sectionAvantages">
   <div class="container">
-    <div class="row mt-4 text-center  max-width-row">
+    <div class="row mt-4 text-center max-width-row">
       <div class="col-md-3">
         <div class="card">
           <div class="div-icone d-flex flex-wrap align-items-center justify-content-center">
-            <img src="{{ asset('images/avantage1.png') }}">
+            <img src="{{ asset('images/009-24-hours.png') }}">
           </div>
           <div class="card-body">
-            <p class="title">24/7 Support</p>
-            <p>Online support 24/7</p>
+            <p class="title">Assistance 24/7</p>
+            <p>Assistance en ligne 24h / 24 et 7j / 7</p>
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card">
           <div class="div-icone d-flex flex-wrap align-items-center justify-content-center">
-            <img src="{{ asset('images/avantage1.png') }}">
+            <img src="{{ asset('images/035-credit-card-3.png') }}">
           </div>
           <div class="card-body">
-            <p class="title">Secure Payment</p>
-            <p>100% secure payment</p>
+            <p class="title">Paiement sécurisé</p>
+            <p>Paiement 100% sécurisé</p>
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card">
           <div class="div-icone d-flex flex-wrap align-items-center justify-content-center">
-            <img src="{{ asset('images/avantage1.png') }}">
+            <img src="{{ asset('images/017-gift-card.png') }}">
           </div>
           <div class="card-body">
-            <p class="title">Specail Gift Cards</p>
-            <p>give the perfect gift</p>
+            <p class="title">Cartes-Cadeaux</p>
+            <p>Offrir le cadeau parfait</p>
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card">
           <div class="div-icone d-flex flex-wrap align-items-center justify-content-center">
-            <img src="{{ asset('images/avantage1.png') }}">
+            <img src="{{ asset('images/007-delivery-truck.png') }}">
           </div>
           <div class="card-body">
-            <p class="title">World Wide Shipping</p>
-            <p>On order over $100</p>
+            <p class="title">Livraison gratuit</p>
+            <p>Livraison gratuite dans le monde entier</p>
           </div>
         </div>
       </div>
@@ -109,37 +109,37 @@
 
 <section id="sectionCategories">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="card img-fluid align-items-center justify-content-center" style="width:500px">
-          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}" alt="Card image" style="width:100%">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-3">
+        <div class="card img-fluid align-items-center justify-content-center">
+          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}">
           <div class="card-img-overlay align-items-center d-flex justify-content-center">
             <a href="#" class="btn btnCategorie">TELEVISON</a>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="card img-fluid align-items-center justify-content-center" style="width:500px">
-          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}" alt="Card image" style="width:100%">
+      <div class="col-md-6 col-lg-3">
+        <div class="card img-fluid align-items-center justify-content-center">
+          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}">
           <div class="card-img-overlay align-items-center d-flex justify-content-center">
             <a href="#" class="btn btnCategorie">PC</a>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="card img-fluid align-items-center justify-content-center" style="width:500px">
-          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}" alt="Card image" style="width:100%">
+      <div class="col-md-6 col-lg-3">
+        <div class="card img-fluid align-items-center justify-content-center">
+          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}">
           <div class="card-img-overlay align-items-center d-flex justify-content-center">
             <a href="#" class="btn btnCategorie">LAPTOP</a>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="card img-fluid align-items-center justify-content-center" style="width:500px">
-          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}" alt="Card image" style="width:100%">
+      <div class="col-md-6 col-lg-3">
+        <div class="card img-fluid align-items-center justify-content-center">
+          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}">
           <div class="card-img-overlay align-items-center d-flex justify-content-center">
             <a href="#" class="btn btnCategorie">WATCH</a>
           </div>
@@ -152,26 +152,29 @@
 
 <section id="sectionProduits">
   <div class="container-fluid px-5">
-    <h2 class="text-center">Exclusive Products</h2>
-    <ul class="nav nav-tabs justify-content-center" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link btn showProductDiv" target="newProduct" data-toggle="tab" role="tab" aria-controls="special"
-          aria-selected="false" onclick="showProductDiv(this.target)">New products</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link btn showProductDiv" target="topRated" data-toggle="tab" role="tab" aria-controls="special"
-          aria-selected="false" onclick="showProductDiv(this.target)">Top rated</a>
+    <h2 class="text-center">Collections</h2>
+    <nav class="shift">
+      <ul class="nav nav-tabs justify-content-center " role="tablist">
+        <li class="nav-item">
+          <a class="nav-link btn showProductDiv" target="newProduct" data-toggle="tab" role="tab"
+            aria-controls="special" aria-selected="false" onclick="showProductDiv(this.target)">Nouveautés</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn showProductDiv" target="topRated" data-toggle="tab" role="tab" aria-controls="special"
+            aria-selected="false" onclick="showProductDiv(this.target)">Meilleure noté</a>
 
-      </li>
-      <li class="nav-item">
-        <a class="nav-link btn showProductDiv" target="bestSeller" data-toggle="tab" role="tab" aria-controls="special"
-          aria-selected="false" onclick="showProductDiv(this.target)">Best seller</a>
-      </li>
-      {{-- <li class="nav-item">
-        <a class="nav-link" id="special-tab" data-toggle="tab" href="#special" role="tab" aria-controls="special"
-          aria-selected="false">Special Offer</a>
-      </li> --}}
-    </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn showProductDiv" target="bestSeller" data-toggle="tab" role="tab"
+            aria-controls="special" aria-selected="false" onclick="showProductDiv(this.target)">Top ventes</a>
+        </li>
+        {{-- <li class="nav-item">
+          <a class="nav-link" id="special-tab" data-toggle="tab" href="#special" role="tab" aria-controls="special"
+            aria-selected="false">Special Offer</a>
+        </li> --}}
+      </ul>
+    </nav>
+
 
     <div class="glider-contain">
       <div id="newProduct" class="productDiv">
@@ -324,22 +327,22 @@
 <section id="sectionMarques">
   <div class="container">
     <div class="row justify-content-center align-items-center">
-      <div class="col-md-4 col-lg-2">
+      <div class="col-4 col-md-2">
         <img src="{{ asset('images/test/logo1.png') }}">
       </div>
-      <div class="col-md-4 col-lg-2">
+      <div class="col-4 col-md-2">
         <img src="{{ asset('images/test/logo2.png') }}">
       </div>
-      <div class="col-md-4 col-lg-2">
+      <div class="col-4 col-md-2">
         <img src="{{ asset('images/test/logo3.png') }}">
       </div>
-      <div class="col-md-4 col-lg-2">
+      <div class="col-4 col-md-2">
         <img src="{{ asset('images/test/logo4.png') }}">
       </div>
-      <div class="col-md-4 col-lg-2">
+      <div class="col-4 col-md-2">
         <img src="{{ asset('images/test/logo3.png') }}">
       </div>
-      <div class="col-md-4 col-lg-2">
+      <div class="col-4 col-md-2">
         <img src="{{ asset('images/test/logo2.png') }}">
       </div>
     </div>

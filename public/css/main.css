@@ -3,7 +3,6 @@
 header {
   background-color: #000000 !important;
   padding-top: 10px;
-  margin-bottom: 10px;
 }
 
 header .icone {
@@ -38,6 +37,20 @@ header .cart .badge {
   font-size: 15px;
   border-radius: 30px;
   color: #ffffff;
+}
+
+header .navbar-dark .navbar-nav .nav-link,
+header .icone .btn {
+  padding: 22px 18px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.2em;
+}
+
+header .navbar-dark .navbar-nav .active > .nav-link {
+  color: #18a0fb;
+  font-weight: 800;
 }
 
 footer {
@@ -82,6 +95,7 @@ footer .fab {
   line-height: 20px;
   font-weight: 700;
   color: #191919;
+  padding: 5px 0;
 }
 
 .prix span {
@@ -94,6 +108,7 @@ footer .fab {
 .rating .fas {
   color: #ffb503;
   font-size: 22px;
+  padding: 5px 0;
 }
 
 .rating .count-rating {
@@ -102,6 +117,10 @@ footer .fab {
 
 section {
   margin-top: 50px;
+}
+
+h2 {
+  font-family: Poppins, sans-serif;
 }
 
 #sectionSlider {
@@ -122,23 +141,48 @@ section {
   margin: 0 auto 0px auto;
   width: 100px;
   height: 100px;
-  background-color: #66f36d;
   border-radius: 50%;
 }
 
 #sectionAvantages .card img {
-  width: 65%;
-  height: 65%;
+  width: 80%;
+  height: 80%;
 }
 
 #sectionAvantages .card .title {
-  font-size: 1em;
-  font-weight: 600;
-  margin-bottom: 2px;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 500;
+  margin: 0 0 5px 0;
+  color: #28274b;
+}
+
+#sectionAvantages .card p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  color: #8b919f;
 }
 
 #sectionAvantages .card span {
   color: #808080;
+}
+
+#sectionCategories .card {
+  margin: 0 auto;
+  max-width: 500px;
+  width: 100%;
+  margin: 15px auto;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#sectionCategories .card:hover {
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+#sectionCategories .card img {
+  width: 100%;
 }
 
 #sectionCategories .btnCategorie {
@@ -150,55 +194,37 @@ section {
 }
 
 #sectionProduits {
-  margin-top: 100px;
+  margin-top: 50px;
   /*************************   Product slide ***************/
   /* medium - display 2  */
   /* large - display 3 */
 }
 
-#sectionProduits .nav-link {
+#sectionProduits .nav-item .nav-link {
   border-bottom: 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  line-height: 1.4em;
+  position: relative;
+  z-index: 1;
+  margin: 0 20px 15px 20px;
+  padding: 0;
+  color: #464b5c;
+  padding: 10px 20px;
 }
 
-#sectionProduits .nav-link a {
-  color: #ffffff;
-  font-weight: 500;
-}
-
-#sectionProduits .nav-link a:hover {
-  color: #18a0fb !important;
-}
-
-#sectionProduits .card {
-  background-color: transparent;
-  border: none;
-  margin: 0 10px;
-}
-
-#sectionProduits .card a {
-  text-decoration: none;
+#sectionProduits .nav-item .nav-link:hover {
   color: #000000;
 }
 
-#sectionProduits .card p {
-  margin: 1px;
+#sectionProduits .nav-tabs .nav-link.active {
+  background-color: #18a0fb;
+  color: #000000;
 }
 
-#sectionProduits .card .categorie {
-  font-size: 1em;
-  color: #999999;
-}
-
-#sectionProduits .card .produit-titre {
-  color: #191919;
-  font-size: 1.1em;
-}
-
-#sectionProduits .card .prix {
-  font-size: 1.3em;
-  line-height: 20px;
-  font-weight: 700;
-  color: #191919;
+#sectionProduits .nav-tabs {
+  border-bottom: none;
 }
 
 @media (min-width: 768px) {
@@ -338,77 +364,6 @@ section {
 }
 
 /*****************************  PROMOTIONS  *******************************/
-
-#sectionPromotions .card {
-  background-color: transparent;
-  border: none;
-  margin: 0 10px;
-}
-
-#sectionPromotions .card .image {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-}
-
-#sectionPromotions .card .image image {
-  width: 100%;
-}
-
-#sectionPromotions .card .solde-reduction {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#sectionPromotions .card .solde-reduction span {
-  padding: 5px 10px;
-  font-size: 1.2em;
-  font-weight: 800;
-}
-
-#sectionPromotions .card .solde-reduction span.solde {
-  background-color: red;
-  color: #ffffff;
-  line-height: 2em;
-}
-
-#sectionPromotions .card .solde-reduction span.reduction {
-  background-color: #ffffff;
-  color: red;
-}
-
-#sectionPromotions .card a {
-  text-decoration: none;
-  color: #000000;
-}
-
-#sectionPromotions .card p {
-  margin: 1px;
-}
-
-#sectionPromotions .card .categorie {
-  font-size: 1em;
-  color: #999999;
-}
-
-#sectionPromotions .card .produit-titre {
-  color: #191919;
-  font-size: 1.1em;
-}
-
-#sectionPromotions .card .prix {
-  font-size: 1.3em;
-  line-height: 20px;
-  font-weight: 700;
-  color: #191919;
-}
-
-#sectionPromotions .card .prix span {
-  font-size: 0.8em;
-  text-decoration: line-through;
-}
 
 #sectionMarques {
   margin-top: 30px;
@@ -573,6 +528,7 @@ section {
   background-color: transparent;
   border: none;
   margin: 0 10px;
+  /* promo*/
 }
 
 .card.product img {
@@ -605,6 +561,14 @@ section {
   line-height: 20px;
   font-weight: 700;
   color: #191919;
+}
+
+.card.product .btn-cart {
+  line-height: 15px;
+  padding: 14px 20px;
+  color: #ffffff;
+  background-color: #18a0fb;
+  font-size: 1.2em;
 }
 
 .card.product .image {

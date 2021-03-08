@@ -11,18 +11,20 @@
         </div>
 
         <div class="card-body text-center">
-            <a href="#" class="categorie">{{$product->category->name}}</a>
+            <a href="#" class="categorie">{{$product->category->name}} -
+                {{$product->brand->name}}</a>
             <div class="rating">
                 {!! $product->printAverageRatingStar() !!}
             </div>
             <a href="#" class="produit-titre">{{$product->name}}</a>
             <p class="prix">{{$product->productSale->getDiscountedPrice($product->price)}} <span>
-                    {{$product->price}} </span></p>
-            <a href="#" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
+                    {{$product->price.' €'}} </span></p>
+            <a href="#" class="btn btn-cart"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
         </div>
     </a>
 </div>
 @else
+
 <div class="card product text-center">
     <a href="{{route('productDetail',$product->slug)}}">
         <img class="card-img-top" src="{{ asset($product->getThumbnailUrl()) }}">
@@ -31,7 +33,6 @@
                 {{$product->brand->name}}</a>
             <div class="rating">
                 {!! $product->printAverageRatingStar() !!}
-
             </div>
             <a href="#" class="produit-titre">{{$product->name}}</a>
             <p class="prix">{{$product->price}} €</p>
@@ -41,7 +42,7 @@
                     <input type="hidden" id="id" name="id" value="{{ $product->slug }}">
                     <input id="quantity" name="quantity" type="hidden" value="1" min="1">
                     <p>
-                        <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
+                        <button class="btn btn-cart"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
                     </p>
                 </div>
             </form>

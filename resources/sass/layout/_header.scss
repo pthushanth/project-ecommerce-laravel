@@ -1,37 +1,56 @@
 header {
-  background-color: #000000 !important;
-  padding-top: 10px;
-  margin-bottom: 10px;
+    background-color: #000000 !important;
+    padding-top: 10px;
+    // margin-bottom: 10px;
 
-  .icone {
-    width: 60px;
-    margin: 0 auto;
-  }
-  p {
-    color: #ffffff;
-    font-size: 1.2em;
-    font-weight: bold;
-  }
+    .icone {
+        width: 60px;
+        margin: 0 auto;
 
-  .icone .fas {
-    color: #ffffff;
-    font-size: 35px;
-  }
-
-  .cart {
-    position: relative;
-    .badge {
-      position: absolute; /* postulat de départ */
-      top: 65%;
-      left: 50%; /* à 50%/50% du parent référent */
-      transform: translate(
-        -50%,
-        -50%
-      ); /* décalage de 50% de sa propre taille */
-      background-color: $primary;
-      font-size: 15px;
-      border-radius: 30px;
-      color: #ffffff;
+        // @media (max-width: 576px) {
+        //     text-align: center !important;
+        //     flex: 0 0 100%;
+        //     max-width: 100%;
+        // }
     }
-  }
+    p {
+        color: #ffffff;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    .icone .fas {
+        color: #ffffff;
+        font-size: 35px;
+    }
+
+    .cart {
+        position: relative;
+        .badge {
+            position: absolute; /* postulat de départ */
+            top: 65%;
+            left: 50%; /* à 50%/50% du parent référent */
+            transform: translate(
+                -50%,
+                -50%
+            ); /* décalage de 50% de sa propre taille */
+            background-color: $primary;
+            font-size: 15px;
+            border-radius: 30px;
+            color: #ffffff;
+        }
+    }
+
+    .navbar-dark .navbar-nav .nav-link,
+    .icone .btn {
+        padding: 22px 18px;
+        font-weight: 700;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 1.2em;
+    }
+    .navbar-dark .navbar-nav .active > .nav-link {
+        color: $primary;
+        font-weight: 800;
+    }
 }

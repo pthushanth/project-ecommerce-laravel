@@ -3,6 +3,7 @@
     line-height: 20px;
     font-weight: 700;
     color: #191919;
+    padding: 5px 0;
 
     span {
         font-size: 0.8em;
@@ -16,7 +17,9 @@
     .fas {
         color: #ffb503;
         font-size: 22px;
+        padding: 5px 0;
     }
+
     .count-rating {
         font-size: 22px;
     }
@@ -26,6 +29,9 @@
 // }
 section {
     margin-top: 50px;
+}
+h2 {
+    font-family: Poppins, sans-serif;
 }
 #sectionSlider {
     margin-top: 0px;
@@ -43,18 +49,25 @@ section {
             margin: 0 auto 0px auto;
             width: 100px;
             height: 100px;
-            background-color: #66f36d;
             border-radius: 50%;
         }
 
         img {
-            width: 65%;
-            height: 65%;
+            width: 80%;
+            height: 80%;
         }
         .title {
-            font-size: 1em;
-            font-weight: 600;
-            margin-bottom: 2px;
+            font-size: 20px;
+            line-height: 1.4;
+            font-weight: 500;
+            margin: 0 0 5px 0;
+            color: #28274b;
+        }
+        p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 20px;
+            color: #8b919f;
         }
         span {
             color: #808080;
@@ -63,6 +76,25 @@ section {
 }
 
 #sectionCategories {
+    .card {
+        margin: 0 auto;
+        max-width: 500px;
+        width: 100%;
+        margin: 15px auto;
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+            0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+            0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        &:hover {
+            box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+                0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+                0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        img {
+            width: 100%;
+        }
+    }
     .btnCategorie {
         // width: 150px;
         min-width: 75px;
@@ -74,47 +106,59 @@ section {
 }
 
 #sectionProduits {
-    margin-top: 100px;
-    .nav-link {
+    margin-top: 50px;
+
+    .nav-item .nav-link {
         border-bottom: 0;
-        a {
-            color: #ffffff;
-            font-weight: 500;
-
-            &:hover {
-                color: $primary !important;
-            }
-        }
-    }
-
-    .card {
-        background-color: transparent;
-        border: none;
-        margin: 0 10px;
-
-        a {
-            text-decoration: none;
+        font-family: Montserrat, sans-serif;
+        font-size: 1.2em;
+        font-weight: 400;
+        line-height: 1.4em;
+        position: relative;
+        z-index: 1;
+        margin: 0 20px 15px 20px;
+        padding: 0;
+        color: rgb(70, 75, 92);
+        padding: 10px 20px;
+        &:hover {
             color: #000000;
         }
-        p {
-            margin: 1px;
-        }
-        .categorie {
-            font-size: 1em;
-            color: #999999;
-        }
-
-        .produit-titre {
-            color: #191919;
-            font-size: 1.1em;
-        }
-        .prix {
-            font-size: 1.3em;
-            line-height: 20px;
-            font-weight: 700;
-            color: #191919;
-        }
     }
+    .nav-tabs .nav-link.active {
+        background-color: $primary;
+        color: #000000;
+    }
+    .nav-tabs {
+        border-bottom: none;
+    }
+    // .card {
+    //     background-color: transparent;
+    //     border: none;
+    //     margin: 0 10px;
+
+    //     a {
+    //         text-decoration: none;
+    //         color: #000000;
+    //     }
+    //     p {
+    //         margin: 1px;
+    //     }
+    //     .categorie {
+    //         font-size: 1em;
+    //         color: #999999;
+    //     }
+
+    //     .produit-titre {
+    //         color: #191919;
+    //         font-size: 1.1em;
+    //     }
+    //     .prix {
+    //         font-size: 1.3em;
+    //         line-height: 20px;
+    //         font-weight: 700;
+    //         color: #191919;
+    //     }
+    // }
 
     /*************************   Product slide ***************/
     /* medium - display 2  */
@@ -259,70 +303,70 @@ section {
 }
 
 /*****************************  PROMOTIONS  *******************************/
-#sectionPromotions {
-    .card {
-        background-color: transparent;
-        border: none;
-        margin: 0 10px;
+// #sectionPromotions {
+//     .card {
+//         background-color: transparent;
+//         border: none;
+//         margin: 0 10px;
 
-        .image {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            image {
-                width: 100%;
-            }
-        }
-        .solde-reduction {
-            position: absolute;
-            top: 0;
-            left: 0;
+//         .image {
+//             position: relative;
+//             width: 200px;
+//             height: 200px;
+//             margin: 0 auto;
+//             image {
+//                 width: 100%;
+//             }
+//         }
+//         .solde-reduction {
+//             position: absolute;
+//             top: 0;
+//             left: 0;
 
-            span {
-                padding: 5px 10px;
-                font-size: 1.2em;
-                font-weight: 800;
-                &.solde {
-                    background-color: red;
-                    color: #ffffff;
-                    line-height: 2em;
-                }
-                &.reduction {
-                    background-color: #ffffff;
-                    color: red;
-                }
-            }
-        }
-        a {
-            text-decoration: none;
-            color: #000000;
-        }
-        p {
-            margin: 1px;
-        }
-        .categorie {
-            font-size: 1em;
-            color: #999999;
-        }
+//             span {
+//                 padding: 5px 10px;
+//                 font-size: 1.2em;
+//                 font-weight: 800;
+//                 &.solde {
+//                     background-color: red;
+//                     color: #ffffff;
+//                     line-height: 2em;
+//                 }
+//                 &.reduction {
+//                     background-color: #ffffff;
+//                     color: red;
+//                 }
+//             }
+//         }
+//         a {
+//             text-decoration: none;
+//             color: #000000;
+//         }
+//         p {
+//             margin: 1px;
+//         }
+//         .categorie {
+//             font-size: 1em;
+//             color: #999999;
+//         }
 
-        .produit-titre {
-            color: #191919;
-            font-size: 1.1em;
-        }
-        .prix {
-            font-size: 1.3em;
-            line-height: 20px;
-            font-weight: 700;
-            color: #191919;
+//         .produit-titre {
+//             color: #191919;
+//             font-size: 1.1em;
+//         }
+//         .prix {
+//             font-size: 1.3em;
+//             line-height: 20px;
+//             font-weight: 700;
+//             color: #191919;
 
-            span {
-                font-size: 0.8em;
-                text-decoration: line-through;
-            }
-        }
-    }
-}
+//             span {
+//                 font-size: 0.8em;
+//                 text-decoration: line-through;
+//             }
+//         }
+//     }
+// }
 
 #sectionMarques {
     margin-top: 30px;

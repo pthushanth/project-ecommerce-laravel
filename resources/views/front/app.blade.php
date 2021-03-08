@@ -34,28 +34,25 @@
 
 </head>
 
-<body class="animsition">
-    <div class="page-wrapper">
+<body>
+    <!-- PAGE CONTAINER-->
+    <div class="">
 
-        <!-- PAGE CONTAINER-->
-        <div class="">
+        {{-- HEADER DESKTOP --}}
+        @include('front.layouts.header')
 
-            {{-- HEADER DESKTOP --}}
-            @include('front.layouts.header')
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                @yield('content')
-            </div>
-            <!-- END MAIN CONTENT-->
-
-            @include('front.layouts.newsletter')
-            @include('front.layouts.footer')
-
-            <!-- END PAGE CONTAINER-->
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            @yield('content')
         </div>
+        <!-- END MAIN CONTENT-->
 
+        @include('front.layouts.newsletter')
+        @include('front.layouts.footer')
+
+        <!-- END PAGE CONTAINER-->
     </div>
+
 
 
 

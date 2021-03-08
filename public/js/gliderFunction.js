@@ -18,14 +18,15 @@ function showGlider(selecteurID){
     });
 
     window._ = new Glider(document.querySelector(selecteur), {
-        slidesToShow: 3, //'auto',
+        slidesToShow: 1, //'auto',
         slidesToScroll: 1,
         itemWidth: 150,
         draggable: true,
-        scrollLock: true,
+        // scrollLock: true,
         dots: '#dots',
         rewind: true,
         duration: 1.2,
+        arrows:true,
         arrows: {
             prev: selecteurID+' .glider-prev',
             next: selecteurID+' .glider-next'
@@ -35,20 +36,27 @@ function showGlider(selecteurID){
     },
         responsive: [
             {
+                breakpoint: 500,
+                settings: {
+                    slidesToScroll: 1,
+                    slidesToShow: 2,
+                    draggable: true,
+                }
+            },
+            
+            {
                 breakpoint: 768,
                 settings: {
                     slidesToScroll: 1,
-                    slidesToShow: 4
+                    slidesToShow: 3,
+                    draggable: true,
                 }
             },
             {
-                breakpoint: 500,
+                breakpoint: 992,
                 settings: {
-                    slidesToScroll: 2,
-                    slidesToShow: 2,
-                    dots: false,
-                    arrows: false,
-                    scrollLock: true
+                    slidesToScroll: 1,
+                    slidesToShow: 4
                 }
             }
         ]

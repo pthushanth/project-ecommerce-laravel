@@ -117,6 +117,11 @@ class Product extends Model
         else return "storage/product_images/$value";
     }
 
+    // public function getPriceAttribute($value)
+    // {
+    //     return $value . ' €';
+    // }
+
     public function printPrice()
     {
         if ($this->productSale != null) {
