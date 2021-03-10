@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Route;
 /***************************************  FRONT  **************************************** */
 Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('produits', [FrontController::class, 'products'])->name('products');
+Route::get('produits/filter', [FrontController::class, 'filterProducts'])->name('products.filter');
 Route::get('produit/{slug}', [FrontController::class, 'productDetail'])->name('productDetail');
 Route::get('/panier', [FrontController::class, 'cart'])->name('cart');
 

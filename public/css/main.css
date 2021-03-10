@@ -393,6 +393,12 @@ h2 {
   width: 100%;
 }
 
+@media (max-width: 468px) {
+  #sectionNewsletter img {
+    min-width: 70px;
+  }
+}
+
 #sectionNewsletter .btn {
   background-color: #000000;
   color: #ffffff;
@@ -405,10 +411,28 @@ h2 {
   margin-bottom: 0;
 }
 
+@media (max-width: 500px) {
+  #sectionNewsletter p {
+    margin-bottom: 10px;
+    line-height: 1.1em;
+  }
+}
+
+@media (max-width: 468px) {
+  #sectionNewsletter {
+    padding: 30px 5px;
+  }
+}
+
 #sectionTitle {
   background-color: #e5e5e5;
   padding: 30px 10px;
   text-align: center;
+}
+
+#sectionProductList .card.filter .title {
+  color: #fff;
+  margin-bottom: 0px;
 }
 
 #pageProductDetail section {

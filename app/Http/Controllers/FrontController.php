@@ -58,6 +58,13 @@ class FrontController extends Controller
         $products = Product::with('category', 'brand')->paginate(12);
         return view('front.pages.products')->with('products', $products);
     }
+    public function filterProducts(Request $request)
+    {
+        $filterType = $request->input('type');
+        $value = $request->input('search');
+        if ($filterType == "search") $products = Product::with('category', 'brand')->where("name", "LIKE", "%$value%")->paginate(12);
+        return view('front.pages.products')->with('products', $products);
+    }
 
     public function cart()
     {

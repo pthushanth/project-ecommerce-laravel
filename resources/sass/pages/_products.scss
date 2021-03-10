@@ -3,3 +3,10 @@
     padding: 30px 10px;
     text-align: center;
 }
+
+#sectionProductList {
+    .card.filter .title {
+        color: #fff;
+        margin-bottom: 0px;
+    }
+}
