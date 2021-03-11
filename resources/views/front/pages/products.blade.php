@@ -3,7 +3,10 @@
 
 @section('styles')
 <style>
-
+  #moreCategory,
+  #moreBrand {
+    display: none;
+  }
 </style>
 @endsection
 
@@ -32,34 +35,57 @@
         <div class="card filter">
           <article class="card-group-item">
             <header class="card-header">
-              <h5 class="title">Catégories </h5>
+              <h5 class="title">Collections </h5>
             </header>
             <div class="filter-content">
               <div class="card-body">
                 <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">52</span>
-                  <input type="checkbox" name="category" class="custom-control-input" id="smartphone">
-                  <label class="custom-control-label" for="smartphone">Smartphone</label>
-                </div> <!-- form-check.// -->
-
+                  <span class="float-right badge badge-light round">100</span>
+                  <input type="checkbox" name="collection" class="custom-control-input" id="newProducts">
+                  <label class="custom-control-label" for="newProducts">Nouveauté</label>
+                </div>
                 <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">132</span>
-                  <input type="checkbox" name="category" class="custom-control-input" id="tablette">
-                  <label class="custom-control-label" for="tablette">Tablette</label>
-                </div> <!-- form-check.// -->
-
+                  <span class="float-right badge badge-light round">100</span>
+                  <input type="checkbox" name="collection" class="custom-control-input" id="bestseller">
+                  <label class="custom-control-label" for="bestseller">Meilleure ventes</label>
+                </div>
                 <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">17</span>
-                  <input type="checkbox" name="category" class="custom-control-input" id="televison">
-                  <label class="custom-control-label" for="televison">Télévision</label>
-                </div> <!-- form-check.// -->
-
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">7</span>
-                  <input type="checkbox" name="category" class="custom-control-input" id="montre">
-                  <label class="custom-control-label" for="montre">Montre connecté</label>
-                </div> <!-- form-check.// -->
+                  <span class="float-right badge badge-light round">100</span>
+                  <input type="checkbox" name="collection" class="custom-control-input" id="promotion">
+                  <label class="custom-control-label" for="promotion">Promotions</label>
+                </div>
               </div> <!-- card-body.// -->
+
+
+            </div>
+          </article>
+
+          <article class="card-group-item">
+            <header class="card-header">
+              <h5 class="title">Catégories </h5>
+            </header>
+            <div class="filter-content">
+              <div class="card-body">
+                @foreach ($categories as $category)
+                @if($loop->iteration==6)
+                <div id="moreCategory">
+                  @endif
+                  <div class="custom-control custom-checkbox">
+                    <span class="float-right badge badge-light round">{{$category->products->count()}}</span>
+                    <input type="checkbox" name="category" class="custom-control-input" id="{{$category->name}}">
+                    <label class="custom-control-label" for="{{$category->name}}">{{$category->name}}</label>
+                  </div>
+                  @if($loop->iteration>=6 &&$loop->last)
+                </div>
+                @endif
+                @endforeach
+
+                <button type="button" onclick="ShowMore('moreCategory','btnShowMoreCategory')"
+                  class="btn btn-outline-primary btnShowMoreCategory">voir
+                  plus</button>
+              </div> <!-- card-body.// -->
+
+
             </div>
           </article>
 
@@ -69,30 +95,24 @@
             </header>
             <div class="filter-content">
               <div class="card-body">
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">52</span>
-                  <input type="checkbox" name="brand" class="custom-control-input" id="samsung">
-                  <label class="custom-control-label" for="samsung">Samsung</label>
-                </div> <!-- form-check.// -->
+                @foreach ($brands as $brand)
+                @if($loop->iteration==6)
+                <div id="moreBrand">
+                  @endif
+                  <div class="custom-control custom-checkbox">
+                    <span class="float-right badge badge-light round">{{$brand->products->count()}}</span>
+                    <input type="checkbox" name="brand" class="custom-control-input" id="{{$brand->name}}">
+                    <label class="custom-control-label" for="{{$brand->name}}">{{$brand->name}}</label>
+                  </div>
+                  @if($loop->iteration>=6 &&$loop->last)
+                </div>
+                @endif
+                @endforeach
 
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">132</span>
-                  <input type="checkbox" name="brand" class="custom-control-input" id="apple">
-                  <label class="custom-control-label" for="apple">Apple</label>
-                </div> <!-- form-check.// -->
-
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">17</span>
-                  <input type="checkbox" name="brand" class="custom-control-input" id="sony">
-                  <label class="custom-control-label" for="sony">Sony</label>
-                </div> <!-- form-check.// -->
-
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">7</span>
-                  <input type="checkbox" name="brand" class="custom-control-input" id="autre">
-                  <label class="custom-control-label" for="autre">Autre</label>
-                </div> <!-- form-check.// -->
-              </div> <!-- card-body.// -->
+                <button type="button" onclick="ShowMore('moreBrand','btnShowMoreBrand')"
+                  class="btn btn-outline-primary btnShowMoreBrand">voir
+                  plus</button>
+              </div><!-- card-body.// -->
             </div>
           </article>
 
@@ -149,30 +169,15 @@
             </header>
             <div class="filter-content">
               <div class="card-body">
+                {{-- {{dd($ratings)}} --}}
+                @foreach ($reviews as $review)
                 <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">52</span>
-                  <input type="checkbox" name="rating" class="custom-control-input" id="Check1">
-                  <label class="custom-control-label" for="Check1">Samsung</label>
-                </div> <!-- form-check.// -->
-
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">132</span>
-                  <input type="checkbox" name="rating" class="custom-control-input" id="Check2">
-                  <label class="custom-control-label" for="Check2">Apple</label>
-                </div> <!-- form-check.// -->
-
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">17</span>
-                  <input type="checkbox" name="rating" class="custom-control-input" id="Check3">
-                  <label class="custom-control-label" for="Check3">Sony</label>
-                </div> <!-- form-check.// -->
-
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">7</span>
-                  <input type="checkbox" name="rating" class="custom-control-input" id="Check4">
-                  <label class="custom-control-label" for="Check4">Autre</label>
-                </div> <!-- form-check.// -->
-              </div> <!-- card-body.// -->
+                  <span class="float-right badge badge-light round">{{$review->totalProducts}}</span>
+                  <input type="checkbox" name="review" class="custom-control-input" id="{{$review->rating}}">
+                  <label class="custom-control-label" for="{{$review->rating}}">{{$review->rating}}</label>
+                </div>
+                @endforeach
+              </div><!-- card-body.// -->
             </div>
           </article>
           <!-- card-group-item.// -->
@@ -222,8 +227,8 @@
                   <form method="POST" action="{{route('cart.add',$product->slug)}}">
                     @csrf
                     <div class="input-field col">
-                      <input type="hidden" id="id" name="id" value="{{ $product->slug }}">
-                      <input id="quantity" name="quantity" type="hidden" value="1" min="1">
+                      <input type="hidden" name="id" value="{{ $product->slug }}">
+                      <input name="quantity" type="hidden" value="1" min="1">
                       <p>
                         <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
                       </p>
@@ -254,5 +259,20 @@
       instance.open();    
     });
   @endif    
+
+  //more filter
+function ShowMore(div,btn) {
+  var divShowMore= document.getElementById(div);
+  var btnText = document.querySelector("."+btn);
+
+  if (divShowMore.style.display === "inline") {
+    btnText.innerHTML = "voir moins"; 
+    divShowMore.style.display = "none";
+
+  } else {
+    btnText.innerHTML = "voir plus"; 
+    divShowMore.style.display = "inline";
+  }
+}
 </script>
 @endsection

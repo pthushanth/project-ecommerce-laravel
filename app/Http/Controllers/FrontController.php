@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderCreated;
 use App\Mail\OrderMail;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Coupon;
 use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\User;
 use App\Notifications\NewOrderNotification;
 use Carbon\Carbon;
@@ -55,8 +57,22 @@ class FrontController extends Controller
     }
     public function products()
     {
+        $categories = Category::with('products')->distinct('name')->get();
+        $brands = Brand::with('products')->distinct('name')->get();
+        // $ratings = Review::with('product')->groupBy('rating')->count();
+        $reviews = DB::table('reviews')
+            ->join('products', 'reviews.product_id', '=', 'products.id')
+            ->select('reviews.rating', DB::raw("count(products.id) as totalProducts"))
+            ->groupBy('reviews.rating')
+            ->get();
         $products = Product::with('category', 'brand')->paginate(12);
-        return view('front.pages.products')->with('products', $products);
+        return view('front.pages.products')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands,
+            'reviews' => $reviews,
+
+        ]);
     }
     public function filterProducts(Request $request)
     {
