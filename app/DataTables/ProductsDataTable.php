@@ -69,11 +69,11 @@ class ProductsDataTable extends DataTable
             })
 
             ->addColumn('action', function (Product $product) {
-                $btn = '<a href="' . route('admin.products.edit', $product->id) . '" class="edit btn btn-info btn-sm">Edit</a> 
-                        <a href="' . route('admin.products.destroy', $product->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                $btn = '<a href="' . route('admin.products.edit', $product->slug) . '" class="edit btn btn-info btn-sm">Edit</a> 
+                        <a href="' . route('admin.products.destroy', $product->slug) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
 
-                if ($product->status) $btn .= ' <a href="' . route('admin.products.desactivate', $product->id) . '" class="edit btn btn-warning btn-sm">Désactivé</a>';
-                if (!$product->status) $btn .= ' <a href="' . route('admin.products.activate', $product->id) . '" class="edit btn btn-success btn-sm">Activé</a>';
+                if ($product->status) $btn .= ' <a href="' . route('admin.products.desactivate', $product->slug) . '" class="edit btn btn-warning btn-sm">Désactivé</a>';
+                if (!$product->status) $btn .= ' <a href="' . route('admin.products.activate', $product->slug) . '" class="edit btn btn-success btn-sm">Activé</a>';
                 return $btn;
             })
             ->rawColumns(['action', 'status', 'image', 'spec']);

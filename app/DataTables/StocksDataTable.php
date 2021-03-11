@@ -2,15 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Sale;
-use Illuminate\Support\Facades\DB;
+use App\Models\Stock;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SalesDataTable extends DataTable
+class StocksDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,28 +21,30 @@ class SalesDataTable extends DataTable
     {
         return datatables()->of($query)
             ->addIndexColumn()
-            ->addColumn('action', function (Sale $sale) {
-                $btn = '<a href="' . route('admin.sales.edit', $sale->id) . '" class="edit btn btn-success btn-sm">Edit</a> <a href="' . route('admin.sales.destroy', $sale->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+            ->addColumn('action', function (Stock $stock) {
+                $btn = '<a href="' . route('admin.stocks.edit', $stock->id) . '" class="edit btn btn-success btn-sm">Edit</a>';
                 return $btn;
             })
-            ->editColumn('created_at', function (Sale $sale) {
+            ->editColumn('created_at', function (Stock $stock) {
                 //change over here
-                return date('d-M-Y H:i:s', strtotime($sale->created_at));
+                return date('d-M-Y H:i:s', strtotime($stock->created_at));
             })
-
-            ->rawColumns(['action']);
+            ->editColumn('image', function (Stock $stock) {
+                $image = $stock->product->getThumbnailUrl();
+                return '<img src="' . asset($image) . '"/>';
+            })
+            ->rawColumns(['action', 'image']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\SalesDataTable $model
+     * @param \App\Models\StocksDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(SalesDataTable $model)
+    public function query(StocksDataTable $model)
     {
-        // return $model->newQuery();
-        $data = Sale::latest()->get();
+        $data = Stock::with('product')->get();
         return $this->applyScopes($data);
     }
 
@@ -56,7 +57,7 @@ class SalesDataTable extends DataTable
     {
         return $this->builder()
             ->responsive(true)
-            ->setTableId('sale')
+            ->setTableId('stock')
             ->AddTableClass('table table-striped table-bordered dt-responsive ')
             ->columns($this->getColumns())
             ->minifiedAjax()
@@ -81,11 +82,10 @@ class SalesDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('N°')->orderable(false)->searchable(false),
-            Column::make('created_at')->title('Date'),
-            Column::make('name')->title('Libellé'),
-            Column::make('discount_value')->title('Reduction'),
-            Column::make('start')->title('Debut'),
-            Column::make('end')->title('Fin'),
+            Column::make('updated_at')->title('Dernière mise à jour'),
+            Column::make('image')->title('Images'),
+            Column::make('product.name')->title('Produit'),
+            Column::make('stock')->title('Stock'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -101,6 +101,6 @@ class SalesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Sales_' . date('YmdHis');
+        return 'Stocks_' . date('YmdHis');
     }
 }

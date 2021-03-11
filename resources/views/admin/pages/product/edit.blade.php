@@ -111,19 +111,6 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    {{-- <div class="form-group">
-                                        <div id="specField">
-                                            <div class="col-md-3 input-group-addon">Caractéristique</div>
-                                            <div class="input-group">
-                                                <input type="text"  name="specName[]" placeholder="attribue" class="form-control @error('specName') is-invalid @enderror">
-                                                <input type="text"  name="specValue[]" placeholder="valeur" class="form-control @error('specValue') is-invalid @enderror">
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-secondary btn-sm" onclick="cloneField('specField','input-group')">
-                                            <i class="fa fa-plus"></i> Ajouter Caractéristique
-                                        </button>
-                                    </div> --}}
-
                                     <div class="form-group">
                                         <div id="imageField">
                                             <div class="col-md-3 input-group-addon">Image</div>

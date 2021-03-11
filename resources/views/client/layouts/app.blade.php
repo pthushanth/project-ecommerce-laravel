@@ -48,14 +48,15 @@
         {{-- MENU SIDEBAR --}}
         @if(Auth::user()) @include('client.layouts.sidebar') @endif
 
-        {{-- HEADER MOBILE--}}
-        @if(Auth::user()) @include('client.layouts.header_mobile') @endif
+
 
         <!-- PAGE CONTAINER-->
-        <div class="page-container">
+        <div class="page-container2">
 
             {{-- HEADER DESKTOP --}}
             @if(Auth::user()) @include('client.layouts.header_desktop') @endif
+            {{-- HEADER MOBILE--}}
+            @if(Auth::user()) @include('client.layouts.header_mobile') @endif
 
             <!-- MAIN CONTENT-->
             <div class="main-content">

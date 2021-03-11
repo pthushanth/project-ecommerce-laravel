@@ -13,7 +13,7 @@
                         <i class="fas fa-tachometer-alt"></i>Dashboard
                     </a>
                 </li>
-                <li class="has-sub" style="color:#4272d7">
+                <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-copy"></i>Catalogue
                     </a>
@@ -77,37 +77,37 @@
                 </ul>
             </li> --}}
             <li>
-                <a href="map.html">
+                <a href="{{route('admin.stocks.index')}}">
                     <i class="fas fa-shipping-fast"></i>Stock
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.clients.index')}}" style="color:#4272d7">
+                <a href="{{route('admin.clients.index')}}">
                     <i class="fas fa-users"></i>Client
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.orders.index')}}" style="color:#4272d7">
+                <a href="{{route('admin.orders.index')}}">
                     <i class="fas fa-clipboard-list"></i>Commande
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.coupons.index')}}" style="color:#4272d7">
+                <a href="{{route('admin.coupons.index')}}">
                     <i class="fas fa-tag"></i>Coupons
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.product_sales.index')}}" style="color:#4272d7">
+                <a href="{{route('admin.product_sales.index')}}">
                     <i class="fas fa-tags"></i>Promotion
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.notifications.index')}}" style="color:#4272d7">
+                <a href="{{route('admin.notifications.index')}}">
                     <i class="fas fa-bell"></i>Notification
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.reviews.index')}}" style="color:#4272d7">
+                <a href="{{route('admin.reviews.index')}}">
                     <i class="fas  fa-star"></i>Commentaire
                     {{-- <i class="fas fa-comment-alt"></i>Commentaire --}}
                 </a>
