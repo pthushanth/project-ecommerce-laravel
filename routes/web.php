@@ -96,7 +96,7 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/ajouter-produit', [ProductController::class, 'create'])->name('products.create');
     Route::post('/ajouter-produit', [ProductController::class, 'store'])->name('products.store');
     Route::get('/modifier-produit/{slug}', [ProductController::class, 'edit'])->name('products.edit');
-    Route::post('/modifier-produit', [ProductController::class, 'update'])->name('products.update');
+    Route::put('/modifier-produit', [ProductController::class, 'update'])->name('products.update');
     Route::get('/supprimer-produit/{slug}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/activer-produit/{slug}', [ProductController::class, 'activateProduct'])->name('products.activate');
     Route::get('/desactiver-produit/{slug}', [ProductController::class, 'desactivateProduct'])->name('products.desactivate');
