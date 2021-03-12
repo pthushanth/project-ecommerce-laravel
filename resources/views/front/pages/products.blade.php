@@ -39,21 +39,27 @@
             </header>
             <div class="filter-content">
               <div class="card-body">
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">100</span>
-                  <input type="checkbox" name="collection" class="custom-control-input" id="newProducts">
-                  <label class="custom-control-label" for="newProducts">Nouveauté</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">100</span>
-                  <input type="checkbox" name="collection" class="custom-control-input" id="bestseller">
-                  <label class="custom-control-label" for="bestseller">Meilleure ventes</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <span class="float-right badge badge-light round">100</span>
-                  <input type="checkbox" name="collection" class="custom-control-input" id="promotion">
-                  <label class="custom-control-label" for="promotion">Promotions</label>
-                </div>
+                <form method="GET" action="{{route('products.filter')}}">
+                  <input type="hidden" value="collection" name="type">
+                  <div class="custom-control custom-radio">
+                    <span class="float-right badge badge-light round">100</span>
+                    <input type="radio" name="collection" value="new-products" class="custom-control-input"
+                      id="newProducts" {{ old('collection') == "new-products" ? 'checked' : ''}}>
+                    <label class="custom-control-label" for="newProducts">Nouveauté</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <span class="float-right badge badge-light round">100</span>
+                    <input type="radio" name="collection" value="bestseller-products" class="custom-control-input"
+                      id="bestseller" {{ old('collection') == "bestseller-products" ? 'checked' : ''}}>
+                    <label class="custom-control-label" for="bestseller">Meilleure ventes</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <span class="float-right badge badge-light round">100</span>
+                    <input type="radio" name="collection" value="sale-products" class="custom-control-input"
+                      id="promotion" {{ old('collection') == "sale-products" ? 'checked' : ''}}>
+                    <label class="custom-control-label" for="promotion">Promotions</label>
+                  </div>
+                </form>
               </div> <!-- card-body.// -->
 
 
@@ -66,20 +72,23 @@
             </header>
             <div class="filter-content">
               <div class="card-body">
-                @foreach ($categories as $category)
-                @if($loop->iteration==6)
-                <div id="moreCategory">
-                  @endif
-                  <div class="custom-control custom-checkbox">
-                    <span class="float-right badge badge-light round">{{$category->products->count()}}</span>
-                    <input type="checkbox" name="category" class="custom-control-input" id="{{$category->name}}">
-                    <label class="custom-control-label" for="{{$category->name}}">{{$category->name}}</label>
+                <form method="GET" action="{{route('products.filter')}}">
+                  <input type="hidden" value="category" name="type">
+                  @foreach ($categories as $category)
+                  @if($loop->iteration==6)
+                  <div id="moreCategory">
+                    @endif
+                    <div class="custom-control custom-checkbox">
+                      <span class="float-right badge badge-light round">{{$category->products->count()}}</span>
+                      <input type="checkbox" name="category" value="{{$category->id}}" class="custom-control-input"
+                        id="{{$category->name}}">
+                      <label class="custom-control-label" for="{{$category->name}}">{{$category->name}}</label>
+                    </div>
+                    @if($loop->iteration>=6 &&$loop->last)
                   </div>
-                  @if($loop->iteration>=6 &&$loop->last)
-                </div>
-                @endif
-                @endforeach
-
+                  @endif
+                  @endforeach
+                </form>
                 <button type="button" onclick="ShowMore('moreCategory','btnShowMoreCategory')"
                   class="btn btn-outline-primary btnShowMoreCategory">voir
                   plus</button>
@@ -95,20 +104,23 @@
             </header>
             <div class="filter-content">
               <div class="card-body">
-                @foreach ($brands as $brand)
-                @if($loop->iteration==6)
-                <div id="moreBrand">
-                  @endif
-                  <div class="custom-control custom-checkbox">
-                    <span class="float-right badge badge-light round">{{$brand->products->count()}}</span>
-                    <input type="checkbox" name="brand" class="custom-control-input" id="{{$brand->name}}">
-                    <label class="custom-control-label" for="{{$brand->name}}">{{$brand->name}}</label>
+                <form method="GET" action="{{route('products.filter')}}">
+                  <input type="hidden" value="brand" name="type">
+                  @foreach ($brands as $brand)
+                  @if($loop->iteration==6)
+                  <div id="moreBrand">
+                    @endif
+                    <div class="custom-control custom-checkbox">
+                      <span class="float-right badge badge-light round">{{$brand->products->count()}}</span>
+                      <input type="checkbox" name="brand" value="{{$brand->id}}" class="custom-control-input"
+                        id="{{$brand->name}}">
+                      <label class="custom-control-label" for="{{$brand->name}}">{{$brand->name}}</label>
+                    </div>
+                    @if($loop->iteration>=6 &&$loop->last)
                   </div>
-                  @if($loop->iteration>=6 &&$loop->last)
-                </div>
-                @endif
-                @endforeach
-
+                  @endif
+                  @endforeach
+                </form>
                 <button type="button" onclick="ShowMore('moreBrand','btnShowMoreBrand')"
                   class="btn btn-outline-primary btnShowMoreBrand">voir
                   plus</button>
@@ -206,39 +218,8 @@
         </div>
         <div class="row justify-content-center">
           @foreach ($products as $product)
-
-          @php $image=$product->image[0]; @endphp
           <div class="col-md-3">
-            <a href="{{route('productDetail',$product->slug)}}">
-              <div class="card product text-center">
-                <img class="card-img-top"
-                  src="{{ $image === "noImage.jpg" ? "/storage/$image" : "/storage/product_images/$image" }}">
-                <div class="card-body ">
-                  <a href="#" class="categorie">{{$product->category->name}} - {{$product->brand->name}}</a>
-                  <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="far fa-star"></i>
-                  </div>
-                  <a href="#" class="produit-titre">{{$product->name}}</a>
-                  <p class="prix">{{$product->price}} €</p>
-                  <form method="POST" action="{{route('cart.add',$product->slug)}}">
-                    @csrf
-                    <div class="input-field col">
-                      <input type="hidden" name="id" value="{{ $product->slug }}">
-                      <input name="quantity" type="hidden" value="1" min="1">
-                      <p>
-                        <button class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
-                      </p>
-                    </div>
-                  </form>
-
-                </div>
-              </div>
-            </a>
-
+            @include('front.includes.product_card',['product'=>$product])
           </div>
           @endforeach
         </div>
@@ -274,5 +255,13 @@ function ShowMore(div,btn) {
     divShowMore.style.display = "inline";
   }
 }
+
+//radio filter to submit 
+$('input[type=radio]').on('change', function() {
+    $(this).closest("form").submit();
+});
+$('input[type=checkbox]').on('change', function() {
+    $(this).closest("form").submit();
+});
 </script>
 @endsection

@@ -76,10 +76,51 @@ class FrontController extends Controller
     }
     public function filterProducts(Request $request)
     {
+
         $filterType = $request->input('type');
-        $value = $request->input('search');
-        if ($filterType == "search") $products = Product::with('category', 'brand')->where("name", "LIKE", "%$value%")->paginate(12);
-        return view('front.pages.products')->with('products', $products);
+        $products = null;
+        if ($filterType == "search") {
+            $value = $request->input('search');
+            $products = Product::with('category', 'brand')->where("name", "LIKE", "%$value%")->paginate(12);
+        } else if ($filterType == "collection") {
+            $collection = $request->input('collection');
+            if ($collection == 'new-products') $products = Product::with('category', 'brand')->latest()->paginate(12);
+            else if ($collection == 'bestseller-products') $products = Product::with('category', 'brand')
+                ->join('order_product', 'order_product.product_id', '=', 'products.id')
+                ->select('products.*', DB::raw('sum(order_product.qty) as totalOrderedProduct'))
+                ->groupBy('products.id')
+                ->orderBy('totalOrderedProduct', 'DESC')
+                ->paginate(12);
+            else if ($collection == 'sale-products') $products = Product::has('productSale')->with('category', 'brand', 'productSale')->latest()->paginate(12);
+        } else if ($filterType == "category") {
+            $category_id = (int)$request->input('category');
+            $products = Product::with('category', 'brand')->whereHas('category', function ($query) use ($category_id) {
+                return $query->where('id', '=', $category_id);
+            })->paginate(12);
+        } else if ($filterType == "brand") {
+            $brand_id = (int)$request->input('brand');
+            $products = Product::with('category', 'brand')->whereHas('brand', function ($query) use ($brand_id) {
+                return $query->where('id', '=', $brand_id);
+            })->paginate(12);
+        }
+
+
+
+        $categories = Category::with('products')->distinct('name')->get();
+        $brands = Brand::with('products')->distinct('name')->get();
+        $reviews = DB::table('reviews')
+            ->join('products', 'reviews.product_id', '=', 'products.id')
+            ->select('reviews.rating', DB::raw("count(products.id) as totalProducts"))
+            ->groupBy('reviews.rating')
+            ->get();
+
+        return view('front.pages.products')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands,
+            'reviews' => $reviews,
+
+        ]);
     }
 
     public function cart()
