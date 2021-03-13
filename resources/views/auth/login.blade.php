@@ -39,7 +39,7 @@
             </form>
         </div>
 
-        <p class="text-muted dashed"><span>J" n'ai pas du compte</span> </p>
+        <p class="text-muted dashed"><span>Je n'ai pas du compte</span> </p>
         <a href="{{ route('register') }}"><button class="btn btnSubmit" type="submit">Créer mon compte</button></a>
     </section>
 

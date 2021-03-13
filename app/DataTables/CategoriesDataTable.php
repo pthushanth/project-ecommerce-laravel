@@ -33,9 +33,7 @@ class CategoriesDataTable extends DataTable
 
             ->editColumn('image', function (Category $category) {
                 //change over here
-                if ($category->image == 'noImage.jpg')
-                    return '<img src="' . asset("/storage/$category->image") . '"/>';
-                return '<img src="' . asset("/storage/category_images/$category->image") . '"/>';
+                return '<img src="' . asset($category->image) . '"/>';
             })
             ->rawColumns(['action', 'image']);
     }

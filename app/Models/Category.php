@@ -10,6 +10,14 @@ class Category extends Model
     use HasFactory;
     protected $guarded = [];
 
+    //accesssor
+    public function getImageAttribute($value)
+    {
+        if ($value == "noImage.jpg") {
+            return '/storage/' . $value;
+        }
+        return '/storage/category_images/' . $value;
+    }
     public function brands()
     {
         return $this->belongsToMany('App\Models\Brand');

@@ -39,13 +39,21 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
-        $inputs = $this->getInputs($request);
+        // $inputs = $this->getInputs($request);
+        // $category = Category::find($inputs['id']);
+        $request->validate([
+            'name' => 'required',
+            'image' => 'image|nullable|max:1999',
 
-        if ($request->has('image')) {
-            $this->deleteImages($inputs['image']);
+        ]);
+        $category = Category::find($request->input('id'));
+        $inputs = $request->except(['image']);
+        if ($request->hasFile('image')) {
+            $this->deleteImages($category->image);
+            $inputs['image'] = $this->saveImages($request);
+        } else {
+            $inputs['image'] = 'noImage.jpg';
         }
-
-        $category = Category::find($inputs['id']);
         $category->update($inputs);
         return back()->with('status', 'La catégorie ' . $category->name . ' a été mis à jour avec succès.');
     }
@@ -67,15 +75,12 @@ class CategoryController extends Controller
         ]);
         $inputs = $request->except(['image']);
 
-        // $inputs['status'] = $request->has('active');
-
         if ($request->hasFile('image')) {
+            $this->deleteImages($request->input('image'));
             $inputs['image'] = $this->saveImages($request);
         } else {
-
             $inputs['image'] = 'noImage.jpg';
         }
-
         return $inputs;
     }
     protected function saveImages($request)
@@ -90,7 +95,7 @@ class CategoryController extends Controller
         $fileNameToStore = $fileName . '_' . time() . '.' . $fileExtension;
 
         //upload image
-        $path = $request->file('image')->storeAs('public/category_images/', $fileNameToStore);
+        $path = $request->file('image')->storeAs('public/category_images', $fileNameToStore);
 
         return $fileNameToStore;
     }

@@ -78,7 +78,7 @@ class ProductSaleController extends Controller
     public function edit($id)
     {
         $productSale = ProductSale::find($id);
-        return view('admin.pages.product_sales.edit')->with(['sale' => $productSale]);
+        return view('admin.pages.product_sale.create')->with(['sale' => $productSale]);
     }
 
     /**
@@ -90,14 +90,15 @@ class ProductSaleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::where('slug', $request->input('product_slug'))->first();
+        // dd($request->input('products')['0']);
+        $product = Product::where('slug', $request->input('products')['0'])->first();
         $productSale = ProductSale::find($id);
         $productSale->name = $request->input('name');
         $productSale->is_percentage =  (int) $request->input('is_percentage');
         $productSale->discount = $request->input('discount');
         $productSale->start = $request->input('start');
         $productSale->end = $request->input('discount');
-        $productSale->save($product);
+        $productSale->product_id = $product->id;
         return back()->with('status', 'Le promotion ' . $product->name . ' a été mis à jour avec succès.');
     }
 

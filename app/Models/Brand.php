@@ -10,6 +10,14 @@ class Brand extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function getImageAttribute($value)
+    {
+        if ($value == "noImage.jpg") {
+            return '/storage/' . $value;
+        }
+        return '/storage/category_images/' . $value;
+    }
+
     public function categories()
     {
         return $this->belongsToMany('App\Models\Category');

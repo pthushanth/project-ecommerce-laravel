@@ -69,7 +69,7 @@ class CouponController extends Controller
     public function edit($id)
     {
         $coupon = Coupon::find($id);
-        return view('admin.pages.coupon.edit')->with(['coupon' => $coupon]);
+        return view('admin.pages.coupon.create')->with(['coupon' => $coupon]);
     }
 
     /**
@@ -84,7 +84,7 @@ class CouponController extends Controller
 
         $coupon = Coupon::find($id);
         $coupon->update($request->all());
-        return back()->with('status', 'La catégorie ' . $coupon->name . ' a été mis à jour avec succès.');
+        return back()->with('status', 'Le coupons ' . $coupon->value . ' a été mis à jour avec succès.');
     }
 
     /**

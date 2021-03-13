@@ -33,9 +33,7 @@ class BrandsDataTable extends DataTable
 
             ->editColumn('image', function (Brand $brand) {
                 //change over here
-                if ($brand->image == 'noImage.jpg')
-                    return '<img src="' . asset("/storage/$brand->image") . '"/>';
-                return '<img src="' . asset("/storage/brand_images/$brand->image") . '"/>';
+                return '<img src="' . asset($brand->image) . '"/>';
             })
             ->rawColumns(['action', 'image']);
     }

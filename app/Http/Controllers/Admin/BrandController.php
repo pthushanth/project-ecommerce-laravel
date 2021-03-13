@@ -36,13 +36,27 @@ class BrandController extends Controller
 
     public function update($request)
     {
-        $inputs = $this->getInputs($request);
+        // $inputs = $this->getInputs($request);
 
-        if ($request->has('image')) {
-            $this->deleteImages($inputs['image']);
+        // if ($request->has('image')) {
+        //     $this->deleteImages($inputs['image']);
+        // }
+
+        // $brand = Brand::find($inputs['id']);
+        $request->validate([
+            'name' => 'required',
+            'image' => 'image|nullable|max:1999',
+
+        ]);
+        $brand = Brand::find($request->input('id'));
+        $inputs = $request->except(['image']);
+        if ($request->hasFile('image')) {
+            $this->deleteImages($brand->image);
+            $inputs['image'] = $this->saveImages($request);
+        } else {
+            $inputs['image'] = 'noImage.jpg';
         }
-
-        $brand = Brand::find($inputs['id']);
+        $brand->update($inputs);
         $brand->update($inputs);
         return back()->with('status', 'La marque ' . $brand->name . ' a été mis à jour avec succès.');
     }
@@ -67,6 +81,7 @@ class BrandController extends Controller
         // $inputs['status'] = $request->has('active');
 
         if ($request->hasFile('image')) {
+            $this->deleteImages($request->input('image'));
             $inputs['image'] = $this->saveImages($request);
         } else {
 

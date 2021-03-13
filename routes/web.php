@@ -96,7 +96,7 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/ajouter-produit', [ProductController::class, 'create'])->name('products.create');
     Route::post('/ajouter-produit', [ProductController::class, 'store'])->name('products.store');
     Route::get('/modifier-produit/{slug}', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/modifier-produit', [ProductController::class, 'update'])->name('products.update');
+    Route::put('/modifier-produit/{slug}', [ProductController::class, 'update'])->name('products.update');
     Route::get('/supprimer-produit/{slug}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/activer-produit/{slug}', [ProductController::class, 'activateProduct'])->name('products.activate');
     Route::get('/desactiver-produit/{slug}', [ProductController::class, 'desactivateProduct'])->name('products.desactivate');
@@ -108,7 +108,7 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/ajouter-attribut', [ProductAttributeController::class, 'create'])->name('attributes.create');
     Route::post('/ajouter-attribut', [ProductAttributeController::class, 'store'])->name('attributes.store');
     Route::get('/modifier-attribut/{id}', [ProductAttributeController::class, 'edit'])->name('attributes.edit');
-    Route::post('/modifier-attribut', [ProductAttributeController::class, 'update'])->name('attributes.update');
+    Route::put('/modifier-attribut/{id}', [ProductAttributeController::class, 'update'])->name('attributes.update');
     Route::get('/supprimer-attribut/{id}', [ProductAttributeController::class, 'destroy'])->name('attributes.destroy');
 
     //Category
@@ -116,7 +116,7 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/ajouter-categorie', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/ajouter-categorie', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/modifier-categorie/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::post('/modifier-categorie', [CategoryController::class, 'update'])->name('categories.update');
+    Route::put('/modifier-categorie/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/supprimer-categorie/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     // Route::resource('categories', CategoryController::class);
 
@@ -125,7 +125,7 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/ajouter-marque', [BrandController::class, 'create'])->name('brands.create');
     Route::post('/ajouter-marque', [BrandController::class, 'store'])->name('brands.store');
     Route::get('/modifier-marque/{id}', [BrandController::class, 'edit'])->name('brands.edit');
-    Route::post('/modifier-marque', [BrandController::class, 'update'])->name('brands.update');
+    Route::put('/modifier-marque/{id}', [BrandController::class, 'update'])->name('brands.update');
     Route::get('/supprimer-marque/{id}', [BrandController::class, 'destroy'])->name('brands.destroy');
     // Route::resource('brands', BrandController::class);
 
@@ -142,7 +142,7 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/ajouter-coupon', [CouponController::class, 'create'])->name('coupons.create');
     Route::post('/ajouter-coupon', [CouponController::class, 'store'])->name('coupons.store');
     Route::get('/modifier-coupon/{id}', [CouponController::class, 'edit'])->name('coupons.edit');
-    Route::post('/modifier-coupon', [CouponController::class, 'update'])->name('coupons.update');
+    Route::put('/modifier-coupon/{id}', [CouponController::class, 'update'])->name('coupons.update');
     Route::get('/supprimer-coupon/{id}', [CouponController::class, 'destroy'])->name('coupons.destroy');
 
     //Sales
@@ -158,7 +158,7 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/ajouter-promo', [ProductSaleController::class, 'create'])->name('product_sales.create');
     Route::post('/ajouter-promo', [ProductSaleController::class, 'store'])->name('product_sales.store');
     Route::get('/modifier-promo/{id}', [ProductSaleController::class, 'edit'])->name('product_sales.edit');
-    Route::post('/modifier-promo', [ProductSaleController::class, 'update'])->name('product_sales.update');
+    Route::put('/modifier-promo/{id}', [ProductSaleController::class, 'update'])->name('product_sales.update');
     Route::get('/supprimer-promo/{id}', [ProductSaleController::class, 'destroy'])->name('product_sales.destroy');
 
     //stock

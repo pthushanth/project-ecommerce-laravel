@@ -68,7 +68,7 @@ class ProductAttributeController extends Controller
     public function edit($id)
     {
         $attribute = Attribute::find($id);
-        return view('admin.pages.attribute.edit')->with(['attribute' => $attribute]);
+        return view('admin.pages.attribute.create')->with(['attribute' => $attribute]);
     }
 
     /**

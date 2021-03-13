@@ -1,7 +1,7 @@
 <!-- MENU SIDEBAR-->
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
-        <a href="#">
+        <a href="{{route('admin.dashboard')}}">
             <img src="{{asset('images/logo.png')}}" alt="Tech Zone" />
         </a>
     </div>
@@ -9,7 +9,7 @@
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
                 <li>
-                    <a href="{{route('admin.dashboard')}} ">
+                    <a href="{{route('admin.dashboard')}}">
                         <i class="fas fa-tachometer-alt"></i>Dashboard
                     </a>
                 </li>

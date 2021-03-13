@@ -26,7 +26,7 @@ $titleForm="Ajouter une Promotion";
                     <div class="card-header">{{ $titleForm }}</div>
                     <div class="card-body card-block">
                         @if(isset($sale))
-                        <form method="POST" action="{{route('admin.product_sales.update')}}">
+                        <form method="POST" action="{{route('admin.product_sales.update',$sale->id)}}">
                             @method('PUT')
                             @else
                             <form method="POST" action="{{route('admin.product_sales.store')}}">
@@ -40,11 +40,13 @@ $titleForm="Ajouter une Promotion";
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" id="percentage"
-                                            name="is_percentage" value="1" {{ old('is_percentage') == "1" ? 'checked' : ''}}>
+                                            name="is_percentage" value="1"
+                                            {{ old('is_percentage') == "1" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="percentage">Pourcentage</label></label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="remise" name="is_percentage" value="0" {{ old('is_percentage') == "0" ? 'checked' : ''}}>
+                                        <input class="form-check-input" type="radio" id="remise" name="is_percentage"
+                                            value="0" {{ old('is_percentage') == "0" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="remise">Remise</label>
                                     </div>
                                 </div>

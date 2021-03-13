@@ -85,9 +85,9 @@ class ProductController extends Controller
         $stock = $product->stock()->create(['stock' => $request->input('stock'), 'low_stock_amount' => 5]);
 
         $sync_data = [];
-        if(!empty($request->input('attribute_id'))){
+        if (!empty($request->input('attribute_id'))) {
 
-            for ($i = 0; $i < count($request->input('attribute_id')); $i++){
+            for ($i = 0; $i < count($request->input('attribute_id')); $i++) {
 
                 $sync_data[$request->input('attribute_id')[$i]] = ['value' => $request->input('attribute_value')[$i]];
             }
@@ -95,7 +95,6 @@ class ProductController extends Controller
 
         $product->attributes()->attach($sync_data);
         return back()->with('status', 'Le produit ' . $product->name . ' a été crée avec succès.');
-
     }
 
 
@@ -117,12 +116,13 @@ class ProductController extends Controller
 
     public function update(Request $request, $slug)
     {
+        $product = Product::where('slug', $slug)->first();
         $validated = $request->validate([
             'category' => 'required',
             'brand' => 'required',
             'price' => 'required',
-            'name' => 'required|unique:App\Models\Product,name',
-            'image' => 'required|array|min:1',
+            'name' => 'required|unique:App\Models\Product,name,' . $product->id,
+            // 'image' => 'required|array|min:1',
             'image.*' => 'image|nullable|max:1999',
             'short_description' => 'required',
             'long_description' => 'required',
@@ -137,10 +137,13 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->short_description = $request->input('short_description');
         $product->long_description = $request->input('long_description');
-        $product->spec = "";
 
-        if ($request->has('image')) {
-            $this->deleteImages($request->input('image'));
+        if ($request->hasFile('image')) {
+            $this->deleteImages($product->image);
+            $imagesFileName = array();
+            foreach ($request->file('image') as $file) {
+                $imagesFileName[] = $this->saveImages($file);
+            }
         }
 
         // $category = Category::find($inputs['id']);

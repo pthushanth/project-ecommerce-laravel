@@ -22,37 +22,9 @@ class ProductsDataTable extends DataTable
     {
         return datatables()->of($query)
             ->addIndexColumn()
-            // ->addColumn('spec', function (Product $product) {
-            //     $champs = "<table>";
-            //     foreach ($product->extra_champs as $extra) {
-            //         $champs .= "<tr>";
-            //         $champs .=  "<td>" . $extra['champs'] . ": </td>";
-            //         $champs .=  "<td>" . $extra['value'] . " </td>";
-            //         $champs .= "</tr>";
-            //     }
-            //     $champs .= "</table>";
-
-            //     return  $champs;
-            // })
             ->editColumn('image', function (Product $product) {
                 $html = "";
-                // dd($product->image[1]);
-                // foreach ($product->image as $index => $image) {
-                //     // var_dump($image);
-                //     if ($image == 'noImage.jpg')
-                //         $html .= '<img src="' . asset("/storage/$image") . '"/>';
-                //     else {
-                //         $html .= '<img src="' . asset("/storage/product_images/$image") . '"/>';
-                //     }
-                // }
-
-                // var_dump($image);
-                $image = $product->image[0];
-                if ($image == 'noImage.jpg')
-                    $html .= '<img src="' . asset("/storage/$image") . '"/>';
-                else {
-                    $html .= '<img src="' . asset("/storage/product_images/$image") . '"/>';
-                }
+                $html .= '<img src="' . asset($product->getThumbnailUrl()) . '"/>';
                 return $html;
             })
 
