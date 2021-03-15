@@ -110,42 +110,16 @@
 <section id="sectionCategories">
   <div class="container-fluid">
     <div class="row justify-content-center">
+      @foreach ($categories as $category)
       <div class="col-md-6 col-lg-3">
         <div class="card img-fluid align-items-center justify-content-center">
-          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}">
+          <img class="card-img-top" src="{{ asset($category->image) }}">
           <div class="card-img-overlay align-items-center d-flex justify-content-center">
-            <a href="#" class="btn btnCategorie">TELEVISON</a>
+            <a href="#" class="btn btnCategorie">{{$category->name}}</a>
           </div>
         </div>
       </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card img-fluid align-items-center justify-content-center">
-          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}">
-          <div class="card-img-overlay align-items-center d-flex justify-content-center">
-            <a href="#" class="btn btnCategorie">PC</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card img-fluid align-items-center justify-content-center">
-          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}">
-          <div class="card-img-overlay align-items-center d-flex justify-content-center">
-            <a href="#" class="btn btnCategorie">LAPTOP</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card img-fluid align-items-center justify-content-center">
-          <img class="card-img-top" src="{{ asset('images/slider2.jpg') }}">
-          <div class="card-img-overlay align-items-center d-flex justify-content-center">
-            <a href="#" class="btn btnCategorie">WATCH</a>
-          </div>
-        </div>
-      </div>
-
+      @endforeach
     </div>
   </div>
 </section>

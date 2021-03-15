@@ -182,6 +182,7 @@ h2 {
 }
 
 #sectionCategories .card img {
+  max-width: 300px;
   width: 100%;
 }
 

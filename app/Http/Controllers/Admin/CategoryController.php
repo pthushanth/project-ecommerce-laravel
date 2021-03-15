@@ -108,4 +108,17 @@ class CategoryController extends Controller
         //     public_path('public/category_images' . $name)
         // ]);
     }
+
+    public function findAutocomplete(Request $request)
+    {
+        $data = [];
+
+        if ($request->has('q')) {
+            $search = $request->q;
+            $data = Category::select("id", "name")
+                ->where('name', 'LIKE', "%$search%")
+                ->get();
+        }
+        return response()->json($data);
+    }
 }

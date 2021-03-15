@@ -18,6 +18,13 @@ class Category extends Model
         }
         return '/storage/category_images/' . $value;
     }
+
+    public function relatedProducts()
+    {
+        return $this->products()->inRandomOrder()->take(4);
+    }
+
+    /******  Relationship  *****/
     public function brands()
     {
         return $this->belongsToMany('App\Models\Brand');
@@ -27,9 +34,8 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Product');
     }
-
-    public function relatedProducts()
+    public function attributes()
     {
-        return $this->products()->inRandomOrder()->take(4);
+        return $this->hasMany('App\Models\Attribute');
     }
 }

@@ -30,8 +30,17 @@ class ProductAttributesDataTable extends DataTable
                 //change over here
                 return date('d-M-Y H:i:s', strtotime($attribute->created_at));
             })
+            ->editColumn('product', function (Attribute $attribute) {
+                $i = 1;
+                $html = "";
+                foreach ($attribute->categories as $category) {
+                    $html .= $i . " - " . $category->name . "</br>";
+                    $i++;
+                }
+                return $html;
+            })
 
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'product']);
     }
 
     /**
@@ -43,7 +52,7 @@ class ProductAttributesDataTable extends DataTable
     public function query(ProductAttributesDataTable $model)
     {
         // return $model->newQuery();
-        $data = Attribute::latest()->get();
+        $data = Attribute::with('categories')->latest()->get();
         return $this->applyScopes($data);
     }
 
@@ -83,6 +92,7 @@ class ProductAttributesDataTable extends DataTable
             Column::make('DT_RowIndex')->title('N°')->orderable(false)->searchable(false),
             Column::make('created_at')->title('Date'),
             Column::make('name')->title('Nom'),
+            Column::make('categories.name')->title('Catégorie'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

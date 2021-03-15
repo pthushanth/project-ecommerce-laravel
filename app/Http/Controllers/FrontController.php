@@ -34,6 +34,7 @@ class FrontController extends Controller
 {
     public function home()
     {
+        $categories = Category::take(4)->get();
         $topRatedProducts = Product::with('category', 'brand')
             ->join('reviews', 'reviews.product_id', '=', 'products.id')
             ->select('products.*', DB::raw('avg(rating) as avg_rating'))
@@ -53,7 +54,13 @@ class FrontController extends Controller
             ->take(10)
             ->get();
         // return view('front.pages.home', compact($topRatedProducts, $latestProducts));
-        return view('front.pages.home')->with(['topRatedProducts' => $topRatedProducts, 'latestProducts' => $latestProducts, 'bestSellerProducts' => $bestSellerProducts, 'saleProducts' => $saleProducts]);
+        return view('front.pages.home')->with([
+            'categories' => $categories,
+            'topRatedProducts' => $topRatedProducts,
+            'latestProducts' => $latestProducts,
+            'bestSellerProducts' => $bestSellerProducts,
+            'saleProducts' => $saleProducts
+        ]);
     }
     public function products()
     {

@@ -35,6 +35,12 @@ $titleForm="Ajouter un attribut";
                                 @endif
                                 @csrf
                                 <div class="form-group">
+                                    <div class="col-md-3 input-group-addon">Catégories</div>
+                                    <select id="categories" name="categories[]" class="form-control" multiple>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="col-md-3 input-group-addon">Nom de l'attribut</div>
                                     <div class="input-group">
                                         <input type="text" id="name" name="name"
@@ -61,6 +67,31 @@ $titleForm="Ajouter un attribut";
 
 @endsection
 
+
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+<script type="text/javascript">
+    $('#categories').select2({
+      placeholder: 'Select an item',
+      ajax: {
+        url: '{{route("admin.categories.findAutocomplete")}}',
+        dataType: 'json',
+        delay: 250,
+        processResults: function (data) {
+          return {
+            results:  $.map(data, function (item) {
+                  return {
+                      text: item.name,
+                      id: item.id,
+                      slug: item.slug,
+                  }
+              })
+          };
+        },
+        cache: true
+      }
+    });
+</script>
 
 @endsection

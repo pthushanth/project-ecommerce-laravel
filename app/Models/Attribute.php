@@ -13,4 +13,8 @@ class Attribute extends Model
     {
         return $this->belongsToMany(Product::class)->withPivot('value');
     }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

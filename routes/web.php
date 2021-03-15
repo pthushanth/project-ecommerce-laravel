@@ -118,6 +118,7 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::get('/modifier-categorie/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/modifier-categorie/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/supprimer-categorie/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/categorie/recherche', [CategoryController::class, 'findAutocomplete'])->name('categories.findAutocomplete');
     // Route::resource('categories', CategoryController::class);
 
     //Brand

@@ -40,6 +40,7 @@ class ProductAttributeController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:App\Models\Attribute,name',
+
         ]);
 
         $attribute = new Attribute();
