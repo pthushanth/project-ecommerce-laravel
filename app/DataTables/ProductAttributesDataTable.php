@@ -30,7 +30,7 @@ class ProductAttributesDataTable extends DataTable
                 //change over here
                 return date('d-M-Y H:i:s', strtotime($attribute->created_at));
             })
-            ->editColumn('product', function (Attribute $attribute) {
+            ->editColumn('categories.name', function (Attribute $attribute) {
                 $i = 1;
                 $html = "";
                 foreach ($attribute->categories as $category) {
@@ -40,7 +40,7 @@ class ProductAttributesDataTable extends DataTable
                 return $html;
             })
 
-            ->rawColumns(['action', 'product']);
+            ->rawColumns(['action', 'categories.name']);
     }
 
     /**

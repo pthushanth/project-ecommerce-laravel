@@ -111,6 +111,9 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::put('/modifier-attribut/{id}', [ProductAttributeController::class, 'update'])->name('attributes.update');
     Route::get('/supprimer-attribut/{id}', [ProductAttributeController::class, 'destroy'])->name('attributes.destroy');
 
+    Route::post('/recuperer-attributes', [ProductAttributeController::class, 'getCategoryAttributes'])->name('attributes.category_attributes');
+
+
     //Category
     Route::get('/categorie', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/ajouter-categorie', [CategoryController::class, 'create'])->name('categories.create');

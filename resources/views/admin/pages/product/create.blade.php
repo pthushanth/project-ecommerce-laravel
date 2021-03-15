@@ -77,9 +77,9 @@ $titleForm="Ajouter un produit";
                                     <select name="attribute" id="attribute"
                                         class="form-control @error('attribute') is-invalid @enderror">
                                         <option value="0">Please select</option>
-                                        @foreach($attributes as $attribute)
+                                        {{-- @foreach($attributes as $attribute)
                                         <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
 
                                     <button type="button" class="btn btn-secondary btn-sm" onclick="AddAttributField()">
@@ -234,6 +234,35 @@ $titleForm="Ajouter un produit";
     //   function RemoveAttributField(e){
     //     e.parentNode.removeChild(e);
     //   }
+
+
+
+    // Ajax request attribute by category
+    // $.ajaxSetup({
+    //     headers: {
+    //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
+    $(document).ready(function () {
+        $('#category').on('change',function(e) {
+            var cat_id = e.target.value;
+            $.ajax({
+            url:"{{ route('admin.attributes.category_attributes') }}",
+            type:"POST",
+            data: {
+                category_id: cat_id,
+                _token: '{{csrf_token()}}'
+            },
+            success:function (data) {
+                console.log(data);
+                $('#attribute').empty();
+                $.each(data.attributes,function(index,attribute){
+                    $('#attribute').append('<option value="'+attribute.id+'">'+attribute.name+'</option>');
+                })
+            }
+            })
+        });
+    });
 </script>
 
 @endsection

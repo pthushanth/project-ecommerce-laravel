@@ -36,6 +36,6 @@ class Category extends Model
     }
     public function attributes()
     {
-        return $this->hasMany('App\Models\Attribute');
+        return $this->belongsToMany('App\Models\Attribute');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Attribute;
 use App\DataTables\ProductAttributesDataTable;
+use App\Models\Category;
 
 class ProductAttributeController extends Controller
 {
@@ -45,8 +46,18 @@ class ProductAttributeController extends Controller
 
         $attribute = new Attribute();
         $attribute->name = $request->input('name');
+        $categories_id = $request->input('categories');
+        $category_id_array = array();
+        foreach ($categories_id as $id) {
+
+            //collect all inserted record IDs
+            $category_id_array[] = $id;
+        }
+        // $attribute->categories()->sync($category_id_array, false); //dont delete old entries = false
         // $attribute->products()->attach($request->input('product_id'));
         $attribute->save();
+        $attribute->categories()->sync($category_id_array);
+
         return back()->with('status', "L'attribut " . $attribute->name . " a été inséré avec succès.");
     }
 
@@ -98,5 +109,14 @@ class ProductAttributeController extends Controller
         $attribute = Attribute::find($id);
         $attribute->delete();
         return back()->with('status', 'L\'attribut ' . $attribute->name . ' a été supprimée avec succès.');
+    }
+
+    public function getCategoryAttributes(Request $request)
+    {
+        $category_attributes = Category::with('attributes')->find($request->category_id);
+
+        return response()->json([
+            'attributes' => $category_attributes->attributes
+        ]);
     }
 }
