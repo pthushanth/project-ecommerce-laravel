@@ -36,6 +36,10 @@
                         <i class="fas fa-shopping-basket"></i>Mes commandes</a>
                 </li>
                 <li>
+                    <a href="{{route('client.reviews')}}">
+                        <i class="fas fa-shopping-basket"></i>Mes avis</a>
+                </li>
+                <li>
                     <a href="inbox.html">
                         <i class="zmdi zmdi-notifications"></i>Notification</a>
                     <span class="inbox-num">3</span>

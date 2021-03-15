@@ -135,6 +135,8 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
 
     //Order
     Route::get('/commande', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/commande/mettre-a-jour/{id}', [OrderController::class, 'edit'])->name('orders.edit');
+    Route::put('/commande/mettre-a-jour/{id}', [OrderController::class, 'update'])->name('orders.update');
     Route::get('/supprimer-commande/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
 
     //Coupon
@@ -183,6 +185,7 @@ Route::middleware(['client'])->prefix('client')->name('client.')->group(function
     Route::get('/mes-info-perso', [ClientController::class, 'account'])->name('account');
     Route::post('/mes-info-perso', [ClientController::class, 'accountUpdate'])->name('account.update');
     Route::get('/commandes', [ClientController::class, 'orders'])->name('orders');
+    Route::get('/commentaires', [ClientController::class, 'reviews'])->name('reviews');
 
     Route::post('/produit/{slug}/donner-avis', [ReviewController::class, 'store'])->name('review.store');
 });

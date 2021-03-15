@@ -13,20 +13,21 @@
                         <div class="noti__item js-item-menu">
                             <i class="zmdi zmdi-notifications" style="color: #ffffff"></i>
                             <span class="quantity">{{Auth::user()->unreadNotifications->count()}}</span>
-                            <div class="notifi-dropdown js-dropdown">
+                            <div class="notifi-dropdown js-dropdown" style="left: -280px;">
                                 <div class="notifi__title">
                                     <p>Vous avez {{Auth::user()->unreadNotifications->count()}} Notifications</p>
                                 </div>
 
-                                @foreach (Auth::user()->unreadNotifications->whereIn('type',
-                                ['App\Notifications\NewOrderNotification',]) as $notification)
+                                {{-- @foreach (Auth::user()->unreadNotifications->whereIn('type',
+                                ['App\Notifications\NewOrderNotification',]) as $notification) --}}
+                                @foreach (Auth::user()->unreadNotifications as $notification)
                                 {{-- @if(isset($notification->data['categorie'])) --}}
                                 <div class="notifi__item">
                                     <div class="bg-c1 img-cir img-40">
                                         <i class="zmdi zmdi-email-open"></i>
                                     </div>
                                     <div class="content">
-                                        <p style="color:red">nouvelle commande n°{{ $notification->data['order_id']}}
+                                        <p style="color:red">{{ $notification->data['message']}}
                                         </p>
                                         <span class="date">{{$notification->created_at}}</span>
                                     </div>

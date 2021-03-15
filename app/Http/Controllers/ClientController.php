@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ClientOrdersDataTable;
+use App\DataTables\ClientReviewsDataTable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,5 +58,9 @@ class ClientController extends Controller
     public function orders(ClientOrdersDataTable $dataTable)
     {
         return $dataTable->render('client.pages.orders');
+    }
+    public function reviews(ClientReviewsDataTable $dataTable)
+    {
+        return $dataTable->render('client.pages.reviews');
     }
 }

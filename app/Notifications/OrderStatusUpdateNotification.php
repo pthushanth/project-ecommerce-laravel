@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewOrderNotification extends Notification
+class OrderStatusUpdateNotification extends Notification
 {
     use Queueable;
     private $orderData;
@@ -58,7 +58,8 @@ class NewOrderNotification extends Notification
         return [
             'client_id' => $this->orderData->user_id,
             'order_id' => $this->orderData->id,
-            'message' => 'Nouvelle commande n° ' . $this->orderData->id
+            'order_status' => $this->orderData->orderStatus->status,
+            'message' => 'Commande' . $this->orderData->id . ' :  ' . $this->orderData->orderStatus->status
 
         ];
     }

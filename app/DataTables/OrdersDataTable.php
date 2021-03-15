@@ -23,7 +23,8 @@ class OrdersDataTable extends DataTable
         return datatables()->of($query)
             ->addIndexColumn()
             ->addColumn('action', function (Order $order) {
-                $btn = '<a href="' . route('admin.orders.destroy', $order->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                $btn = '<a href="' . route('admin.orders.destroy', $order->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Supprimer</a>
+                <a href="' . route('admin.orders.edit', $order->id) . '"" class="delete btn btn-info btn-sm">Maj status commande </a>';
                 return $btn;
             })
             ->editColumn('product', function (Order $order) {
