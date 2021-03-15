@@ -70,7 +70,7 @@ class ProductController extends Controller
         $product->short_description = $request->input('short_description');
         $product->long_description = $request->input('long_description');
 
-        $product->spec = "";
+        // $product->spec = "";
 
         //$product->attributes()->attach($request->input('attribute_id'), ['value' => $request->input('attribute_value')]);
         $product->image = $imagesFileName;
@@ -139,15 +139,32 @@ class ProductController extends Controller
         $product->long_description = $request->input('long_description');
 
         if ($request->hasFile('image')) {
-            $this->deleteImages($product->image);
+            foreach ($product->image as $image) {
+                $this->deleteImages($image);
+            }
+
             $imagesFileName = array();
             foreach ($request->file('image') as $file) {
                 $imagesFileName[] = $this->saveImages($file);
             }
+            $product->image = $imagesFileName;
         }
 
-        // $category = Category::find($inputs['id']);
-        // $category->update($inputs);
+        $product->status = 1;
+        $product->category_id = $request->input('category');
+        $product->brand_id = $request->input('brand');
+        $product->stock()->create(['stock' => $request->input('stock'), 'low_stock_amount' => 5]);
+        $sync_data = [];
+        if (!empty($request->input('attribute_id'))) {
+
+            for ($i = 0; $i < count($request->input('attribute_id')); $i++) {
+
+                $sync_data[$request->input('attribute_id')[$i]] = ['value' => $request->input('attribute_value')[$i]];
+            }
+        }
+
+        $product->save();
+
         return back()->with('status', 'Le produit ' . $product->name . ' a été mis à jour avec succès.');
     }
 

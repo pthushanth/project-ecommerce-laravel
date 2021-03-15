@@ -555,9 +555,13 @@ h2 {
   /* promo*/
 }
 
-.card.product img {
+.card.product .card-img-top {
   width: 200px;
   height: 200px;
+  width: auto;
+}
+
+.card.product img {
   margin: 0 auto;
 }
 

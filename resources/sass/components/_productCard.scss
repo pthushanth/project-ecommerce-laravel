@@ -3,9 +3,15 @@
     border: none;
     margin: 0 10px;
 
-    img {
-        width: 200px;
+    .card-img-top{
+       width: 200px;
         height: 200px;
+         width: auto;
+    }
+    img {
+        // max-height: 200px;
+        // height: 100%;
+        //  width: auto;
         margin: 0 auto;
     }
     a {
