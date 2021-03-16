@@ -40,6 +40,11 @@ Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('produits', [FrontController::class, 'products'])->name('products');
 Route::get('produits/filter', [FrontController::class, 'filterProducts'])->name('products.filter');
 Route::get('produit/{slug}', [FrontController::class, 'productDetail'])->name('productDetail');
+Route::get('produits/collection/nouveaux-produits', [FrontController::class, 'getNewProducts'])->name('products.new');
+Route::get('produits/collection/meilleurs-vendus', [FrontController::class, 'getBestsellerProducts'])->name('products.bestseller');
+Route::get('produits/collection/promotion', [FrontController::class, 'getSaleProducts'])->name('products.sale');
+
+
 Route::get('/panier', [FrontController::class, 'cart'])->name('cart');
 
 Route::post('panier/produit/{slug}', [FrontController::class, 'addToCart'])->name('cart.add');

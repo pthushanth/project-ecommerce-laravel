@@ -130,12 +130,12 @@
     <nav class="shift">
       <ul class="nav nav-tabs justify-content-center " role="tablist">
         <li class="nav-item">
-          <a class="nav-link btn showProductDiv" target="newProduct" data-toggle="tab" role="tab"
+          <a class="nav-link btn showProductDiv active" target="newProduct" data-toggle="tab" role="tab"
             aria-controls="special" aria-selected="false" onclick="showProductDiv(this.target)">Nouveautés</a>
         </li>
         <li class="nav-item">
           <a class="nav-link btn showProductDiv" target="topRated" data-toggle="tab" role="tab" aria-controls="special"
-            aria-selected="false" onclick="showProductDiv(this.target)">Meilleure noté</a>
+            aria-selected="false" onclick="showProductDiv(this.target)">Meilleure notés</a>
 
         </li>
         <li class="nav-item">

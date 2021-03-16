@@ -337,4 +337,69 @@ class FrontController extends Controller
         $relatedProducts = Category::with('products')->where('id', $product->category->id)->get();
         return view('front.pages.product_detail')->with(['product' => $product, 'relatedProducts' => $relatedProducts]);
     }
+
+
+    public function getNewProducts()
+    {
+        $products = Product::with('category', 'brand')->latest()->paginate(12);
+        $categories = Category::with('products')->distinct('name')->get();
+        $brands = Brand::with('products')->distinct('name')->get();
+        $reviews = DB::table('reviews')
+            ->join('products', 'reviews.product_id', '=', 'products.id')
+            ->select('reviews.rating', DB::raw("count(products.id) as totalProducts"))
+            ->groupBy('reviews.rating')
+            ->get();
+
+        return view('front.pages.products')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands,
+            'reviews' => $reviews,
+
+        ]);
+    }
+    public function getBestsellerProducts()
+    {
+        $products = Product::with('category', 'brand')
+            ->join('order_product', 'order_product.product_id', '=', 'products.id')
+            ->select('products.*', DB::raw('sum(order_product.qty) as totalOrderedProduct'))
+            ->groupBy('products.id')
+            ->orderBy('totalOrderedProduct', 'DESC')
+            ->paginate(12);
+        $categories = Category::with('products')->distinct('name')->get();
+        $brands = Brand::with('products')->distinct('name')->get();
+        $reviews = DB::table('reviews')
+            ->join('products', 'reviews.product_id', '=', 'products.id')
+            ->select('reviews.rating', DB::raw("count(products.id) as totalProducts"))
+            ->groupBy('reviews.rating')
+            ->get();
+
+        return view('front.pages.products')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands,
+            'reviews' => $reviews,
+
+        ]);
+    }
+
+    public function getSaleProducts()
+    {
+        $products = Product::has('productSale')->with('category', 'brand', 'productSale')->latest()->paginate(12);
+        $categories = Category::with('products')->distinct('name')->get();
+        $brands = Brand::with('products')->distinct('name')->get();
+        $reviews = DB::table('reviews')
+            ->join('products', 'reviews.product_id', '=', 'products.id')
+            ->select('reviews.rating', DB::raw("count(products.id) as totalProducts"))
+            ->groupBy('reviews.rating')
+            ->get();
+
+        return view('front.pages.products')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands,
+            'reviews' => $reviews,
+
+        ]);
+    }
 }

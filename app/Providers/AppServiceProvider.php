@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'cartCount' => Cart::getTotalQuantity(),
                 'cartTotal' => Cart::getTotal(),
+                'cat' => Category::take(10)->get()
             ]);
         });
     }

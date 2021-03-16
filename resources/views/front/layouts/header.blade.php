@@ -1,4 +1,5 @@
 <header>
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 text-center col-md-9 col-lg-10 justify-content-left">
@@ -17,30 +18,31 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav mx-auto">
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown" {{ Request::is('/produits/filter?type=category*') ? 'active' : '' }}>
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                   Categories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  @foreach ($cat as $category)
+                  <a class="dropdown-item"
+                    href="{{url('/produits/filter?type=category&category='.$category->id)}}">{{$category->name}}</a>
+                  @endforeach
                 </div>
               </li>
 
-              <li class="nav-item active">
-                <a class="nav-link" href="{{route('products')}}">Produits <span class="sr-only">(current)</span></a>
+              <li class="nav-item {{ Request::is('produits') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('products')}}">Produits </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Nouveaux Produits</a>
+              <li class="nav-item {{ Request::routeIs('products.new') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('products.new')}}">Nouveaux
+                  Produits</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Plus vendu</a>
+              <li class="nav-item {{ Request::routeIs('products.bestseller')  ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('products.bestseller')}}">Plus vendu</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Promotions</a>
+              <li class="nav-item {{ Request::routeIs('products.sale')  ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('products.sale')}}">Promotions</a>
               </li>
             </ul>
 
