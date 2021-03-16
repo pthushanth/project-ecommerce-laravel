@@ -355,6 +355,7 @@ class FrontController extends Controller
             'categories' => $categories,
             'brands' => $brands,
             'reviews' => $reviews,
+            'pageTitle' => 'Nouveauté'
 
         ]);
     }
@@ -379,6 +380,7 @@ class FrontController extends Controller
             'categories' => $categories,
             'brands' => $brands,
             'reviews' => $reviews,
+            'pageTitle' => 'Meilleure ventes'
 
         ]);
     }
@@ -399,6 +401,7 @@ class FrontController extends Controller
             'categories' => $categories,
             'brands' => $brands,
             'reviews' => $reviews,
+            'pageTitle' => 'Promotion'
 
         ]);
     }

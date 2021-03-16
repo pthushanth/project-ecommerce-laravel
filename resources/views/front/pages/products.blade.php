@@ -11,8 +11,23 @@
 @endsection
 
 @section('content')
-<section id="sectionTitle">
+{{-- <section id="sectionTitle">
   <h1>PRODUITS</h1>
+</section> --}}
+<section id="sectionOffres">
+  <div class="container-fluid px-0">
+    <div class="parallax " style="min-height: 200px">
+      <div class="masque">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col" style="margin-top:80px">
+              <h1 class="text-center" style="color:#ffffff; text-transform:uppercase;">
+                {{isset($pageTitle)? $pageTitle : 'produits'}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </section>
 
 <section id="sectionProductList">
