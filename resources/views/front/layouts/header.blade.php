@@ -52,7 +52,7 @@
 
         </nav>
       </div>
-      <div class="col-12 col-md-3 col-lg-2 text-center text-sm-right icone">
+      <div class="col-12 col-md-3 col-lg-2 text-center text-md-right icone">
         <div class="btn-group" role="group">
           @if(Auth::user() && Auth::user()->isClient())
           <a href="#" class="btn dropdown-toggle pr-0" data-toggle="dropdown"> <img

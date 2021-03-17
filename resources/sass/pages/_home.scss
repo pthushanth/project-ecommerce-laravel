@@ -35,9 +35,37 @@ h2 {
 }
 #sectionSlider {
     margin-top: 0px;
-    img {
-        height: 500px;
-        width: 100%;
+    .slider-desktop{
+        display: block;
+        @media (max-width: 600px) {
+            display: none;
+            }
+        
+    }
+    .slider-mobile{
+        display: none;
+        @media (max-width: 600px) {
+        display: block;
+        }
+    }
+    .carousel-inner img {
+        height: 700px;
+        max-height: 700px;
+    width: 100%;
+    }
+    
+
+    @media (max-width: 600px) {
+        // .slider-desktop{
+        //     display: none;
+        // }
+        // .slider-mobile{
+        //     display: block;
+        // }
+        .carousel-inner img {
+            height: 400px;
+            max-height: 400px;
+        }
     }
 }
 #sectionAvantages {

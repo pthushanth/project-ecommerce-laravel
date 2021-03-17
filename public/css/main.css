@@ -127,9 +127,37 @@ h2 {
   margin-top: 0px;
 }
 
-#sectionSlider img {
-  height: 500px;
+#sectionSlider .slider-desktop {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  #sectionSlider .slider-desktop {
+    display: none;
+  }
+}
+
+#sectionSlider .slider-mobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  #sectionSlider .slider-mobile {
+    display: block;
+  }
+}
+
+#sectionSlider .carousel-inner img {
+  height: 700px;
+  max-height: 700px;
   width: 100%;
+}
+
+@media (max-width: 600px) {
+  #sectionSlider .carousel-inner img {
+    height: 400px;
+    max-height: 400px;
+  }
 }
 
 #sectionAvantages .card {

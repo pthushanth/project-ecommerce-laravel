@@ -27,33 +27,74 @@
 
 @section('content')
 <section id="sectionSlider">
-  <div id="sliderIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#sliderIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#sliderIndicators" data-slide-to="1"></li>
-      <li data-target="#sliderIndicators" data-slide-to="2"></li>
-    </ol>
+  <div class="slider-destktop">
 
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-100" src="{{ asset('images/slider1.jpg') }}" alt="First slide">
+    <div id="sliderIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#sliderIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#sliderIndicators" data-slide-to="1"></li>
+        <li data-target="#sliderIndicators" data-slide-to="2"></li>
+        <li data-target="#sliderIndicators" data-slide-to="3"></li>
+      </ol>
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class=" w-100" src="{{ asset('images/slider1.jpg') }}" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class=" w-100" src="{{ asset('images/slider2.jpg') }}" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class=" w-100" src="{{ asset('images/slider3.jpg') }}" alt="Third slide">
+        </div>
+        <div class="carousel-item">
+          <img class=" w-100" src="{{ asset('images/slider4.jpg') }}" alt="Third slide">
+        </div>
       </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="{{ asset('images/slider2.jpg') }}" alt="Second slide">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="{{ asset('images/slider3.jpg') }}" alt="Third slide">
-      </div>
+      <a class="carousel-control-prev" href="#sliderIndicators" role="button" data-slide="prev">
+        <p class="carousel-control-prev-icon" aria-hidden="true"></p>
+        <p class="sr-only">Previous</p>
+      </a>
+      <a class="carousel-control-next" href="#sliderIndicators" role="button" data-slide="next">
+        <p class="carousel-control-next-icon" aria-hidden="true"></p>
+        <p class="sr-only">Next</p>
+      </a>
     </div>
-    <a class="carousel-control-prev" href="#sliderIndicators" role="button" data-slide="prev">
-      <p class="carousel-control-prev-icon" aria-hidden="true"></p>
-      <p class="sr-only">Previous</p>
-    </a>
-    <a class="carousel-control-next" href="#sliderIndicators" role="button" data-slide="next">
-      <p class="carousel-control-next-icon" aria-hidden="true"></p>
-      <p class="sr-only">Next</p>
-    </a>
   </div>
+  {{-- <div class="slider-mobile">
+
+    <div id="sliderMobileIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#sliderMobileIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#sliderMobileIndicators" data-slide-to="1"></li>
+        <li data-target="#sliderMobileIndicators" data-slide-to="2"></li>
+        <li data-target="#sliderMobileIndicators" data-slide-to="3"></li>
+      </ol>
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class=" w-100" src="{{ asset('images/slider1-small.jpg') }}" alt="First slide">
+  </div>
+  <div class="carousel-item">
+    <img class=" w-100" src="{{ asset('images/slider2-small.jpg') }}" alt="Second slide">
+  </div>
+  <div class="carousel-item">
+    <img class=" w-100" src="{{ asset('images/slider3-small.jpg') }}" alt="Third slide">
+  </div>
+  <div class="carousel-item">
+    <img class=" w-100" src="{{ asset('images/slider4-small.jpg') }}" alt="Third slide">
+  </div>
+  </div>
+  <a class="carousel-control-prev" href="#sliderMobileIndicators" role="button" data-slide="prev">
+    <p class="carousel-control-prev-icon" aria-hidden="true"></p>
+    <p class="sr-only">Previous</p>
+  </a>
+  <a class="carousel-control-next" href="#sliderMobileIndicators" role="button" data-slide="next">
+    <p class="carousel-control-next-icon" aria-hidden="true"></p>
+    <p class="sr-only">Next</p>
+  </a>
+  </div>
+  </div> --}}
 </section>
 
 <section id="sectionAvantages">
