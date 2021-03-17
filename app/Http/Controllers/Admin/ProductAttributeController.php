@@ -94,7 +94,15 @@ class ProductAttributeController extends Controller
     {
         $attribute = Attribute::find($id);
         $attribute->name = $request->input('name');
-        $attribute->update();
+        $categories_id = $request->input('categories');
+        $category_id_array = array();
+        foreach ($categories_id as $id) {
+
+            //collect all inserted record IDs
+            $category_id_array[] = $id;
+        }
+        $attribute->save();
+        $attribute->categories()->sync($category_id_array);
         return back()->with('status', 'L\'attribut ' . $attribute->name . ' a été mis à jour avec succès.');
     }
 
