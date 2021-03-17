@@ -3,7 +3,46 @@
 
 @section('styles')
 <style>
+  span.only-small-screen {
+    display: none;
+  }
 
+  @media only screen and (max-width: 500px) {
+    #qty {
+      display: inline;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>td,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>thead>tr>th {
+      padding: 3px 0;
+      border: none;
+      display: block;
+      min-width: 100% !important;
+    }
+
+    .table>thead>tr>th {
+      display: none;
+    }
+
+    .table .filterBody span {
+      display: block;
+    }
+
+    .table td p {
+      display: inline;
+    }
+
+    .table>tbody {
+      display: block;
+      margin: 0 auto;
+      width: 200px;
+      text-align: center;
+    }
+  }
 </style>
 @endsection
 
@@ -20,7 +59,7 @@
         <p class="sous-titre">Détail de mon panier</p>
         <div class="row ">
           <div class="card">
-            <table class="table">
+            <table class="table table-responsive-sm ">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">Produit</th>
@@ -43,20 +82,23 @@
                     </div>
                   </th>
                   <td>
+                    <span class="only-small-screen">Prix : </span>
                     <p class="prix">{{$item->model->price}} €</p>
                   </td>
                   <td>
+                    <span class="only-small-screen">Quantité : </span>
                     <form action="{{ route('cart.update', $item->id) }}" method="POST">
                       @csrf
                       @method('PUT')
                       <input name="quantity" type="number" min="1" value="{{ $item->quantity }}" class="form-control"
-                        style="width:70px">
+                        style="width:70px" id="qty">
 
                       <button class="btn btn-secondary" type="submit">modifier</button>
                     </form>
                   </td>
 
                   <td>
+                    <span class="only-small-screen">Toal : </span>
                     <p class="prix">{{ number_format($item->quantity * $item->price, 2, ',', ' ') }} €</p>
                   </td>
                   <td>

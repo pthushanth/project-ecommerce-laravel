@@ -7,7 +7,28 @@
   #moreBrand {
     display: none;
   }
+
+
+  /* @media screen and (max-width: 700px) {
+
+    li.page-item {
+
+      display: none;
+    }
+
+    .page-item:first-child,
+    .page-item:nth-child(1),
+    .page-item:nth-last-child(5),
+    .page-item:last-child,
+    .page-item.active,
+    .page-item.disabled {
+
+      display: block;
+    }
+  } */
 </style>
+
+
 @endsection
 
 @section('content')

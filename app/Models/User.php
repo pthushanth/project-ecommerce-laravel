@@ -78,6 +78,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+    public function whishlist()
+    {
+        return $this->hasMany(Whishlist::class);
+    }
 
     public function reviews()
     {
