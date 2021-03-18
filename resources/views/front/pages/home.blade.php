@@ -156,7 +156,8 @@
         <div class="card img-fluid align-items-center justify-content-center">
           <img class="card-img-top" src="{{ asset($category->image) }}">
           <div class="card-img-overlay align-items-center d-flex justify-content-center">
-            <a href="#" class="btn btnCategorie">{{$category->name}}</a>
+            <a href="{{url("/produits/filter?type=category&category=$category->id")}}"
+              class="btn btnCategorie">{{$category->name}}</a>
           </div>
         </div>
       </div>

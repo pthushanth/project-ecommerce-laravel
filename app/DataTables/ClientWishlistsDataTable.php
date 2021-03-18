@@ -22,6 +22,10 @@ class ClientWishlistsDataTable  extends DataTable
     {
         return datatables()->of($query)
             ->addIndexColumn()
+            ->addColumn('action', function (Wishlist $whishlist) {
+                $btn = '<a href="' . route('client.wishlist.destroy', $whishlist->products[0]->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                return $btn;
+            })
             ->editColumn('product', function (Wishlist $whishlist) {
                 $i = 1;
                 $html = "";
@@ -49,7 +53,8 @@ class ClientWishlistsDataTable  extends DataTable
                 //change over here
                 return date('d-M-Y H:i:s', strtotime($whishlist->created_at));
             })
-            ->rawColumns(['product', 'product_image']);
+
+            ->rawColumns(['action', 'product', 'product_image']);
     }
 
     /**
@@ -61,7 +66,7 @@ class ClientWishlistsDataTable  extends DataTable
     public function query(ClientWishlistsDataTable  $model)
     {
         // return $model->newQuery();
-        $data = Wishlist::with('user', 'products')->where('user_id', auth()->user()->id)->latest()->get();
+        $data = Wishlist::whereHas('products')->latest()->get();
         return $this->applyScopes($data);
     }
 
@@ -75,11 +80,11 @@ class ClientWishlistsDataTable  extends DataTable
         return $this->builder()
             ->responsive(true)
             ->setTableId('whishlist')
-            ->AddTableClass('table table-striped table-bwhishlisted dt-responsive ')
+            ->AddTableClass('table table-striped table-bordered dt-responsive ')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('lBfrtip')
-            ->whishlistBy(1)
+            ->orderBy(1)
             ->buttons(
                 Button::make('excel'),
                 Button::make('pdf'),
@@ -98,15 +103,15 @@ class ClientWishlistsDataTable  extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')->title('N°')->whishlistable(false)->searchable(false),
+            Column::make('DT_RowIndex')->title('N°')->orderable(false)->searchable(false),
             Column::make('created_at')->title('Date'),
             Column::make('product')->title('Produit'),
             Column::make('product_image')->title('Produit image'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center')
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center')
         ];
     }
 

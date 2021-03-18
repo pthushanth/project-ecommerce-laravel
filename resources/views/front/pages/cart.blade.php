@@ -102,8 +102,9 @@
                     <p class="prix">{{ number_format($item->quantity * $item->price, 2, ',', ' ') }} €</p>
                   </td>
                   <td>
-                    <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip"
-                      data-original-title="Save to Wishlist"> <i class="fa fa-heart"></i></a>
+                    <a title="" href="{{route('client.wishlist.store',$item->model->slug)}}"
+                      class="btn btn-outline-success" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i
+                        class="fa fa-heart"></i></a>
                     <form action="{{ route('cart.delete_item', $item->id) }}" method="POST" class="d-inline-block">
                       @csrf
                       @method('DELETE')

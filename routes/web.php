@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ReviewController;
-use App\Http\Controllers\Admin\WishlistController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\Admin\ProductSaleController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\FrontController;
@@ -199,6 +199,6 @@ Route::middleware(['client'])->prefix('client')->name('client.')->group(function
     Route::post('/produit/{slug}/donner-avis', [ReviewController::class, 'store'])->name('review.store');
 
     Route::get('/list-denvie', [WishlistController::class, 'index'])->name('wishlist.index');
-    Route::post('/list-denvie/produit/{slug}/', [WishlistController::class, 'store'])->name('wishlist.store');
-    Route::post('/suppprimer-list-denvie/produit/{id}/', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::get('/list-denvie/produit/{slug}/', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::get('/suppprimer-list-denvie/produit/{id}/', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 });

@@ -184,4 +184,9 @@ class Product extends Model
     {
         return $this->hasOne(ProductSale::class);
     }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(Wishlist::class);
+    }
 }

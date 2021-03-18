@@ -14,16 +14,16 @@
             </div>
             <div class="col-sm-6 col-md-3 py-3">
                 <p class="titre">Produit</p>
-                <a href="#">Nouveaux produits</a>
-                <a href="#">Plus vendu</a>
-                <a href="#">Meilleur noté</a>
-                <a href="#">Solde</a>
+                <a href="{{route('products.new')}}">Nouveaux produits</a>
+                <a href="{{route('products.bestseller')}}">Plus vendu</a>
+                <a href="{{route('products.new')}}">Meilleur noté</a>
+                <a href="{{route('products.sale')}}">Solde</a>
             </div>
             <div class="col-sm-6 col-md-3 py-3">
                 <p class="titre">Mon Compte</p>
-                <a href="#">Se connecter</a>
-                <a href="#">Mon compte</a>
-                <a href="#">S'incrire</a>
+                <a href="{{route('client.dashboard')}}">Se connecter</a>
+                <a href="{{route('client.dashboard')}}">Mon compte</a>
+                <a href="{{route('register')}}">S'incrire</a>
             </div>
             <div class="col-sm-6 col-md-3 py-3">
                 <p class="titre">Paiement</p>

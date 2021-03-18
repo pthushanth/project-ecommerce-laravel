@@ -74,7 +74,7 @@
           @else
           <a class="btn" href="{{route('client.dashboard')}}"><i class="fas fa-user"></i></a>
           @endif
-          <a class="btn" href="#"><i class="fas fa-heart"></i></a>
+          <a class="btn" href="{{route('client.wishlist.index')}}"><i class="fas fa-heart"></i></a>
           <a class="btn cart" href="{{route('cart')}}">
             <i class="fas fa-shopping-bag"></i>
             @if(!empty($cartCount) && $cartCount)
