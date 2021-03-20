@@ -215,7 +215,7 @@ class FrontController extends Controller
 
     public function checkout()
     {
-        if (!Auth::user()) {
+        if (!Auth::user() || Auth::user()->isAdmin()) {
             //session to store where to redirect after login
             session(['url.intended' => 'checkout']);
             return view('auth.login');
