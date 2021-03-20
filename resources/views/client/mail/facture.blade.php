@@ -168,7 +168,6 @@
                     <td>{{$product->name}}</td>
                     <td>{{$product->pivot->qty}}</td>
                     <td>{{$product->price}}</td>
-                    {{dd($product->price * $product->pivot->qty)}}
                     <td>{{$product->price*$product->pivot->qty}}</td>
                 </tr>
                 @endforeach
