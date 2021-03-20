@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique();
             $table->text('short_description');
             $table->text('long_description');
-            $table->string('price');
+            $table->float('price');
             // $table->string('thumbnail');
             $table->json('image');
             $table->json('spec')->nullable();

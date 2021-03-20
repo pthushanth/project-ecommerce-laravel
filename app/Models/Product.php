@@ -122,6 +122,17 @@ class Product extends Model
     //     return $value . ' €';
     // }
 
+    public function getPriceAttribute($value)
+    {
+        // $value = str_replace('.', ',', $value);
+        $value = (float)$value;
+        return number_format($value, 2, ',', ' ');
+    }
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = str_replace(',', '.', $value);
+        // return number_format($value, 2, '', '');
+    }
     public function printPrice()
     {
         if ($this->productSale != null) {
