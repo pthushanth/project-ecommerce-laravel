@@ -17,8 +17,7 @@
                 {!! $product->printAverageRatingStar() !!}
             </div>
             <a href="#" class="produit-titre">{{$product->name}}</a>
-            <p class="prix">{{$product->productSale->getDiscountedPrice($product->price)}} <span>
-                    {{$product->price.' €'}} </span></p>
+            <p class="prix">{{$product->printPrice()}}</p>
             <a href="#" class="btn btn-cart"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
         </div>
     </a>
@@ -35,7 +34,7 @@
                 {!! $product->printAverageRatingStar() !!}
             </div>
             <a href="#" class="produit-titre">{{$product->name}}</a>
-            <p class="prix">{{$product->price}} €</p>
+            <p class="prix">{{$product->printPrice()}}</p>
             <form method="POST" action="{{route('cart.add',$product->slug)}}">
                 @csrf
                 <div class="input-field col">

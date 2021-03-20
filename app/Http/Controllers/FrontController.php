@@ -147,7 +147,7 @@ class FrontController extends Controller
                 'id' => $product->id,
                 'slug' => $product->slug,
                 'name' => $product->name,
-                'price' => $product->price,
+                'price' => $product->getRawOriginal('price'),
                 'quantity' => intval($request->quantity),
                 'attributes' => [],
                 'associatedModel' => $product,
