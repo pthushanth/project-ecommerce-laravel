@@ -25,6 +25,10 @@ class Client
         // }
         // return redirect()->route('login')->with('error', 'Access denied. Login to continue');
 
+        if (auth()->user() && auth()->user()->role === 'admin') {
+            return redirect()->route('admin.login');
+        }
+
         if (auth()->user() && auth()->user()->role === 'client') {
             return $next($request);
         }
