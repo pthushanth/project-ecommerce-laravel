@@ -164,6 +164,7 @@ class ProductController extends Controller
         }
 
         $product->save();
+        $product->attributes()->attach($sync_data);
 
         return back()->with('status', 'Le produit ' . $product->name . ' a été mis à jour avec succès.');
     }
