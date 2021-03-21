@@ -23,7 +23,7 @@ class ClientWishlistsDataTable  extends DataTable
         return datatables()->of($query)
             ->addIndexColumn()
             ->addColumn('action', function (Wishlist $whishlist) {
-                $btn = '<a href="' . route('client.wishlist.destroy', $whishlist->products[0]->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                $btn = '<a href="' . route('client.wishlist.destroy', $whishlist->products[0]->id) . '"" id="delete" class="delete btn btn-danger"><i class="fas fa-trash"></i></a>';
                 return $btn;
             })
             ->editColumn('product', function (Wishlist $whishlist) {

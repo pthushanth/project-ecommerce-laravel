@@ -24,7 +24,7 @@ class ProductSalesDataTable extends DataTable
         return datatables()->of($query)
             ->addIndexColumn()
             ->addColumn('action', function (ProductSale $sale) {
-                $btn = '<a href="' . route('admin.product_sales.edit', $sale->id) . '" class="edit btn btn-success btn-sm">Edit</a> <a href="' . route('admin.product_sales.destroy', $sale->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                $btn = '<a href="' . route('admin.product_sales.edit', $sale->id) . '" class="edit btn btn-info"><i class="far fa-edit"></i></a> <a href="' . route('admin.product_sales.destroy', $sale->id) . '"" id="delete" class="delete btn btn-danger"><i class="fas fa-trash"></i></a>';
                 return $btn;
             })
             ->editColumn('created_at', function (ProductSale $sale) {

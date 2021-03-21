@@ -22,7 +22,7 @@ class StocksDataTable extends DataTable
         return datatables()->of($query)
             ->addIndexColumn()
             ->addColumn('action', function (Stock $stock) {
-                $btn = '<a href="' . route('admin.stocks.edit', $stock->id) . '" class="edit btn btn-success btn-sm">Edit</a>';
+                $btn = '<a href="' . route('admin.stocks.edit', $stock->id) . '" class="edit btn btn-info"><i class="far fa-edit"></i></a>';
                 return $btn;
             })
             ->editColumn('created_at', function (Stock $stock) {

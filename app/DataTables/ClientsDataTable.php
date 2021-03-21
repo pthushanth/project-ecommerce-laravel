@@ -23,7 +23,7 @@ class ClientsDataTable extends DataTable
         return datatables()->of($query)
             ->addIndexColumn()
             ->addColumn('action', function (User $client) {
-                $btn = '<a href="' . route('admin.clients.destroy', $client->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                $btn = '<a href="' . route('admin.clients.destroy', $client->id) . '"" id="delete" class="delete btn btn-danger"><i class="fas fa-trash"></i></a>';
                 return $btn;
             })
             ->editColumn('created_at', function (User $client) {

@@ -23,7 +23,7 @@ class ClientReviewsDataTable extends DataTable
         return datatables()->of($query)
             ->addIndexColumn()
             ->addColumn('action', function (Review $review) {
-                $btn = '<a href="' . route('admin.reviews.destroy', $review->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                $btn = '<a href="' . route('admin.reviews.destroy', $review->id) . '"" id="delete" class="delete btn btn-danger"><i class="fas fa-trash"></i></a>';
                 return $btn;
             })
             ->editColumn('rating', function (Review $review) {

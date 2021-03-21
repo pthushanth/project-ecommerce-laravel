@@ -23,7 +23,7 @@ class CouponsDataTable extends DataTable
         return datatables()->of($query)
             ->addIndexColumn()
             ->addColumn('action', function (Coupon $coupon) {
-                $btn = '<a href="' . route('admin.coupons.edit', $coupon->id) . '" class="edit btn btn-success btn-sm">Edit</a> <a href="' . route('admin.coupons.destroy', $coupon->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                $btn = '<a href="' . route('admin.coupons.edit', $coupon->id) . '" class="edit btn btn-info"><i class="far fa-edit"></i></a> <a href="' . route('admin.coupons.destroy', $coupon->id) . '"" id="delete" class="delete btn btn-danger"><i class="fas fa-trash"></i></a>';
                 return $btn;
             })
             ->editColumn('created_at', function (Coupon $coupon) {

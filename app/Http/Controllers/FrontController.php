@@ -38,17 +38,19 @@ class FrontController extends Controller
         $topRatedProducts = Product::with('category', 'brand')
             ->join('reviews', 'reviews.product_id', '=', 'products.id')
             ->select('products.*', DB::raw('avg(rating) as avg_rating'))
+            ->where('status', 1)
             ->groupBy('products.id')
             ->orderBy('avg_rating', 'DESC')
             ->take(10)
             ->get();
 
-        $latestProducts = Product::with('category', 'brand')->latest()->take(10)->get();
-        $saleProducts = Product::has('productSale')->with('category', 'brand', 'productSale')->latest()->take(10)->get();
+        $latestProducts = Product::with('category', 'brand')->where('status', 1)->latest()->take(10)->get();
+        $saleProducts = Product::has('productSale')->with('category', 'brand', 'productSale')->where('status', 1)->latest()->take(10)->get();
 
         $bestSellerProducts = Product::with('category', 'brand')
             ->join('order_product', 'order_product.product_id', '=', 'products.id')
             ->select('products.*', DB::raw('sum(order_product.qty) as totalOrderedProduct'))
+            ->where('status', 1)
             ->groupBy('products.id')
             ->orderBy('totalOrderedProduct', 'DESC')
             ->take(10)
@@ -72,7 +74,7 @@ class FrontController extends Controller
             ->select('reviews.rating', DB::raw("count(products.id) as totalProducts"))
             ->groupBy('reviews.rating')
             ->get();
-        $products = Product::with('category', 'brand')->paginate(12);
+        $products = Product::with('category', 'brand')->where('status', 1)->paginate(12);
         return view('front.pages.products')->with([
             'products' => $products,
             'categories' => $categories,
@@ -95,6 +97,7 @@ class FrontController extends Controller
             else if ($collection == 'bestseller-products') $products = Product::with('category', 'brand')
                 ->join('order_product', 'order_product.product_id', '=', 'products.id')
                 ->select('products.*', DB::raw('sum(order_product.qty) as totalOrderedProduct'))
+                ->where('status', 1)
                 ->groupBy('products.id')
                 ->orderBy('totalOrderedProduct', 'DESC')
                 ->paginate(12);
@@ -103,12 +106,12 @@ class FrontController extends Controller
             $category_id = (int)$request->input('category');
             $products = Product::with('category', 'brand')->whereHas('category', function ($query) use ($category_id) {
                 return $query->where('id', '=', $category_id);
-            })->paginate(12);
+            })->where('status', 1)->paginate(12);
         } else if ($filterType == "brand") {
             $brand_id = (int)$request->input('brand');
             $products = Product::with('category', 'brand')->whereHas('brand', function ($query) use ($brand_id) {
                 return $query->where('id', '=', $brand_id);
-            })->paginate(12);
+            })->where('status', 1)->paginate(12);
         }
 
 
@@ -118,6 +121,7 @@ class FrontController extends Controller
         $reviews = DB::table('reviews')
             ->join('products', 'reviews.product_id', '=', 'products.id')
             ->select('reviews.rating', DB::raw("count(products.id) as totalProducts"))
+
             ->groupBy('reviews.rating')
             ->get();
 
@@ -341,7 +345,7 @@ class FrontController extends Controller
 
     public function getNewProducts()
     {
-        $products = Product::with('category', 'brand')->latest()->paginate(12);
+        $products = Product::with('category', 'brand')->where('status', 1)->latest()->paginate(12);
         $categories = Category::with('products')->distinct('name')->get();
         $brands = Brand::with('products')->distinct('name')->get();
         $reviews = DB::table('reviews')
@@ -364,6 +368,7 @@ class FrontController extends Controller
         $products = Product::with('category', 'brand')
             ->join('order_product', 'order_product.product_id', '=', 'products.id')
             ->select('products.*', DB::raw('sum(order_product.qty) as totalOrderedProduct'))
+            ->where('status', 1)
             ->groupBy('products.id')
             ->orderBy('totalOrderedProduct', 'DESC')
             ->paginate(12);
@@ -387,7 +392,7 @@ class FrontController extends Controller
 
     public function getSaleProducts()
     {
-        $products = Product::has('productSale')->with('category', 'brand', 'productSale')->latest()->paginate(12);
+        $products = Product::has('productSale')->with('category', 'brand', 'productSale')->where('status', 1)->latest()->paginate(12);
         $categories = Category::with('products')->distinct('name')->get();
         $brands = Brand::with('products')->distinct('name')->get();
         $reviews = DB::table('reviews')

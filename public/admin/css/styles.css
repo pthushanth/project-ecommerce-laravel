@@ -5,6 +5,11 @@
 #datatable {
     padding: 10px;
 }
+#datatable .edit,
+#datatable .delete {
+    width: 40px;
+}
+
 #datatable img {
     height: 100px;
 }

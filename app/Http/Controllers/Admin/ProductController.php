@@ -189,7 +189,7 @@ class ProductController extends Controller
 
     public function desactivateProduct($slug)
     {
-        $product = Product::find($slug);
+        $product = Product::where('slug', $slug)->first();
         $product->status = 0;
         $product->save();
         return back()->with('status', 'Le product ' . $product->name . ' a été desactivé avec succès.');

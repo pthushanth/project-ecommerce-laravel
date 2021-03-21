@@ -18,7 +18,8 @@ class ClientController extends Controller
     }
     function index()
     {
-        return view('client.pages');
+        // return view('client.dashboard');
+        return redirect()->route('client.account');
     }
     function account()
     {

@@ -23,7 +23,7 @@ class CategoriesDataTable extends DataTable
         return datatables()->of($query)
             ->addIndexColumn()
             ->addColumn('action', function (Category $category) {
-                $btn = '<a href="' . route('admin.categories.edit', $category->id) . '" class="edit btn btn-success btn-sm">Edit</a> <a href="' . route('admin.categories.destroy', $category->id) . '"" id="delete" class="delete btn btn-danger btn-sm">Delete</a>';
+                $btn = '<a href="' . route('admin.categories.edit', $category->id) . '" class="edit btn btn-info"><i class="far fa-edit"></i></a> <a href="' . route('admin.categories.destroy', $category->id) . '"" id="delete" class="delete btn btn-danger"><i class="fas fa-trash"></i></a>';
                 return $btn;
             })
             ->editColumn('created_at', function (Category $category) {
