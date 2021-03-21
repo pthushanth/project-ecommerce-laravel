@@ -167,8 +167,8 @@
                 <tr class="item">
                     <td>{{$product->name}}</td>
                     <td>{{$product->pivot->qty}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->price*$product->pivot->qty}}</td>
+                    <td>{{$product->printPrice()}}</td>
+                    <td>{{$product->price*$product->pivot->qty}} €</td>
                 </tr>
                 @endforeach
 
@@ -177,7 +177,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        Total: {{$order->amount}}
+                        Total: {{$order->amount}} €
                     </td>
                 </tr>
 

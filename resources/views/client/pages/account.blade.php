@@ -50,7 +50,6 @@
                         <div class="divImage mx-auto">
                             <div class="form-group">
                                 <img src="{{asset($client->getAvatarUrl())}}" id="preview" class="img-thumbnail">
-
                                 <input type="file" name="avatar" class="file" accept="image/*">
                                 <input type="text" class="form-control" disabled placeholder="photo de profile"
                                     id="file">
@@ -70,7 +69,7 @@
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="m" name="title" value="m"
-                                {{ ($client->customer->title=="mme")? "checked" : "" }}>
+                                {{ ($client->customer->title=="m")? "checked" : "" }}>
                             <label class="form-check-label" for="m">Monsieur</label>
                         </div>
                     </div>
@@ -95,17 +94,20 @@
 
                     <div class="form-group">
                         <label for="inputAddress">Adresse</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Adresse">
+                        <input type="text" class="form-control" id="inputAddress" name="address" placeholder="Adresse"
+                            value="{{$client->customer->address}}">
                     </div>
                     <div class="form-row">
 
                         <div class="form-group col-md-6">
                             <label for="inputZip">Code Postal</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input type="text" class="form-control" id="inputZip" name="post_code"
+                                value="{{$client->customer->post_code}}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputCity">Ville</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <input type="text" class="form-control" id="inputCity" name="city"
+                                value="{{$client->customer->city}}">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Mettre à jour</button>
