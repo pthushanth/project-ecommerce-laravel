@@ -30,6 +30,7 @@ class StocksDataTable extends DataTable
                 return date('d-M-Y H:i:s', strtotime($stock->created_at));
             })
             ->editColumn('image', function (Stock $stock) {
+                // var_dump($stock->id);
                 $image = $stock->product->getThumbnailUrl();
                 return '<img src="' . asset($image) . '"/>';
             })
@@ -93,7 +94,7 @@ class StocksDataTable extends DataTable
                 ->addClass('text-center')
         ];
     }
-
+    
     /**
      * Get filename for export.
      *

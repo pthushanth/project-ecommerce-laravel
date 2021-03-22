@@ -145,15 +145,21 @@ class FrontController extends Controller
 
     public function addToCart(Request $request, $slug)
     {
-        $product = Product::where('slug', $slug)->first();
-        // dd(Cart::getContent());
+        $product = Product::with('stock')->where('slug', $slug)->first();
+
+        if ($product->stock->stock == null || $product->stock->stock <= 0) return redirect()->back()->with('cartError', 'quantité insuffisant');
+        $quantity = intval($request->quantity);
+        if ($product->stock->stock >= $quantity) {
+            $product->stock->stock -= $quantity;
+            $product->stock->save();
+        }
         Cart::add(
             [
                 'id' => $product->id,
                 'slug' => $product->slug,
                 'name' => $product->name,
                 'price' => $product->getRawOriginal('price'),
-                'quantity' => intval($request->quantity),
+                'quantity' => $quantity,
                 'attributes' => [],
                 'associatedModel' => $product,
             ]
@@ -164,15 +170,41 @@ class FrontController extends Controller
 
     public function updateCart(Request $request, $id)
     {
-        Cart::update($id, [
-            'quantity' => ['relative' => false, 'value' => $request->quantity],
-        ]);
+        $product = Cart::get($id)->model;
+        $extraQty = $request->quantity - Cart::get($id)->quantity;
+        $update = true;
+
+        if ($extraQty < 0) {
+
+            $product->stock->stock -= $extraQty;
+            if ($product->stock->stock < 0) $product->stock->stock = 0;
+
+            $product->stock->save();
+        }
+        if ($extraQty > 0) {
+            if ($product->stock->stock >= $extraQty) {
+                $product->stock->stock -= $extraQty;
+                if ($product->stock->stock < 0) $product->stock->stock = 0;
+                $product->stock->save();
+            } else {
+                $update = false;
+            }
+        }
+        if ($update) {
+            Cart::update($id, [
+                'quantity' => ['relative' => false, 'value' => $request->quantity],
+            ]);
+        }
+
         return redirect(route('cart'));
     }
 
 
     public function deleteItemCart($id)
     {
+        $product = Cart::get($id)->model;
+        $product->stock->stock += Cart::get($id)->quantity;
+        $product->stock->save();
         Cart::remove($id);
         return redirect(route('cart'));
     }
