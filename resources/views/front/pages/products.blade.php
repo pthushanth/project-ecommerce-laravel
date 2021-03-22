@@ -170,19 +170,35 @@
             </header>
             <div class="filter-content">
               <div class="card-body">
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <input type="range" class="custom-range" min="0" max="100" name="">
+                <form method="GET" action="{{route('products.filter')}}">
+                  @csrf
+                  <input type="hidden" value="price" name="type">
+                  <div class="form-row">
+                    <div class="form-group col-md-12">
+                      <input type="range" class="custom-range" min="0" max="100" name="">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Min</label>
+                      <div class="input-group">
+                        <input type="number" class="form-control" name="min" placeholder="1">
+                        <div class="input-group-append">
+                          <span class="input-group-text">€</span>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="form-group col-md-6 text-right">
+                      <label>Max</label>
+                      <div class="input-group">
+                        <input type="number" class="form-control" name="max" placeholder="1000">
+                        <div class="input-group-append">
+                          <span class="input-group-text">€</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label>Min</label>
-                    <input type="number" class="form-control" id="inputEmail4" placeholder="$0">
-                  </div>
-                  <div class="form-group col-md-6 text-right">
-                    <label>Max</label>
-                    <input type="number" class="form-control" placeholder="$1,0000">
-                  </div>
-                </div>
+                  <button type="submit" class="btn btn-outline-primary">Filtrer</button>
+                </form>
               </div> <!-- card-body.// -->
             </div>
           </article> <!-- card-group-item.// -->

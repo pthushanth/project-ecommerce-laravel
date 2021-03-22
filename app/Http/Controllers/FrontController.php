@@ -112,8 +112,9 @@ class FrontController extends Controller
             $products = Product::with('category', 'brand')->whereHas('brand', function ($query) use ($brand_id) {
                 return $query->where('id', '=', $brand_id);
             })->where('status', 1)->paginate(12);
+        } else if ($filterType == "price") {
+            $products = Product::with('category', 'brand')->whereBetween('price', [$request->input('min'), $request->input('max')])->orderBy('price')->paginate(12);
         }
-
 
 
         $categories = Category::with('products')->distinct('name')->get();
