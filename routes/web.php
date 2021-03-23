@@ -156,14 +156,6 @@ Route::middleware(['admin'])->prefix('admins')->name('admin.')->group(function (
     Route::put('/modifier-coupon/{id}', [CouponController::class, 'update'])->name('coupons.update');
     Route::get('/supprimer-coupon/{id}', [CouponController::class, 'destroy'])->name('coupons.destroy');
 
-    //Sales
-    // Route::get('/promotion', [SaleController::class, 'index'])->name('sales.index');
-    // Route::get('/ajouter-promotion', [SaleController::class, 'create'])->name('sales.create');
-    // Route::post('/ajouter-promotion', [SaleController::class, 'store'])->name('sales.store');
-    // Route::get('/modifier-promotion/{id}', [SaleController::class, 'edit'])->name('sales.edit');
-    // Route::post('/modifier-promotion', [SaleController::class, 'update'])->name('sales.update');
-    // Route::get('/supprimer-promotion/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
-
     //Product Sales
     Route::get('/promo', [ProductSaleController::class, 'index'])->name('product_sales.index');
     Route::get('/ajouter-promo', [ProductSaleController::class, 'create'])->name('product_sales.create');

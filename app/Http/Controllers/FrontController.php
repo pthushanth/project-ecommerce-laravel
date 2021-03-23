@@ -90,7 +90,7 @@ class FrontController extends Controller
         $products = null;
         if ($filterType == "search") {
             $value = $request->input('search');
-            $products = Product::with('category', 'brand')->where("name", "LIKE", "%$value%")->paginate(12);
+            $products = Product::with('category', 'brand')->where("name", "LIKE", "%$value%")->where('status', 1)->paginate(12);
         } else if ($filterType == "collection") {
             $collection = $request->input('collection');
             if ($collection == 'new-products') $products = Product::with('category', 'brand')->latest()->paginate(12);

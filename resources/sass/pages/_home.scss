@@ -35,25 +35,23 @@ h2 {
 }
 #sectionSlider {
     margin-top: 0px;
-    .slider-desktop{
+    .slider-desktop {
         display: block;
         @media (max-width: 600px) {
             display: none;
-            }
-        
+        }
     }
-    .slider-mobile{
+    .slider-mobile {
         display: none;
         @media (max-width: 600px) {
-        display: block;
+            display: block;
         }
     }
     .carousel-inner img {
         height: 700px;
         max-height: 700px;
-    width: 100%;
+        width: 100%;
     }
-    
 
     @media (max-width: 600px) {
         // .slider-desktop{
@@ -289,7 +287,7 @@ h2 {
     }
     .card {
         width: 100%;
-        .price {
+        .prix {
             font-weight: 800;
             font-size: 2.5em;
 

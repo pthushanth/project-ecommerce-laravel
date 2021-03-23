@@ -252,77 +252,45 @@
 <section id="SectionDeals">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6 colLeft d-flex px-3">
-        <div class="card text-center d-fill">
-          <img class="card-img-top" src="{{ asset('images/test/apple_watch.png') }}">
-          <div class="card-body ">
-            <h5 class="card-title">Apple Watch (Series 3) 38 mm - Aluminium Gris sidéral - Bracelet Sport Noir</h5>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <p class="price">184,99 € <span> 239,99 €</span></p>
-            <div class="clockdiv">
-              <div>
-                <span class="days"></span>
-                <div class="smalltext">Days</div>
+      @if($saleProducts->count()>1)
+      @php $dealProducts=$saleProducts->random(2) @endphp
+      @foreach ($dealProducts as $product)
+      @if($loop->first)<div class="col-md-6 colLeft d-flex px-3">
+        @else <div class="col-md-6 colRight d-flex px-3">
+          @endif
+          <div class="card text-center d-fill">
+            <img class="card-img-top" src="{{ asset('images/test/apple_watch.png') }}">
+            <div class="card-body ">
+              <h5 class="card-title">{{$product->name}}</h5>
+              <div class="rating">
+                {!! $product->printAverageRatingStar() !!}
               </div>
-              <div>
-                <span class="hours"></span>
-                <div class="smalltext">Hours</div>
-              </div>
-              <div>
-                <span class="minutes"></span>
-                <div class="smalltext">Minutes</div>
-              </div>
-              <div>
-                <span class="seconds"></span>
-                <div class="smalltext">Seconds</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 colRight d-flex px-3">
-        <div class="card text-center d-fill align-items-center">
-          <img class="card-img-top" src="{{ asset('images/test/s20.jpg') }}">
-          <div class="card-body ">
-            <h5 class="card-title">Samsung Galaxy S20 Gris</h5>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <p class="price">789,00 € <span> 1099,00 €</span></p>
-            <div class="clockdiv">
-              <div>
-                <span class="days"></span>
-                <div class="smalltext">Days</div>
-              </div>
-              <div>
-                <span class="hours"></span>
-                <div class="smalltext">Hours</div>
-              </div>
-              <div>
-                <span class="minutes"></span>
-                <div class="smalltext">Minutes</div>
-              </div>
-              <div>
-                <span class="seconds"></span>
-                <div class="smalltext">Seconds</div>
+              <p class="prix">{!!$product->printPrice()!!}</p>
+              <div class="clockdiv">
+                <div>
+                  <span class="days"></span>
+                  <div class="smalltext">Jours</div>
+                </div>
+                <div>
+                  <span class="hours"></span>
+                  <div class="smalltext">Heures</div>
+                </div>
+                <div>
+                  <span class="minutes"></span>
+                  <div class="smalltext">Minutes</div>
+                </div>
+                <div>
+                  <span class="seconds"></span>
+                  <div class="smalltext">Secondes</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        @endforeach
+        @endif
       </div>
     </div>
-  </div>
 </section>
 
 <section id="sectionPromotions">
@@ -430,6 +398,8 @@ function initializeClock(div, endtime) {
 
 const deadline = new Date(Date.parse(new Date()) + 2 * 24 * 60 * 60 * 1000);
 const deadline2 = new Date(Date.parse(new Date()) + 1 * 24 * 60 * 60 * 1000);
+// const deadline = new Date({{strtotime($dealProducts[0]->end)*1000}});
+// const deadline2 = new Date(Date.parse(new Date()) + 1 * 24 * 60 * 60 * 1000);
 initializeClock('.colLeft .clockdiv', deadline);
 initializeClock('.colRight .clockdiv', deadline2);
 </script>

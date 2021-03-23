@@ -15,7 +15,6 @@ $titleForm="Modifier un produit";
                 <h4 class="card-title">{{ $titleForm }}</h4>
                 {{-- show error or successs message --}}
                 @include('admin.includes.error_status')
-
                 <div class="card">
                     <div class="card-header">{{ $titleForm }}</div>
                     <div class="card-body card-block">

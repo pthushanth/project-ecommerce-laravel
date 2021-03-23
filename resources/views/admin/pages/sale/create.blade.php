@@ -26,10 +26,12 @@ $titleForm="Ajouter une Promotion";
                     <div class="card-header">{{ $titleForm }}</div>
                     <div class="card-body card-block">
                         @if(isset($sale))
-                        <form method="POST" action="{{route('admin.sales.update')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('admin.product_sales.update')}}"
+                            enctype="multipart/form-data">
                             @method('PUT')
                             @else
-                            <form method="POST" action="{{route('admin.sales.store')}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('admin.product_sales.store')}}"
+                                enctype="multipart/form-data">
                                 @endif
                                 @csrf
                                 <div class="form-group">

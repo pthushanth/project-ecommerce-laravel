@@ -116,7 +116,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $slug)
     {
-        $product = Product::where('slug', $slug)->first();
+        $product = Product::with('category', 'brand', 'attributes', 'stock')->where('slug', $slug)->first();
         $validated = $request->validate([
             'category' => 'required',
             'brand' => 'required',
@@ -130,10 +130,9 @@ class ProductController extends Controller
             'specValue' => 'array|min:1',
             'stock' => 'numeric',
         ]);
-        $product = Product::where('slug', $slug)->first();
-
         $product->name = $request->input('name');
         $product->slug = Str::slug($product->name);
+
         $product->price = $request->input('price');
         $product->short_description = $request->input('short_description');
         $product->long_description = $request->input('long_description');
@@ -153,7 +152,8 @@ class ProductController extends Controller
         $product->status = 1;
         $product->category_id = $request->input('category');
         $product->brand_id = $request->input('brand');
-        $product->stock()->create(['stock' => $request->input('stock'), 'low_stock_amount' => 5]);
+        $product->stock->stock = $request->input('stock');
+        $product->stock->save();
         $sync_data = [];
         if (!empty($request->input('attribute_id'))) {
 
@@ -165,8 +165,11 @@ class ProductController extends Controller
 
         $product->save();
         $product->attributes()->attach($sync_data);
-
-        return back()->with('status', 'Le produit ' . $product->name . ' a été mis à jour avec succès.');
+        // return back()->with([
+        //     'status' => 'Le produit ' . $product->name . ' a été mis à jour avec succès.',
+        //     'product' => $product
+        // ]);
+        return redirect()->route('admin.products.edit', $product->slug);
     }
 
     public function destroy($slug)

@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title','Marques')
+@section('title','Promo')
 
 @section('styles')
 

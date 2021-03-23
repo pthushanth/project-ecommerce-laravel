@@ -43,12 +43,13 @@ class ProductSaleController extends Controller
         $request->validate([
             'products' => 'required',
             'is_percentage' => 'required',
-            'discount_value' => 'required|unique:App\Models\Sale,name',
+            'discount_value' => 'required',
             'start' => 'required|date',
             'end' => 'required|date'
         ]);
         $product_slug = $request->input('products')['0'];
         $product = Product::where('slug', $product_slug)->first();
+
         $productSale = new ProductSale();
         $productSale->is_percentage =  (int) $request->input('is_percentage');
         $productSale->discount_value = $request->input('discount_value');
