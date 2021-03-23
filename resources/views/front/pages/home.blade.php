@@ -398,8 +398,11 @@ function initializeClock(div, endtime) {
 
 const deadline = new Date(Date.parse(new Date()) + 2 * 24 * 60 * 60 * 1000);
 const deadline2 = new Date(Date.parse(new Date()) + 1 * 24 * 60 * 60 * 1000);
+@if($saleProducts->count()>1)
 // const deadline = new Date({{strtotime($dealProducts[0]->end)*1000}});
 // const deadline2 = new Date(Date.parse(new Date()) + 1 * 24 * 60 * 60 * 1000);
+@endif
+
 initializeClock('.colLeft .clockdiv', deadline);
 initializeClock('.colRight .clockdiv', deadline2);
 </script>
