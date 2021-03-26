@@ -34,7 +34,6 @@ class ProductsDataTable extends DataTable
                 if ($product->status) return '<label class="badge badge-success">Activé</label>';
                 if (!$product->status) return '<label class="badge badge-warning">Désactivé</label>';
             })
-
             ->editColumn('created_at', function (Product $product) {
                 //change over here
                 return date('d-M-Y H:i:s', strtotime($product->created_at));
@@ -48,7 +47,7 @@ class ProductsDataTable extends DataTable
                 if (!$product->status) $btn .= ' <a href="' . route('admin.products.activate', $product->slug) . '" class="edit btn btn-success btn-sm"><i class="fas fa-eye"></i></a>';
                 return $btn;
             })
-            ->rawColumns(['action', 'status', 'image', 'spec']);
+            ->rawColumns(['action', 'status', 'image', 'spec', 'short_description', 'long_description']);
         // ->make(true);
     }
 
