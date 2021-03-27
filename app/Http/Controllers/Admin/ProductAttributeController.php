@@ -124,7 +124,7 @@ class ProductAttributeController extends Controller
         $category_attributes = Category::with('attributes')->find($request->category_id);
 
         return response()->json([
-            'attributes' => $category_attributes->attributes
+            'attributes' => $category_attributes->attributes->sortBy('attributes.name')
         ]);
     }
 }

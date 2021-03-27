@@ -130,7 +130,7 @@ class Product extends Model
     }
     public function setPriceAttribute($value)
     {
-        $this->attributes['price'] = str_replace(',', '.', $value);
+        $this->attributes['price'] = (float)str_replace(',', '.', $value);
         // return number_format($value, 2, '', '');
     }
     public function printPrice()

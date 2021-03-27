@@ -25,9 +25,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        $brands = Brand::all();
-        $attributes = Attribute::all();
+        $categories = Category::orderBy('name')->get();
+        $brands = Brand::orderBy('name')->get();
+        $attributes = Attribute::orderBy('name')->get();
         return view('admin.pages.product.create')
             ->with([
                 'categories' => $categories,
@@ -102,9 +102,9 @@ class ProductController extends Controller
     {
 
         $product = Product::with('category', 'brand', 'attributes', 'stock')->where('slug', $slug)->first();
-        $categories = Category::all();
-        $brands = Brand::all();
-        $attributes = Attribute::all();
+        $categories = Category::orderBy('name')->get();
+        $brands = Brand::orderBy('name')->get();
+        $attributes = Attribute::orderBy('name')->get();
         return view('admin.pages.product.edit')
             ->with([
                 'product' => $product,
