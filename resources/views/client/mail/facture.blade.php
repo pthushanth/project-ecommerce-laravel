@@ -167,8 +167,8 @@
                 <tr class="item">
                     <td>{{$product->name}}</td>
                     <td>{{$product->pivot->qty}}</td>
-                    <td>{{$product->printPrice()}}</td>
-                    <td>{{$product->price*$product->pivot->qty}} €</td>
+                    <td>{!!$product->printPrice()!!}</td>
+                    <td>{{$product->getRawOriginal('price')*$product->pivot->qty}} €</td>
                 </tr>
                 @endforeach
 

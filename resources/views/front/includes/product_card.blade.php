@@ -18,7 +18,16 @@
             </div>
             <a href="#" class="produit-titre">{{$product->name}}</a>
             <p class="prix">{!!$product->printPrice()!!}</p>
-            <a href="#" class="btn btn-cart"><i class="fas fa-shopping-bag"></i> Ajouter au panier</a>
+            <form method="POST" action="{{route('cart.add',$product->slug)}}">
+                @csrf
+                <div class="input-field col">
+                    <input type="hidden" id="id" name="id" value="{{ $product->slug }}">
+                    <input id="quantity" name="quantity" type="hidden" value="1" min="1">
+                    <p>
+                        <button class="btn btn-cart"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
+                    </p>
+                </div>
+            </form>
         </div>
     </a>
 </div>

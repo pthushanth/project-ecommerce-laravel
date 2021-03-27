@@ -83,7 +83,7 @@
                   </th>
                   <td>
                     <span class="only-small-screen">Prix : </span>
-                    <p class="prix">{{$item->model->printPrice()}}</p>
+                    <p class="prix">{!!$item->model->printPrice()!!}</p>
                   </td>
                   <td>
                     <span class="only-small-screen">Quantité : </span>

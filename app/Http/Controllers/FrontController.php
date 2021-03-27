@@ -273,6 +273,7 @@ class FrontController extends Controller
             return view('front.pages.cart');
         }
 
+
         Stripe::setApiKey('sk_test_51Hkyc3H45Efq8ulYspcvIsk1Y0LnA78QDXYdnv3430jkXj43zTiZfZfRlvr18aRxnFnzgUuOEfnx65LJrz55PXMY00ZBLsBQ8V');
         try {
 
@@ -326,6 +327,7 @@ class FrontController extends Controller
         Session::put('order', $order);
 
         $order = Order::with('user', 'deliveryAddress', 'products', 'orderStatus')->find($order->id);
+
         $email = Auth::user()->email;
         // Mail::to($email)->send(new OrderMail($order));
 

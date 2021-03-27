@@ -40,10 +40,14 @@
                         <i class="fas fa-shopping-basket"></i>Mes avis</a>
                 </li>
                 <li>
+                    <a href="{{route('client.wishlist.index')}}">
+                        <i class="fas fa-shopping-basket"></i>Ma list d'envie</a>
+                </li>
+                {{-- <li>
                     <a href="inbox.html">
                         <i class="zmdi zmdi-notifications"></i>Notification</a>
                     <span class="inbox-num">3</span>
-                </li>
+                </li> --}}
 
             </ul>
         </nav>
