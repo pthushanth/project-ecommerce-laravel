@@ -269,6 +269,7 @@
           </div>
         </div>
         <div class="row justify-content-center">
+
           @foreach ($products as $product)
           <div class="col-md-3">
             @include('front.includes.product_card',['product'=>$product])
