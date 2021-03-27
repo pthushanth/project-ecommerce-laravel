@@ -352,12 +352,12 @@ h2 {
   width: 100%;
 }
 
-#SectionDeals .card .price {
+#SectionDeals .card .prix {
   font-weight: 800;
   font-size: 2.5em;
 }
 
-#SectionDeals .card .price span {
+#SectionDeals .card .prix span {
   font-size: 0.7em;
   text-decoration: line-through;
 }
@@ -663,5 +663,10 @@ h2 {
 
 html {
   font-family: "Nunito", sans-serif;
+}
+
+#datatable img {
+  max-width: 100px;
+  width: 100%;
 }
 
