@@ -24,7 +24,7 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::find($id);
-        return view('admin.pages.brand.edit')->with(['brand' => $brand]);
+        return view('admin.pages.brand.create')->with(['brand' => $brand]);
     }
 
     public function store(Request $request)
@@ -34,7 +34,7 @@ class BrandController extends Controller
         return back()->with('status', 'La marque ' . $brand->name . ' a été inséré avec succès.');
     }
 
-    public function update($request)
+    public function update(Request $request)
     {
         // $inputs = $this->getInputs($request);
 
