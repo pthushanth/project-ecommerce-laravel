@@ -121,10 +121,12 @@ class ProductAttributeController extends Controller
 
     public function getCategoryAttributes(Request $request)
     {
-        $category_attributes = Category::with('attributes')->find($request->category_id);
-
+        $category_attributes = Category::with(['attributes' => function ($query) {
+            $query->orderBy('name', 'asc');
+        }])->find($request->category_id);
+        $attributes = $category_attributes->attributes;
         return response()->json([
-            'attributes' => $category_attributes->attributes->sortBy('attributes.name')
+            'attributes' => $attributes
         ]);
     }
 }
