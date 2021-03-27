@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class OptionalAdsressToCustomersTable extends Migration
+class OptionalAddressToCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class OptionalAdsressToCustomersTable extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->string('address')->nullable();
-            $table->string('post_code')->nullable();
-            $table->string('city')->nullable();
+            $table->string('address')->nullable()->change();
+            $table->string('post_code')->nullable()->change();
+            $table->string('city')->nullable()->change();
         });
     }
 
