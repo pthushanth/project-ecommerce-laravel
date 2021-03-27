@@ -15,7 +15,7 @@ class Brand extends Model
         if ($value == "noImage.jpg") {
             return '/storage/' . $value;
         }
-        return '/storage/category_images/' . $value;
+        return '/storage/brand_images/' . $value;
     }
 
     public function categories()

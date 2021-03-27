@@ -53,8 +53,6 @@ class BrandController extends Controller
         if ($request->hasFile('image')) {
             $this->deleteImages($brand->image);
             $inputs['image'] = $this->saveImages($request);
-        } else {
-            $inputs['image'] = 'noImage.jpg';
         }
         $brand->update($inputs);
         $brand->update($inputs);
