@@ -34,7 +34,7 @@
                 <li>
                     <a href="{{route('client.orders')}}">
                         <i class="fas fa-shopping-basket"></i>Mes commandes</a>
-                </li>
+                        </li>
                 <li>
                     <a href="{{route('client.reviews')}}">
                         <i class="fas fa-shopping-basket"></i>Mes avis</a>
