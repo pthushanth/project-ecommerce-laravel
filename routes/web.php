@@ -66,13 +66,13 @@ Route::get('/confirmation', [FrontController::class, 'confirmation'])->name('con
 Route::get('admins/login', function () {
     Session::put('adminLoginPage', true);
     return view('admin.auth.login');
-})->name('admin.login');
+})->name('admin.login')->middleware('guest');
 
 Route::get('admins/register', function () {
     // Session::put('adminRegisterPage', true);
     // return view('admin.auth.register');
     return redirect()->route('admin.login');
-})->name('admin.register');
+})->name('admin.register')->middleware('guest');
 /***************************************************************************************** */
 
 Route::get('/logedin', function () {
