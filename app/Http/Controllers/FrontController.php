@@ -88,11 +88,13 @@ class FrontController extends Controller
 
         $filterType = $request->input('type');
         $products = null;
+        $filterToDisplay = "";
         if ($filterType == "search") {
             $value = $request->input('search');
             $products = Product::with('category', 'brand')->where("name", "LIKE", "%$value%")->where('status', 1)->paginate(12);
         } else if ($filterType == "collection") {
             $collection = $request->input('collection');
+            $filterToDisplay = "Collection / $collection";
             if ($collection == 'new-products') $products = Product::with('category', 'brand')->latest()->paginate(12);
             else if ($collection == 'bestseller-products') $products = Product::with('category', 'brand')
                 ->join('order_product', 'order_product.product_id', '=', 'products.id')
@@ -104,16 +106,21 @@ class FrontController extends Controller
             else if ($collection == 'sale-products') $products = Product::has('productSale')->with('category', 'brand', 'productSale')->latest()->paginate(12);
         } else if ($filterType == "category") {
             $category_id = (int)$request->input('category');
+            $category = Category::findOrFail($category_id);
             $products = Product::with('category', 'brand')->whereHas('category', function ($query) use ($category_id) {
                 return $query->where('id', '=', $category_id);
             })->where('status', 1)->paginate(12);
+            $filterToDisplay = "Catégorie / $category->name";
         } else if ($filterType == "brand") {
             $brand_id = (int)$request->input('brand');
+            $brand = Brand::findOrFail($brand_id);
             $products = Product::with('category', 'brand')->whereHas('brand', function ($query) use ($brand_id) {
                 return $query->where('id', '=', $brand_id);
             })->where('status', 1)->paginate(12);
+            $filterToDisplay = "Marques / $brand->name";
         } else if ($filterType == "price") {
             $products = Product::with('category', 'brand')->whereBetween('price', [$request->input('min'), $request->input('max')])->orderBy('price')->paginate(12);
+            $filterToDisplay = "Prix entre " . $request->input('min') . " € et " . $request->input('max') . " €";
         }
 
 
@@ -131,6 +138,7 @@ class FrontController extends Controller
             'categories' => $categories,
             'brands' => $brands,
             'reviews' => $reviews,
+            "filterToDisplay" => $filterToDisplay
 
         ]);
     }

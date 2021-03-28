@@ -58,7 +58,8 @@
         {{-- <h2>FILTRE</h2> --}}
         <form method="GET" action="{{route('products.filter')}}">
           <div class="input-group py-2 mb-3">
-            <input class="form-control py-2" type="text" placeholder="search" id="example-search-input" name="search">
+            <input class="form-control py-2" type="text" placeholder="Rechercher" id="example-search-input"
+              name="search">
             <input type="hidden" value="search" name="type">
             <span class="input-group-append">
               <button class="btn bg-dark text-white" type="submit">
@@ -78,19 +79,16 @@
                 <form method="GET" action="{{route('products.filter')}}">
                   <input type="hidden" value="collection" name="type">
                   <div class="custom-control custom-radio">
-                    <span class="float-right badge badge-light round">100</span>
                     <input type="radio" name="collection" value="new-products" class="custom-control-input"
                       id="newProducts" {{ old('collection') == "new-products" ? 'checked' : ''}}>
                     <label class="custom-control-label" for="newProducts">Nouveauté</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <span class="float-right badge badge-light round">100</span>
                     <input type="radio" name="collection" value="bestseller-products" class="custom-control-input"
                       id="bestseller" {{ old('collection') == "bestseller-products" ? 'checked' : ''}}>
                     <label class="custom-control-label" for="bestseller">Meilleure ventes</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <span class="float-right badge badge-light round">100</span>
                     <input type="radio" name="collection" value="sale-products" class="custom-control-input"
                       id="promotion" {{ old('collection') == "sale-products" ? 'checked' : ''}}>
                     <label class="custom-control-label" for="promotion">Promotions</label>
@@ -255,6 +253,7 @@
             <span>{{$products->total()}} produits</span>
           </div>
           <div class="col">
+            @isset($filterToDisplay) <span class="text-uppercase">{{$filterToDisplay}}</span>@endisset
             {{-- <div class="input-group">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Trier</label>
