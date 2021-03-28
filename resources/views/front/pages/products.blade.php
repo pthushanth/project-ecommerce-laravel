@@ -202,7 +202,7 @@
               </div> <!-- card-body.// -->
             </div>
           </article> <!-- card-group-item.// -->
-          <article class="card-group-item">
+          {{-- <article class="card-group-item">
             <header class="card-header">
               <h5 class="title">Couleur</h5>
             </header>
@@ -226,7 +226,7 @@
 
               </div> <!-- card-body.// -->
             </div>
-          </article>
+          </article> --}}
           <article class="card-group-item">
             <header class="card-header">
               <h5 class="title">Rating </h5>
@@ -255,7 +255,7 @@
             <span>{{$products->total()}} produits</span>
           </div>
           <div class="col">
-            <div class="input-group">
+            {{-- <div class="input-group">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Trier</label>
               </div>
@@ -265,7 +265,7 @@
                 <option value="2">Two</option>
                 <option value="3">Three</option>
               </select>
-            </div>
+            </div> --}}
           </div>
         </div>
         <div class="row justify-content-center">
