@@ -25,8 +25,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @foreach ($cat as $category)
-                  <a class="dropdown-item"
-                    href="{{url('/produits/filter?type=category&category='.$category->id)}}">{{$category->name}}</a>
+                  <a class="dropdown-item" href="{{url('/produits/filter?type=category&category='.$category->id)}}">
+                    <img src="{{asset($category->image)}}" width="70" height="50">
+                    {{$category->name}}
+                  </a>
                   @endforeach
                 </div>
               </li>
@@ -39,7 +41,7 @@
                   Produits</a>
               </li>
               <li class="nav-item {{ Request::routeIs('products.bestseller')  ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('products.bestseller')}}">Plus vendu</a>
+                <a class="nav-link" href="{{route('products.bestseller')}}">Meilleures ventes</a>
               </li>
               <li class="nav-item {{ Request::routeIs('products.sale')  ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('products.sale')}}">Promotions</a>

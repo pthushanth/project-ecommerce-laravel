@@ -131,13 +131,13 @@
                         <div class="w-100"></div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="phone">Expiration</label>
+                                <label for="phone">Expiration mois</label>
                                 <input type="text" id="card-expiry-month" class="form-control" placeholder="">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="emailaddress">Expiration Year</label>
+                                <label for="emailaddress">Expiration année</label>
                                 <input type="text" id="card-expiry-year" class="form-control" placeholder="">
                             </div>
                         </div>

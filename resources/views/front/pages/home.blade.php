@@ -177,7 +177,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link btn showProductDiv" target="topRated" data-toggle="tab" role="tab" aria-controls="special"
-            aria-selected="false" onclick="showProductDiv(this.target)">Meilleure notés</a>
+            aria-selected="false" onclick="showProductDiv(this.target)">Meilleures notés</a>
 
         </li>
         <li class="nav-item">

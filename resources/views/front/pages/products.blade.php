@@ -268,7 +268,7 @@
             </div> --}}
           </div>
         </div>
-        <div class="row align-items-stretch justify-content-center">
+        <div class="row justify-content-center">
 
           @foreach ($products as $product)
           <div class="col-md-3">

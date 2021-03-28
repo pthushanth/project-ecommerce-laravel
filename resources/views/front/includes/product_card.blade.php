@@ -1,7 +1,6 @@
 {{-- @if($product->price==1400) {{dd($product->productSale->discount_value)}}@endif --}}
 @if($product->isOnSale())
-
-<div class="card product text-center">
+<div class="card product text-center h-100">
     <a href="{{route('productDetail',$product->slug)}}">
         <div class="image">
             <div class="solde-reduction">
@@ -11,7 +10,7 @@
             <img class="card-img-top" src="{{ asset($product->getThumbnailUrl()) }}">
         </div>
 
-        <div class="card-body text-center">
+        <div class="card-body text-center d-flex flex-column">
             <a href="#" class="categorie">{{$product->category->name}} -
                 {{$product->brand->name}}</a>
             <div class="rating">
@@ -19,7 +18,7 @@
             </div>
             <a href="#" class="produit-titre">{{$product->name}}</a>
             <p class="prix">{!!$product->printPrice()!!}</p>
-            <form method="POST" action="{{route('cart.add',$product->slug)}}">
+            <form method="POST" action="{{route('cart.add',$product->slug)}}" class="mt-auto">
                 @csrf
                 <div class="input-field col">
                     <input type="hidden" id="id" name="id" value="{{ $product->slug }}">
@@ -34,10 +33,10 @@
 </div>
 @else
 
-<div class="card product text-center">
+<div class="card product text-center h-100">
     <a href="{{route('productDetail',$product->slug)}}">
         <img class="card-img-top" src="{{ asset($product->getThumbnailUrl()) }}">
-        <div class="card-body text-center">
+        <div class="card-body text-center d-flex flex-column">
             <a href="#" class="categorie">{{$product->category->name}} -
                 {{$product->brand->name}}</a>
             <div class="rating">
@@ -45,7 +44,7 @@
             </div>
             <a href="#" class="produit-titre">{{$product->name}}</a>
             <p class="prix">{!!$product->printPrice()!!}</p>
-            <form method="POST" action="{{route('cart.add',$product->slug)}}">
+            <form method="POST" action="{{route('cart.add',$product->slug)}}" class="mt-auto">
                 @csrf
                 <div class="input-field col">
                     <input type="hidden" id="id" name="id" value="{{ $product->slug }}">
