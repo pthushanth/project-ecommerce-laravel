@@ -136,8 +136,8 @@ class Product extends Model
     public function printPrice()
     {
         if ($this->productSale != null) {
-            return '<p class="prix">' . $this->productSale->getDiscountedPrice($this->getRawOriginal('price')) . ' € <span> ' . $this->price . ' €</span></p>';
-            return $this->productSale->getDiscountedPrice($this->getRawOriginal('price')) . ' €';
+            return $this->productSale->getDiscountedPrice($this->getRawOriginal('price')) . ' <span> ' . $this->price . ' €</span>';
+            // return $this->productSale->getDiscountedPrice($this->getRawOriginal('price')) . ' €';
         } else return $this->price . ' €';
     }
     public function isOnSale()
