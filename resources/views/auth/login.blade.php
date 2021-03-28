@@ -34,7 +34,9 @@
                     </span>
                     @enderror
                 </div>
-
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                </a>
                 <button class="btn btnSubmit" type="submit">Se connecter</button>
             </form>
         </div>

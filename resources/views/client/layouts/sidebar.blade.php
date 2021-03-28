@@ -12,9 +12,9 @@
 
             </div>
             <h4 class="name text-center">{{Auth::user()->name}}</h4>
-            <a href="{{ route('logout') }}" style="font-size: 1em"
+            <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                <i class="zmdi zmdi-power"> </i> Se déconnecter
+                <i class="zmdi zmdi-power"></i> Se déconnecter
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
@@ -34,7 +34,7 @@
                 <li>
                     <a href="{{route('client.orders')}}">
                         <i class="fas fa-shopping-basket"></i>Mes commandes</a>
-                        </li>
+                </li>
                 <li>
                     <a href="{{route('client.reviews')}}">
                         <i class="fas fa-shopping-basket"></i>Mes avis</a>

@@ -1,5 +1,6 @@
 {{-- @if($product->price==1400) {{dd($product->productSale->discount_value)}}@endif --}}
 @if($product->isOnSale())
+
 <div class="card product text-center">
     <a href="{{route('productDetail',$product->slug)}}">
         <div class="image">
