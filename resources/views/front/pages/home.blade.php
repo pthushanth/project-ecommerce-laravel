@@ -259,7 +259,7 @@
         @else <div class="col-md-6 colRight d-flex px-3">
           @endif
           <div class="card text-center d-fill">
-            <img class="card-img-top" src="{{ asset('images/test/apple_watch.png') }}">
+            <img class="card-img-top" src="{{asset($product->getThumbnailUrl()) }}">
             <div class="card-body ">
               <h5 class="card-title">{{$product->name}}</h5>
               <div class="rating">
