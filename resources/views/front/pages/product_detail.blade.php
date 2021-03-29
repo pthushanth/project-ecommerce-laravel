@@ -150,7 +150,7 @@
                 </table>
             </div>
             <div id="description" class="mb-5">
-                <h2>Review</h2>
+                <h2>Avis</h2>
                 @if(Auth::user() && $product->currentUserCanReview())
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
