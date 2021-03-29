@@ -240,7 +240,8 @@
             <div class="col-12">
               <h4 class="text-center">OFFRE SPECIAL -25%</h4>
             </div>
-            <div class="col-12 mt-3 text-center"><a href="{{''}}" class="btn btn-primary button-cta">Profitez
+            <div class="col-12 mt-3 text-center"><a href="{{route('products.sale')}}"
+                class="btn btn-primary button-cta">Profitez
                 maintenant</a></div>
           </div>
         </div>
